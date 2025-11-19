@@ -23,6 +23,9 @@
     display: block; 
     padding: 8px 15px; 
     text-decoration: none; 
+    color: var(--text-color); /* 기존 스타일 변수 사용 */
+    font-weight: 500;
+    transition: color 0.3s;
 }
 /* 햄버거 토글 기본 숨김 (데스크톱에서는 안 보임) */
 .nav-toggle-label { 
@@ -44,7 +47,7 @@
         width: 100%;
         display: none; /* 모바일에서 기본적으로 메뉴 숨김 */
         flex-direction: column;
-        background: #f8f8f8; /* 메뉴 배경색 */
+        background: #fff; /* 메뉴 배경색을 흰색으로 통일 */
         z-index: 999;
         box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
     }
@@ -134,12 +137,8 @@
             color: var(--primary-color);
             text-decoration: none;
         }
-        .nav-links a {
-            color: var(--text-color);
-            text-decoration: none;
-            margin-left: 25px;
-            font-weight: 500;
-            transition: color 0.3s;
+        .nav-links a:hover {
+            color: var(--primary-color);
         }
 
         /* Language Switcher */
@@ -272,7 +271,6 @@
         @media (max-width: 768px) {
             .hero h1 { font-size: 2rem; }
             .service-item, .strength-item { flex-basis: 100%; }
-            .nav-links { display: none; } 
         }
     </style>
 </head>
@@ -280,18 +278,14 @@
 
 <header class="header">
     <div class="container nav-content">
-        <a href="#" class="logo">Hana Energy</a>
+        <a href="#home" class="logo">Hana Energy</a>
         <nav class="main-nav">
     <input type="checkbox" id="nav-toggle" class="nav-toggle">
     <label for="nav-toggle" class="nav-toggle-label">☰</label>
     
     <ul class="nav-links">
-        <li><a href="/en/index.html">Home</a></li>
-        <li><a href="/en/solutions.html">Solutions</a></li>
-        <li><a href="/en/strengths.html">Strengths</a></li>
-        <li><a href="/en/contact.html">Contact</a></li>
-        
-        <li class="language-switch"><a href="/index.html">Deutsch</a></li> 
+        <li><a href="#home">Home</a></li>
+        <li><a href="#solutions">Solutions</a></li> <li><a href="#strengths">Strengths</a></li> <li><a href="#contact">Contact</a></li> <li class="language-switch"><a href="/index.html">Deutsch</a></li> 
     </ul>
 </nav>
     </div>
@@ -301,11 +295,10 @@
     <div class="container">
         <h1>Your Partner for EV Charging, Photovoltaics & Energy Storage Systems in Austria and Germany.</h1>
         <h2>We connect global manufacturers with trusted installers and EPC firms in the DACH region for seamless market entry.</h2>
-        <a href="/en/contact.html" class="cta-button">Partner Inquiry: Start Your Expansion</a>
-    </div>
+        <a href="#contact" class="cta-button">Partner Inquiry: Start Your Expansion</a> </div>
 </section>
 
-<section class="services" id="scope">
+<section class="services" id="solutions">
     <div class="container">
         <h2>Our Core Competencies and Solutions</h2>
         <div class="service-grid">
@@ -379,8 +372,12 @@
 </footer>
 
 <script>
+    // 앵커 클릭 시 부드럽게 스크롤하는 JavaScript
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
+            // 모바일 메뉴가 열려 있다면 닫기 (선택 사항)
+            document.getElementById('nav-toggle').checked = false; 
+            
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
