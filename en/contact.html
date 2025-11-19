@@ -169,17 +169,56 @@
         <h1>Contact Us</h1>
         <p>Do you have questions about a partnership or our solutions? Please fill out the form below, and we will get back to you as soon as possible.</p>
 
-        <form 
+<form 
     action="https://formspree.io/f/xjklobyd" 
     method="POST"
+    style="max-width: 500px; margin: 0 auto;"
     >
     
-    <input type="email" id="email" name="email" required>
+    <input type="hidden" name="_subject" value="[Hana Energy] New Website Inquiry">
     
-    <input type="text" id="name" name="name">
-    <textarea id="message" name="message" required></textarea>
+    <label for="name" style="display: block; margin-top: 15px;">Name / Company:</label>
+    <input 
+        type="text" 
+        id="name" 
+        name="Name_Company" 
+        placeholder="Your Name or Company" 
+        required 
+        style="width: 100%; padding: 10px; box-sizing: border-box;"
+    >
 
-    <button type="submit">Send (전송)</button>
+    <label for="phone" style="display: block; margin-top: 15px;">Phone Number: (Optional)</label>
+    <input 
+        type="tel" 
+        id="phone" 
+        name="Phone_Number" 
+        placeholder="Your phone number (optional)" 
+        style="width: 100%; padding: 10px; box-sizing: border-box;"
+    >
+
+    <label for="email" style="display: block; margin-top: 15px;">Email Address:</label>
+    <input 
+        type="email" 
+        id="email" 
+        name="_replyto" 
+        placeholder="Your Email Address" 
+        required 
+        style="width: 100%; padding: 10px; box-sizing: border-box;"
+    >
+
+    <label for="message" style="display: block; margin-top: 15px;">Your Inquiry / Message:</label>
+    <textarea 
+        id="message" 
+        name="Message_Content" 
+        rows="5" 
+        placeholder="Your inquiry or message..." 
+        required 
+        style="width: 100%; padding: 10px; box-sizing: border-box;"
+    ></textarea>
+
+    <button type="submit" style="margin-top: 20px; padding: 10px 20px; background-color: #007bff; color: white; border: none; cursor: pointer;">
+        Send (전송)
+    </button>
 </form>
         </section>
     <footer class="footer" id="contact">
