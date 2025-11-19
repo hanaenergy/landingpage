@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hana Energy | Market Entry & Sales Agency for DACH Energy Solutions</title>
+    <title>Hana Energy | Ihr Partner für E-Mobilität, Photovoltaik & Energiespeichersysteme in DACH</title>
     
     <style>
         :root {
-            --primary-color: #007bff; /* Hana Energy를 위한 에너지 관련 블루 컬러 */
-            --secondary-color: #f8f9fa;
+            --primary-color: #007bff; /* Primärfarbe: Blau */
+            --secondary-color: #f8f9fa; /* Hintergrundfarbe: Hellgrau */
             --text-color: #333;
             --light-text: #555;
             --font-family: 'Helvetica Neue', Arial, sans-serif; 
@@ -18,7 +18,6 @@
             margin: 0;
             padding: 0;
             color: var(--text-color);
-            background-color: #fff;
             line-height: 1.6;
         }
         .container {
@@ -27,7 +26,7 @@
             padding: 0 20px;
         }
         
-        /* Navigation (Navi) */
+        /* Navigation */
         .header {
             background-color: #fff;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
@@ -55,7 +54,18 @@
             transition: color 0.3s;
         }
 
-        /* Hero Section (Startseite) */
+        /* Language Switcher */
+        .lang-switch {
+            font-size: 0.9rem;
+            margin-left: 15px;
+        }
+        .lang-switch a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Hero Section */
         .hero {
             background-color: var(--secondary-color);
             padding: 100px 0;
@@ -66,17 +76,11 @@
             margin-bottom: 20px;
             color: #222;
         }
-        .hero .language-block {
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-            color: var(--light-text);
-            font-style: italic;
-        }
-        .main-description {
+        .hero h2 {
             font-size: 1.25rem;
             margin-bottom: 40px;
             color: #555;
-            margin-top: 30px;
+            margin-top: 0;
         }
         .cta-button {
             display: inline-block;
@@ -93,7 +97,7 @@
             background-color: #0056b3;
         }
 
-        /* Service Section (Leistungen) */
+        /* Service Section (Lösungen) */
         .services {
             padding: 80px 0;
             text-align: center;
@@ -122,15 +126,48 @@
             color: var(--primary-color);
             text-align: center;
         }
-        .lang-text {
-            margin-top: 10px;
-            border-left: 3px solid #ccc;
-            padding-left: 10px;
-            line-height: 1.4;
+        .description-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 15px;
             font-size: 0.95rem;
         }
+        .description-list li {
+            margin-bottom: 8px;
+            padding-left: 15px;
+            position: relative;
+        }
+        .description-list li::before {
+            content: '•';
+            color: var(--primary-color);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+            position: absolute;
+            left: 0;
+        }
 
-        /* Footer (Fußzeile) */
+        /* Strengths Section */
+        .strengths {
+            padding: 60px 0;
+            background-color: #f8f8f8;
+            text-align: center;
+        }
+        .strengths h2 {
+            margin-bottom: 40px;
+        }
+        .strength-item {
+            flex-basis: calc(50% - 20px);
+            padding: 20px;
+            text-align: left;
+        }
+        .strength-item h4 {
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+        
+        /* Footer */
         .footer {
             background-color: #333;
             color: white;
@@ -138,54 +175,126 @@
             text-align: center;
             font-size: 0.9rem;
         }
-        
-        /* Mobile adjustments (Anpassungen für Mobilgeräte) */
+        .footer a {
+            color: white;
+            text-decoration: underline;
+        }
+
+        /* Mobile adjustments */
         @media (max-width: 768px) {
             .hero h1 { font-size: 2rem; }
-            .service-item { flex-basis: 100%; }
+            .service-item, .strength-item { flex-basis: 100%; }
             .nav-links { display: none; } 
         }
     </style>
 </head>
 <body>
 
-    <header class="header">
-        <div class="container nav-content">
-            <a href="#" class="logo">Hana Energy</a>
-            <nav class="nav-links">
-                <a href="#home">Home | Start</a>
-                <a href="#services">Solutions | Lösungen</a>
-                <a href="#contact">Contact | Kontakt</a>
-            </nav>
-        </div>
-    </header>
-    <section class="hero" id="home">
-        <div class="container">
-            <h1>Your Trusted Market Entry & Sales Agency for DACH Energy Solutions</h1>
-            
-            <p class="language-block de">Ihr Partner für den Markteintritt und Vertrieb von Energielösungen in der DACH-Region.</p>
+<header class="header">
+    <div class="container nav-content">
+        <a href="#" class="logo">Hana Energy</a>
+        <nav class="nav-links">
+            <a href="#home">Startseite</a>
+            <a href="#scope">Lösungen</a>
+            <a href="#strengths">Stärken</a>
+            <a href="#contact">Kontakt</a>
+            <span class="lang-switch">| <a href="/en/">English</a></span> 
+        </nav>
+    </div>
+</header>
 
-            <p class="main-description">
-                We connect worldwide manufacturers of EV Charging, PV, and ESS with reliable installation partners, EPC firms, and distributors across Austria and Germany.
-            </p>
+<section class="hero" id="home">
+    <div class="container">
+        <h1>Ihr Spezialist für E-Mobilität, Photovoltaik & Energiespeichersysteme in Österreich und Deutschland.</h1>
+        <h2>Wir verbinden Hersteller weltweit mit vertrauenswürdigen Installateuren und EPC-Firmen in der DACH-Region, um Markteintritte effizient zu gestalten.</h2>
+        <a href="mailto:contact@hanaenergy.at" class="cta-button">Jetzt Partner werden: Expansion starten</a>
+    </div>
+</section>
 
-            <a href="mailto:contact@hanaenergy.at" class="cta-button">Partner Inquiry (Kontakt aufnehmen)</a>
+<section class="services" id="scope">
+    <div class="container">
+        <h2>Unsere Kernkompetenzen und Lösungen</h2>
+        <div class="service-grid">
+            <div class="service-item">
+                <div class="icon">🔌</div>
+                <h3>1. E-Ladelösungen (EV Charging)</h3>
+                <ul class="description-list">
+                    <li>AC- und DC-Ladegeräte, Zubehör und Ladekabel.</li>
+                    <li>Analyse des lokalen Bedarfs und Aufbau von Vertriebskanälen.</li>
+                    <li>Vermittlung an lokale Installateure und Distributoren.</li>
+                    <li>Beratung zu Zertifizierungen (CE, EN-Normen).</li>
+                </ul>
+            </div>
+            <div class="service-item">
+                <div class="icon">☀️</div>
+                <h3>2. Photovoltaik-Komponenten (PV)</h3>
+                <ul class="description-list">
+                    <li>Komponenten für private und gewerbliche PV-Anlagen.</li>
+                    <li>Aufbau von Distributoren- und EPC-Partnerschaften.</li>
+                    <li>Wettbewerbs-Benchmarking für eine erfolgreiche Markteinführung.</li>
+                    <li>Unterstützung bei lokalen Vorschriften (ÖNORM, VDE etc.).</li>
+                </ul>
+            </div>
+            <div class="service-item">
+                <div class="icon">🔋</div>
+                <h3>3. Energiespeichersysteme (ESS)</h3>
+                <ul class="description-list">
+                    <li>Heimspeicher (5–15 kWh) und Hybrid-Wechselrichterlösungen.</li>
+                    <li>Marktchancen-Bewertung (Machbarkeitsanalyse).</li> 
+                    <li>Gezielte Identifizierung von B2B-Vertriebspartnern.</li>
+                </ul>
+            </div>
         </div>
-    </section>
-    <section class="services" id="services">
-        <div class="container">
-            <h2>Our Core Business Solutions / Unsere Kernlösungen</h2>
-            <div class="service-grid">
-                
-                <div class="service-item">
-                    <div class="icon">🔌</div>
-                    <h3>EV Charging Solutions | E-Ladelösungen</h3>
-                    <p class="lang-text en">
-                        **[EN]** We navigate AC/DC charger sales and compliance (CE, EN standards) to introduce manufacturers to local installers and distributors.
-                    </p>
-                    <p class="lang-text de">
-                        **[DE]** Wir unterstützen Hersteller beim Vertrieb und der Konformität (CE, EN-Normen) von AC/DC-Ladegeräten und vermitteln lokale Installationspartner.
-                    </p>
-                </div>
-                
-                <div
+    </div>
+</section>
+
+<section class="strengths" id="strengths">
+    <div class="container">
+        <h2>Ihre Vorteile einer Partnerschaft mit Hana Energy</h2>
+        <div class="service-grid">
+            <div class="strength-item">
+                <h4>Starkes lokales Netzwerk</h4>
+                <p>Wir kooperieren eng mit Installateuren, Energieberatern und kleineren EPC-Unternehmen, die wettbewerbsfähige Produkte suchen.</p>
+            </div>
+            <div class="strength-item">
+                <h4>Umfassende Marktkenntnis</h4>
+                <p>Aktuelles Wissen über europäische technische Standards, Preisgestaltung, Logistik und Wettbewerb in den Fokusmärkten.</p>
+            </div>
+            <div class="strength-item">
+                <h4>Provisionsbasiertes Handelsagenten-Modell</h4>
+                <p>Als Handelsagent arbeiten wir leistungsorientiert, wodurch Hersteller in Europa **ohne Fixkostenrisiko oder lokale Einstellungspflichten** expandieren können.</p>
+            </div>
+            <div class="strength-item">
+                <h4>Flexible Logistikberatung</h4>
+                <p>Wir unterstützen DAP-, DDP-Lösungen und den Aufbau von EU-Fulfillment-Centern, passend zur langfristigen Strategie der Hersteller.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer" id="contact">
+    <div class="container">
+        <p>Hana Energy (e.U. in Gründung, Österreich)</p>
+        <p>E-Mail: <strong>contact@hanaenergy.at</strong></p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/nambodo" target="_blank">www.linkedin.com/in/nambodo</a></p>
+        <div class="footer-links" style="margin-top: 10px;">
+            <a href="#">Datenschutzerklärung</a> | <a href="#">Nutzungsbedingungen</a>
+        </div>
+        <p style="margin-top: 15px;">Gegründet: 2025. Alle Rechte vorbehalten.</p>
+    </div>
+</footer>
+
+<script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
