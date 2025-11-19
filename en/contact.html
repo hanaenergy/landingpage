@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Hana Energy | Your Partner for EV Charging & PV</title>
+    <title>Contact Hana Energy | Your Specialist for EV Charging & PV</title>
     
     <style>
         /* 기본 스타일 */
@@ -23,6 +23,9 @@
     display: block; 
     padding: 8px 15px; 
     text-decoration: none; 
+    color: var(--text-color);
+    font-weight: 500;
+    transition: color 0.3s;
 }
 /* 햄버거 토글 기본 숨김 (데스크톱에서는 안 보임) */
 .nav-toggle-label { 
@@ -44,7 +47,7 @@
         width: 100%;
         display: none; /* 모바일에서 기본적으로 메뉴 숨김 */
         flex-direction: column;
-        background: #f8f8f8; /* 메뉴 배경색 */
+        background: #fff; /* 메뉴 배경색 */
         z-index: 999;
         box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
     }
@@ -67,22 +70,23 @@
         display: flex; 
     }
 }
+        
         /* 아래 코드를 기존 <style> 태그 안에 추가 */
 #cookie-banner {
-    position: fixed; /* 화면에 고정 */
+    position: fixed; 
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.85); /* 어두운 배경 */
+    background-color: rgba(0, 0, 0, 0.85); 
     color: white;
     padding: 10px 20px;
     text-align: center;
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
-    z-index: 1000; /* 다른 요소 위에 표시 */
+    z-index: 1000; 
     font-size: 0.9rem;
 }
 #cookie-banner a {
-    color: #87CEEB; /* 링크 색상 */
+    color: #87CEEB; 
     text-decoration: underline;
 }
 #cookie-banner button {
@@ -95,8 +99,8 @@
     border-radius: 3px;
 }
         :root {
-            --primary-color: #007bff;
-            --secondary-color: #f8f9fa;
+            --primary-color: #007bff; 
+            --secondary-color: #f8f9fa; 
             --text-color: #333;
             --light-text: #555;
             --font-family: 'Helvetica Neue', Arial, sans-serif; 
@@ -134,26 +138,15 @@
             color: var(--primary-color);
             text-decoration: none;
         }
-        .nav-links a {
-            color: var(--text-color);
-            text-decoration: none;
-            margin-left: 25px;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        /* Language Switcher */
-        .lang-switch {
-            font-size: 0.9rem;
-            margin-left: 15px;
-        }
-        .lang-switch a {
+        .nav-links a:hover {
             color: var(--primary-color);
-            text-decoration: none;
-            font-weight: bold;
         }
 
-        /* Form Specific Styles */
+        /* Form Specific Styles (German contact.html에서 가져옴) */
+        .form-container {
+             max-width: 500px; 
+             margin: 0 auto;
+        }
         .form-group {
             margin-bottom: 20px;
         }
@@ -161,160 +154,8 @@
             display: block;
             margin-bottom: 5px;
             font-weight: bold;
+            margin-top: 15px; 
         }
         .form-group input[type="text"],
         .form-group input[type="email"],
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box; 
-            font-family: var(--font-family);
-            font-size: 1rem;
-        }
-        .form-group textarea {
-            resize: vertical;
-        }
-        .cta-button {
-            display: inline-block;
-            background-color: var(--primary-color);
-            color: white;
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: background-color 0.3s;
-            border: none;
-            cursor: pointer;
-        }
-        .cta-button:hover {
-            background-color: #0056b3;
-        }
-
-        /* Footer */
-        .footer {
-            background-color: #333;
-            color: white;
-            padding: 40px 0;
-            text-align: center;
-            font-size: 0.9rem;
-        }
-        .footer a {
-            color: white;
-            text-decoration: underline;
-        }
-
-        /* Mobile adjustments */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2rem; }
-            .nav-links { display: none; } 
-        }
-    </style>
-</head>
-<body>
-
-    <header class="header">
-        <div class="container nav-content">
-            <a href="/en/index.html" class="logo">Hana Energy</a>
-            <nav class="main-nav">
-    <input type="checkbox" id="nav-toggle" class="nav-toggle">
-    <label for="nav-toggle" class="nav-toggle-label">☰</label>
-    
-    <ul class="nav-links">
-        <li><a href="/en/index.html">Home</a></li>
-        <li><a href="/en/solutions.html">Solutions</a></li>
-        <li><a href="/en/strengths.html">Strengths</a></li>
-        <li><a href="/en/contact.html">Contact</a></li>
-        
-        <li class="language-switch"><a href="/index.html">Deutsch</a></li> 
-    </ul>
-</nav>
-        </div>
-    </header>
-    <section class="container" style="padding: 80px 0;">
-        <h1>Contact Us</h1>
-        <p>Do you have questions about a partnership or our solutions? Please fill out the form below, and we will get back to you as soon as possible.</p>
-
-<form 
-    action="https://formspree.io/f/xjklobyd" 
-    method="POST"
-    style="max-width: 500px; margin: 0 auto;"
-    >
-    
-    <input type="hidden" name="_subject" value="[Hana Energy] New Website Inquiry">
-    
-    <label for="name" style="display: block; margin-top: 15px;">Name / Company:</label>
-    <input 
-        type="text" 
-        id="name" 
-        name="Name_Company" 
-        placeholder="Your Name or Company" 
-        required 
-        style="width: 100%; padding: 10px; box-sizing: border-box;"
-    >
-
-    <label for="phone" style="display: block; margin-top: 15px;">Phone Number: (Optional)</label>
-    <input 
-        type="tel" 
-        id="phone" 
-        name="Phone_Number" 
-        placeholder="Your phone number (optional)" 
-        style="width: 100%; padding: 10px; box-sizing: border-box;"
-    >
-
-    <label for="email" style="display: block; margin-top: 15px;">Email Address:</label>
-    <input 
-        type="email" 
-        id="email" 
-        name="_replyto" 
-        placeholder="Your Email Address" 
-        required 
-        style="width: 100%; padding: 10px; box-sizing: border-box;"
-    >
-
-    <label for="message" style="display: block; margin-top: 15px;">Your Inquiry / Message:</label>
-    <textarea 
-        id="message" 
-        name="Message_Content" 
-        rows="5" 
-        placeholder="Your inquiry or message..." 
-        required 
-        style="width: 100%; padding: 10px; box-sizing: border-box;"
-    ></textarea>
-
-    <button type="submit" style="margin-top: 20px; padding: 10px 20px; background-color: #007bff; color: white; border: none; cursor: pointer;">
-        Send
-    </button>
-</form>
-        </section>
-    <footer class="footer" id="contact">
-        <div class="container">
-            <p>Hana Energy (e.U. in Gründung, Austria)</p>
-            <p>Email: <strong>contact@hanaenergy.at</strong></p>
-            <p>LinkedIn: <a href="https://www.linkedin.com/in/nambodo" target="_blank">www.linkedin.com/in/nambodo</a></p>
-            <div class="footer-links" style="margin-top: 10px;">
-                <a href="/en/legal/privacy.html">Privacy Policy</a> | <a href="/en/legal/terms.html">Terms of Use</a>
-            </div>
-            <p style="margin-top: 15px;">Founded: 2025. All Rights Reserved.</p>
-        </div>
-    </footer>
-    <div id="cookie-banner">
-    This website uses cookies to ensure functionality. You can find more information in our <a href="/en/legal/privacy.html">Privacy Policy</a>. 
-    <button onclick="acceptCookies()">OK</button>
-</div>
-
-<script>
-    function acceptCookies() {
-        document.getElementById('cookie-banner').style.display = 'none';
-        // Stores consent status in local storage
-        localStorage.setItem('cookieConsent', 'granted');
-    }
-    // Hide the banner if consent was previously granted
-    if (localStorage.getItem('cookieConsent') === 'granted') {
-        document.getElementById('cookie-banner').style.display = 'none';
-    }
-</script>
-    </body>
-</html>
+        .form-group input[type="tel
