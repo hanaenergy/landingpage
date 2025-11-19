@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Hana Energy | Your Partner for EV Charging & PV</title>
+    
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #f8f9fa;
+            --text-color: #333;
+            --light-text: #555;
+            --font-family: 'Helvetica Neue', Arial, sans-serif; 
+        }
+        body {
+            font-family: var(--font-family);
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navigation */
+        .header {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        /* Language Switcher */
+        .lang-switch {
+            font-size: 0.9rem;
+            margin-left: 15px;
+        }
+        .lang-switch a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Form Specific Styles */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; 
+            font-family: var(--font-family);
+            font-size: 1rem;
+        }
+        .form-group textarea {
+            resize: vertical;
+        }
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        .cta-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        .footer a {
+            color: white;
+            text-decoration: underline;
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .nav-links { display: none; } 
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container nav-content">
+            <a href="/en/index.html" class="logo">Hana Energy</a>
+            <nav class="nav-links">
+                <a href="/en/index.html#home">Home</a>
+                <a href="/en/index.html#scope">Solutions</a>
+                <a href="/en/index.html#strengths">Strengths</a>
+                <a href="/en/contact.html" style="font-weight: bold; color: var(--primary-color);">Contact</a> <span class="lang-switch">| <a href="/contact.html">Deutsch</a></span> 
+            </nav>
+        </div>
+    </header>
+    <section class="container" style="padding: 80px 0;">
+        <h1>Contact Us</h1>
+        <p>Do you have questions about a partnership or our solutions? Please fill out the form below, and we will get back to you as soon as possible.</p>
+
+        <form action="mailto:contact@hanaenergy.at" method="post" enctype="text/plain" style="max-width: 600px; margin: 40px 0;">
+            
+            <div class="form-group">
+                <label for="name">Name / Company (Required):</label>
+                <input type="text" id="name" name="Name/Company" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email (Required):</label>
+                <input type="email" id="email" name="Email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">Phone Number (Optional):</label>
+                <input type="text" id="phone" name="Phone">
+            </div>
+
+            <div class="form-group">
+                <label for="subject">Subject:</label>
+                <input type="text" id="subject" name="Subject" required>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Your Message (Required):</label>
+                <textarea id="message" name="Message" rows="6" required></textarea>
+            </div>
+
+            <div class="form-group" style="font-size: 0.9rem;">
+                <input type="checkbox" id="privacy_consent" name="Privacy-Consent" required>
+                <label for="privacy_consent" style="display: inline; font-weight: normal;">I agree that Hana Energy may process my data to answer my inquiry. I have read and accepted the <a href="/en/legal/privacy.html" target="_blank" style="color: var(--primary-color);">Privacy Policy</a>.</label>
+            </div>
+
+            <button type="submit" class="cta-button" style="margin-top: 20px;">Send Message</button>
+            
+        </form>
+        </section>
+    <footer class="footer" id="contact">
+        <div class="container">
+            <p>Hana Energy (e.U. in Gründung, Austria)</p>
+            <p>Email: <strong>contact@hanaenergy.at</strong></p>
+            <p>LinkedIn: <a href="https://www.linkedin.com/in/nambodo" target="_blank">www.linkedin.com/in/nambodo</a></p>
+            <div class="footer-links" style="margin-top: 10px;">
+                <a href="/en/legal/privacy.html">Privacy Policy</a> | <a href="/en/legal/terms.html">Terms of Use</a>
+            </div>
+            <p style="margin-top: 15px;">Founded: 2025. All Rights Reserved.</p>
+        </div>
+    </footer>
+    </body>
+</html>
