@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontaktieren Sie Hana Energy</title>
+    </head>
+<body>
+    <header class="header">
+        </header>
+
+    <section class="container" style="padding: 80px 0;">
+        <h1>Kontaktieren Sie uns</h1>
+        <p>Bitte nutzen Sie das folgende Formular, um uns eine Nachricht zu senden. Wir werden uns so schnell wie möglich bei Ihnen melden.</p>
+
+        <form action="mailto:contact@hanaenergy.at" method="post" enctype="text/plain">
+            <div style="margin-bottom: 15px;">
+                <label for="name">Name / Firma (Erforderlich):</label><br>
+                <input type="text" id="name" name="Name/Firma" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label for="email">E-Mail (Erforderlich):</label><br>
+                <input type="email" id="email" name="E-Mail" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+            </div>
+            
+            <div style="margin-bottom: 15px;">
+                <label for="subject">Betreff:</label><br>
+                <input type="text" id="subject" name="Betreff" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label for="message">Ihre Nachricht (Erforderlich):</label><br>
+                <textarea id="message" name="Nachricht" rows="6" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;"></textarea>
+            </div>
+
+            <button type="submit" class="cta-button" style="border: none; cursor: pointer;">Nachricht senden</button>
+        </form>
+        </section>
+
+    </body>
+</html>
