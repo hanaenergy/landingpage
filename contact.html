@@ -6,6 +6,67 @@
     <title>Kontaktieren Sie Hana Energy | Ihr Spezialist für E-Mobilität & PV</title>
     
     <style>
+        /* 기본 스타일 */
+.main-nav { 
+    display: flex; 
+    justify-content: flex-end; /* 메뉴를 오른쪽으로 정렬 */
+    align-items: center; 
+    padding: 10px 20px;
+}
+.nav-links { 
+    list-style: none; 
+    display: flex; /* 데스크톱에서 가로로 배치 */
+    margin: 0; 
+    padding: 0; 
+}
+.nav-links li a { 
+    display: block; 
+    padding: 8px 15px; 
+    text-decoration: none; 
+}
+/* 햄버거 토글 기본 숨김 (데스크톱에서는 안 보임) */
+.nav-toggle-label { 
+    display: none; 
+    cursor: pointer; 
+    font-size: 30px; 
+    order: 1; /* 오른쪽 끝으로 배치 */
+}
+.nav-toggle { 
+    display: none; /* 체크박스 숨김 */
+}
+
+/* --- 모바일 화면 스타일 (768px 이하) --- */
+@media (max-width: 768px) {
+    .nav-links {
+        position: absolute;
+        top: 60px; /* 헤더 높이에 따라 조정 */
+        right: 0;
+        width: 100%;
+        display: none; /* 모바일에서 기본적으로 메뉴 숨김 */
+        flex-direction: column;
+        background: #f8f8f8; /* 메뉴 배경색 */
+        z-index: 999;
+        box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+    }
+    .nav-links li {
+        text-align: center;
+        width: 100%;
+        border-bottom: 1px solid #eee;
+    }
+    .nav-links li a {
+        padding: 15px;
+    }
+
+    /* 햄버거 아이콘만 보여주기 */
+    .nav-toggle-label {
+        display: block; /* 햄버거 아이콘 표시 */
+    }
+
+    /* 체크박스가 체크되면 메뉴 보여주기 (핵심 기능) */
+    .nav-toggle:checked ~ .nav-links {
+        display: flex; 
+    }
+}
         /* 아래 코드를 기존 <style> 태그 안에 추가 */
 #cookie-banner {
     position: fixed; /* 화면에 고정 */
@@ -164,12 +225,19 @@
     <header class="header">
         <div class="container nav-content">
             <a href="/index.html" class="logo">Hana Energy</a>
-            <nav class="nav-links">
-                <a href="/index.html#home">Startseite</a>
-                <a href="/index.html#scope">Lösungen</a>
-                <a href="/index.html#strengths">Stärken</a>
-                <a href="/contact.html" style="font-weight: bold; color: var(--primary-color);">Kontakt</a> <span class="lang-switch">| <a href="/en/contact.html">English</a></span> 
-            </nav>
+            <nav class="main-nav">
+    <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    <label for="nav-toggle" class="nav-toggle-label">☰</label>
+    
+    <ul class="nav-links">
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/solutions.html">Solutions</a></li>
+        <li><a href="/strengths.html">Strengths</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+        
+        <li class="language-switch"><a href="/en/index.html">English</a></li> 
+    </ul>
+</nav>
         </div>
     </header>
     <section class="container" style="padding: 80px 0;">
