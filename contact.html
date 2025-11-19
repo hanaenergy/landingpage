@@ -23,6 +23,9 @@
     display: block; 
     padding: 8px 15px; 
     text-decoration: none; 
+    color: var(--text-color); /* 기존 스타일 변수 사용 */
+    font-weight: 500;
+    transition: color 0.3s;
 }
 /* 햄버거 토글 기본 숨김 (데스크톱에서는 안 보임) */
 .nav-toggle-label { 
@@ -44,7 +47,7 @@
         width: 100%;
         display: none; /* 모바일에서 기본적으로 메뉴 숨김 */
         flex-direction: column;
-        background: #f8f8f8; /* 메뉴 배경색 */
+        background: #fff; /* 메뉴 배경색을 흰색으로 통일 */
         z-index: 999;
         box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
     }
@@ -67,6 +70,7 @@
         display: flex; 
     }
 }
+        
         /* 아래 코드를 기존 <style> 태그 안에 추가 */
 #cookie-banner {
     position: fixed; /* 화면에 고정 */
@@ -134,33 +138,15 @@
             color: var(--primary-color);
             text-decoration: none;
         }
-        .nav-links a {
-            color: var(--text-color);
-            text-decoration: none;
-            margin-left: 25px;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        /* Language Switcher */
-        .lang-switch {
-            font-size: 0.9rem;
-            margin-left: 15px;
-        }
-        .lang-switch a {
+        .nav-links a:hover {
             color: var(--primary-color);
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        /* Hero Section (Not used in contact, but styles are available) */
-        .hero h1 {
-            font-size: 2.8rem;
-            margin-bottom: 20px;
-            color: #222;
         }
 
         /* Form Specific Styles */
+        .form-container {
+             max-width: 500px; 
+             margin: 0 auto;
+        }
         .form-group {
             margin-bottom: 20px;
         }
@@ -168,15 +154,17 @@
             display: block;
             margin-bottom: 5px;
             font-weight: bold;
+            margin-top: 15px; /* 간격 확보 */
         }
         .form-group input[type="text"],
         .form-group input[type="email"],
+        .form-group input[type="tel"],
         .form-group textarea {
             width: 100%;
             padding: 12px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            box-sizing: border-box; /* Padding and border are included in the element's total width and height */
+            box-sizing: border-box; 
             font-family: var(--font-family);
             font-size: 1rem;
         }
@@ -216,7 +204,7 @@
         /* Mobile adjustments */
         @media (max-width: 768px) {
             .hero h1 { font-size: 2rem; }
-            .nav-links { display: none; } 
+            /* .nav-links { display: none; } <--- 이 코드는 햄버거 메뉴 CSS로 이동 */
         }
     </style>
 </head>
@@ -226,76 +214,85 @@
         <div class="container nav-content">
             <a href="/index.html" class="logo">Hana Energy</a>
             <nav class="main-nav">
-    <input type="checkbox" id="nav-toggle" class="nav-toggle">
-    <label for="nav-toggle" class="nav-toggle-label">☰</label>
-    
-    <ul class="nav-links">
-        <li><a href="/index.html">Home</a></li>
-        <li><a href="/solutions.html">Solutions</a></li>
-        <li><a href="/strengths.html">Strengths</a></li>
-        <li><a href="/contact.html">Contact</a></li>
-        
-        <li class="language-switch"><a href="/en/index.html">English</a></li> 
-    </ul>
-</nav>
+                <input type="checkbox" id="nav-toggle" class="nav-toggle">
+                <label for="nav-toggle" class="nav-toggle-label">☰</label>
+                
+                <ul class="nav-links">
+                    <li><a href="/index.html#home">Home</a></li>
+                    <li><a href="/index.html#solutions">Solutions</a></li>
+                    <li><a href="/index.html#strengths">Strengths</a></li>
+                    <li><a href="/index.html#contact">Contact</a></li>
+                    
+                    <li class="language-switch"><a href="/en/contact.html">English</a></li> 
+                </ul>
+            </nav>
         </div>
     </header>
     <section class="container" style="padding: 80px 0;">
         <h1>Kontakt aufnehmen</h1>
         <p>Haben Sie Fragen zu einer Partnerschaft oder unseren Lösungen? Bitte füllen Sie das folgende Formular aus. Wir werden uns umgehend bei Ihnen melden.</p>
 
-<form 
-    action="https://formspree.io/f/xjklobyd" 
-    method="POST"
-    style="max-width: 500px; margin: 0 auto;"
-    >
-    
-    <input type="hidden" name="_subject" value="[Hana Energy] Website Anfrage">
-    
-    <label for="name" style="display: block; margin-top: 15px;">Name / Firma (Name / Company):</label>
-    <input 
-        type="text" 
-        id="name" 
-        name="Name_Firma" 
-        placeholder="Ihr Name oder Ihre Firma" 
-        required 
-        style="width: 100%; padding: 10px; box-sizing: border-box;"
-    >
+        <form 
+            action="https://formspree.io/f/xjklobyd" 
+            method="POST"
+            class="form-container"
+        >
+            
+            <input type="hidden" name="_subject" value="[Hana Energy] Website Anfrage">
+            
+            <div class="form-group">
+                <label for="name">Name / Firma (Name / Company):</label>
+                <input 
+                    type="text" 
+                    id="name" 
+                    name="Name_Firma" 
+                    placeholder="Ihr Name oder Ihre Firma" 
+                    required 
+                >
+            </div>
 
-    <label for="phone" style="display: block; margin-top: 15px;">Telefonnummer (Phone Number): (Optional)</label>
-    <input 
-        type="tel" 
-        id="phone" 
-        name="Telefonnummer" 
-        placeholder="Ihre Telefonnummer (optional)" 
-        style="width: 100%; padding: 10px; box-sizing: border-box;"
-    >
+            <div class="form-group">
+                <label for="phone">Telefonnummer (Phone Number): (Optional)</label>
+                <input 
+                    type="tel" 
+                    id="phone" 
+                    name="Telefonnummer" 
+                    placeholder="Ihre Telefonnummer (optional)" 
+                >
+            </div>
 
-    <label for="email" style="display: block; margin-top: 15px;">E-Mail (Email):</label>
-    <input 
-        type="email" 
-        id="email" 
-        name="_replyto" 
-        placeholder="Ihre E-Mail-Adresse" 
-        required 
-        style="width: 100%; padding: 10px; box-sizing: border-box;"
-    >
+            <div class="form-group">
+                <label for="email">E-Mail (Email):</label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="_replyto" 
+                    placeholder="Ihre E-Mail-Adresse" 
+                    required 
+                >
+            </div>
 
-    <label for="message" style="display: block; margin-top: 15px;">Ihre Nachricht (Your Message):</label>
-    <textarea 
-        id="message" 
-        name="Nachricht" 
-        rows="5" 
-        placeholder="Ihre Anfrage oder Nachricht..." 
-        required 
-        style="width: 100%; padding: 10px; box-sizing: border-box;"
-    ></textarea>
+            <div class="form-group">
+                <label for="message">Ihre Nachricht (Your Message):</label>
+                <textarea 
+                    id="message" 
+                    name="Nachricht" 
+                    rows="5" 
+                    placeholder="Ihre Anfrage oder Nachricht..." 
+                    required 
+                ></textarea>
+            </div>
 
-    <button type="submit" style="margin-top: 20px; padding: 10px 20px; background-color: #007bff; color: white; border: none; cursor: pointer;">
-        Senden
-    </button>
-</form>
-        </section>
+            <button type="submit" class="cta-button" style="padding: 10px 20px;">
+                Senden
+            </button>
+        </form>
+
+        <p style="text-align: center; max-width: 500px; margin: 30px auto; font-size: 0.9rem; color: #555;">
+            * Hinweis: Zur Bearbeitung des Formulars nutzen wir den externen Dienstleister <a href="https://formspree.io/legal/privacy" target="_blank" style="color: var(--primary-color); text-decoration: underline;">Formspree, Inc.</a> Es erfolgt eine Datenübermittlung in die USA. Weitere Informationen finden Sie in unserer <a href="/legal/datenschutz.html" style="color: var(--primary-color); text-decoration: underline;">Datenschutzerklärung</a>.
+        </p>
+
+    </section>
     <footer class="footer" id="contact">
         <div class="container">
             <p>Hana Energy (e.U. in Gründung, Österreich)</p>
@@ -308,7 +305,7 @@
         </div>
     </footer>
     <script>
-        // Note: Smooth scrolling logic is usually on the main page. This script is kept minimal.
+        // Contact 페이지에서는 스크롤 스크립트가 필요 없으므로 삭제합니다.
     </script>
 <div id="cookie-banner">
     Diese Website verwendet Cookies, um die Funktionalität zu gewährleisten. Weitere Informationen finden Sie in unserer <a href="/legal/datenschutz.html">Datenschutzerklärung</a>. 
@@ -328,4 +325,3 @@
 </script>
 </body>
 </html>
-
