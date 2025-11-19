@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hana Energy | Market Entry & Sales Solutions for EV Charging, PV, and ESS in the DACH Region</title>
+    
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #f8f9fa;
+            --text-color: #333;
+            --light-text: #555;
+            --font-family: 'Helvetica Neue', Arial, sans-serif; 
+        }
+        body {
+            font-family: var(--font-family);
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navigation */
+        .header {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        /* Language Switcher */
+        .lang-switch {
+            font-size: 0.9rem;
+            margin-left: 15px;
+        }
+        .lang-switch a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-color: var(--secondary-color);
+            padding: 100px 0;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            color: #222;
+        }
+        .hero h2 {
+            font-size: 1.25rem;
+            margin-bottom: 40px;
+            color: #555;
+            margin-top: 0;
+        }
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: background-color 0.3s;
+        }
+        .cta-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Service Section (Solutions) */
+        .services {
+            padding: 80px 0;
+            text-align: center;
+        }
+        .services h2 {
+            font-size: 2rem;
+            margin-bottom: 50px;
+        }
+        .service-grid {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        .service-item {
+            flex-basis: calc(33% - 20px);
+            padding: 30px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+            text-align: left;
+        }
+        .icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            text-align: center;
+        }
+        .description-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 15px;
+            font-size: 0.95rem;
+        }
+        .description-list li {
+            margin-bottom: 8px;
+            padding-left: 15px;
+            position: relative;
+        }
+        .description-list li::before {
+            content: '•';
+            color: var(--primary-color);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Strengths Section */
+        .strengths {
+            padding: 60px 0;
+            background-color: #f8f8f8;
+            text-align: center;
+        }
+        .strengths h2 {
+            margin-bottom: 40px;
+        }
+        .strength-item {
+            flex-basis: calc(50% - 20px);
+            padding: 20px;
+            text-align: left;
+        }
+        .strength-item h4 {
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        .footer a {
+            color: white;
+            text-decoration: underline;
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .service-item, .strength-item { flex-basis: 100%; }
+            .nav-links { display: none; } 
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="container nav-content">
+        <a href="#" class="logo">Hana Energy</a>
+        <nav class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#scope">Solutions</a>
+            <a href="#strengths">Strengths</a>
+            <a href="#contact">Contact</a>
+            <span class="lang-switch">| <a href="/">Deutsch</a></span> 
+        </nav>
+    </div>
+</header>
+
+<section class="hero" id="home">
+    <div class="container">
+        <h1>Your Partner for EV Charging, Photovoltaics & Energy Storage Systems in Austria and Germany.</h1>
+        <h2>We connect global manufacturers with trusted installers and EPC firms in the DACH region for seamless market entry.</h2>
+        <a href="mailto:contact@hanaenergy.at" class="cta-button">Partner Inquiry: Start Your Expansion</a>
+    </div>
+</section>
+
+<section class="services" id="scope">
+    <div class="container">
+        <h2>Our Core Competencies and Solutions</h2>
+        <div class="service-grid">
+            <div class="service-item">
+                <div class="icon">🔌</div>
+                <h3>1. EV Charging Solutions</h3>
+                <ul class="description-list">
+                    <li>AC and DC chargers, accessories, and charging cables.</li>
+                    <li>Local demand analysis and sales channel development.</li>
+                    <li>Introduction to local installers and distributors.</li>
+                    <li>Consulting on certifications (CE, EN standards).</li>
+                </ul>
+            </div>
+            <div class="service-item">
+                <div class="icon">☀️</div>
+                <h3>2. Photovoltaic Components (PV)</h3>
+                <ul class="description-list">
+                    <li>Components for residential and commercial PV systems.</li>
+                    <li>Development of distributor and EPC partnerships.</li>
+                    <li>Competitive benchmarking for successful market launch.</li>
+                    <li>Support with local regulations (ÖNORM, VDE, etc.).</li>
+                </ul>
+            </div>
+            <div class="service-item">
+                <div class="icon">🔋</div>
+                <h3>3. Energy Storage Systems (ESS)</h3>
+                <ul class="description-list">
+                    <li>Home batteries (5–15 kWh) and hybrid inverter solutions.</li>
+                    <li>Market feasibility assessment.</li>
+                    <li>Targeted identification of B2B sales partners.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="strengths" id="strengths">
+    <div class="container">
+        <h2>Your Advantages of Partnering with Hana Energy</h2>
+        <div class="service-grid">
+            <div class="strength-item">
+                <h4>Strong Local Network</h4>
+                <p>We cooperate closely with installers, energy consultants, and smaller EPC companies looking for competitive products.</p>
+            </div>
+            <div class="strength-item">
+                <h4>Comprehensive Market Knowledge</h4>
+                <p>Up-to-date knowledge on European technical standards, pricing, logistics, and competition in our focus markets.</p>
+            </div>
+            <div class="strength-item">
+                <h4>Performance-Based Commercial Agent Model (Handelsagent)</h4>
+                <p>As a Commercial Agent, we work on a performance-based model, allowing manufacturers to expand into Europe **without fixed cost risk or local employment obligations**.</p>
+            </div>
+            <div class="strength-item">
+                <h4>Flexible Logistics Consulting</h4>
+                <p>We support DAP and DDP solutions, and the setup of EU fulfillment centers, matching the manufacturers' long-term strategy.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer" id="contact">
+    <div class="container">
+        <p>Hana Energy (e.U. in Gründung, Austria)</p>
+        <p>Email: <strong>contact@hanaenergy.at</strong></p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/nambodo" target="_blank">www.linkedin.com/in/nambodo</a></p>
+        <div class="footer-links" style="margin-top: 10px;">
+            <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a>
+        </div>
+        <p style="margin-top: 15px;">Founded: 2025. All Rights Reserved.</p>
+    </div>
+</footer>
+
+<script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
