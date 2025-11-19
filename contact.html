@@ -179,14 +179,53 @@
 <form 
     action="https://formspree.io/f/xjklobyd" 
     method="POST"
+    style="max-width: 500px; margin: 0 auto;"
     >
     
-    <input type="email" id="email" name="email" required>
+    <input type="hidden" name="_subject" value="[Hana Energy] Website Anfrage">
     
-    <input type="text" id="name" name="name">
-    <textarea id="message" name="message" required></textarea>
+    <label for="name" style="display: block; margin-top: 15px;">Name / Firma (Name / Company):</label>
+    <input 
+        type="text" 
+        id="name" 
+        name="Name_Firma" 
+        placeholder="Ihr Name oder Ihre Firma" 
+        required 
+        style="width: 100%; padding: 10px; box-sizing: border-box;"
+    >
 
-    <button type="submit">Senden (전송)</button>
+    <label for="phone" style="display: block; margin-top: 15px;">Telefonnummer (Phone Number): (Optional)</label>
+    <input 
+        type="tel" 
+        id="phone" 
+        name="Telefonnummer" 
+        placeholder="Ihre Telefonnummer (optional)" 
+        style="width: 100%; padding: 10px; box-sizing: border-box;"
+    >
+
+    <label for="email" style="display: block; margin-top: 15px;">E-Mail (Email):</label>
+    <input 
+        type="email" 
+        id="email" 
+        name="_replyto" 
+        placeholder="Ihre E-Mail-Adresse" 
+        required 
+        style="width: 100%; padding: 10px; box-sizing: border-box;"
+    >
+
+    <label for="message" style="display: block; margin-top: 15px;">Ihre Nachricht (Your Message):</label>
+    <textarea 
+        id="message" 
+        name="Nachricht" 
+        rows="5" 
+        placeholder="Ihre Anfrage oder Nachricht..." 
+        required 
+        style="width: 100%; padding: 10px; box-sizing: border-box;"
+    ></textarea>
+
+    <button type="submit" style="margin-top: 20px; padding: 10px 20px; background-color: #007bff; color: white; border: none; cursor: pointer;">
+        Senden (전송)
+    </button>
 </form>
         </section>
     <footer class="footer" id="contact">
