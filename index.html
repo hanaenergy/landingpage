@@ -9,13 +9,13 @@
         /* 기본 스타일 */
 .main-nav { 
     display: flex; 
-    justify-content: flex-end; /* 메뉴를 오른쪽으로 정렬 */
+    justify-content: flex-end; 
     align-items: center; 
     padding: 10px 20px;
 }
 .nav-links { 
     list-style: none; 
-    display: flex; /* 데스크톱에서 가로로 배치 */
+    display: flex; 
     margin: 0; 
     padding: 0; 
 }
@@ -28,27 +28,27 @@
     transition: color 0.3s;
 }
 
-/* 햄버거 토글 기본 숨김 (데스크톱에서는 안 보임) */
+/* 햄버거 토글 기본 숨김 */
 .nav-toggle-label { 
     display: none; 
     cursor: pointer; 
     font-size: 30px; 
-    order: 1; /* 오른쪽 끝으로 배치 */
+    order: 1; 
 }
 .nav-toggle { 
-    display: none; /* 체크박스 숨김 */
+    display: none; 
 }
 
 /* --- 모바일 화면 스타일 (768px 이하) --- */
 @media (max-width: 768px) {
     .nav-links {
         position: absolute;
-        top: 60px; /* 헤더 높이에 따라 조정 */
+        top: 60px; 
         right: 0;
         width: 100%;
-        display: none; /* 모바일에서 기본적으로 메뉴 숨김 */
+        display: none; 
         flex-direction: column;
-        background: #fff; /* 메뉴 배경색 */
+        background: #fff; 
         z-index: 999;
         box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
     }
@@ -60,19 +60,15 @@
     .nav-links li a {
         padding: 15px;
     }
-
-    /* 햄버거 아이콘만 보여주기 */
     .nav-toggle-label {
-        display: block; /* 햄버거 아이콘 표시 */
+        display: block; 
     }
-
-    /* 체크박스가 체크되면 메뉴 보여주기 (핵심 기능) */
     .nav-toggle:checked ~ .nav-links {
         display: flex; 
     }
 }
         
-        /* 아래는 기존 스타일 유지 */
+        /* 쿠키 배너 스타일 */
 #cookie-banner {
     position: fixed; 
     bottom: 0;
@@ -99,6 +95,7 @@
     cursor: pointer;
     border-radius: 3px;
 }
+        /* 기본 변수 및 바디 스타일 */
         :root {
             --primary-color: #007bff; 
             --secondary-color: #f8f9fa; 
@@ -119,7 +116,7 @@
             padding: 0 20px;
         }
         
-        /* Navigation (기존 스타일과의 충돌 방지를 위해 최소화) */
+        /* Navigation (기존 스타일 유지) */
         .header {
             background-color: #fff;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
@@ -142,7 +139,6 @@
         .nav-links a:hover {
             color: var(--primary-color);
         }
-
 
         /* Hero Section */
         .hero {
@@ -171,6 +167,8 @@
             font-weight: bold;
             font-size: 1.1rem;
             transition: background-color 0.3s;
+            border: none; /* 버튼 스타일 통일 */
+            cursor: pointer;
         }
         .cta-button:hover {
             background-color: #0056b3;
@@ -246,6 +244,41 @@
             margin-top: 0;
         }
         
+        /* Contact Form Section (새로 추가) */
+        .contact-form-section {
+            padding: 80px 0;
+            text-align: center;
+        }
+        .form-container {
+             max-width: 500px; 
+             margin: 0 auto;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            margin-top: 15px; 
+        }
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"],
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; 
+            font-family: var(--font-family);
+            font-size: 1rem;
+        }
+        .form-group textarea {
+            resize: vertical;
+        }
+
         /* Footer */
         .footer {
             background-color: #333;
@@ -259,11 +292,10 @@
             text-decoration: underline;
         }
 
-        /* Mobile adjustments (기존 코드에서 nav-links display:none은 햄버거 CSS로 이동) */
+        /* Mobile adjustments */
         @media (max-width: 768px) {
             .hero h1 { font-size: 2rem; }
             .service-item, .strength-item { flex-basis: 100%; }
-            /* .nav-links { display: none; } <--- 이 코드는 햄버거 메뉴 CSS로 이동 */
         }
     </style>
 </head>
@@ -271,13 +303,16 @@
 
 <header class="header">
     <div class="container nav-content">
-        <a href="#home" class="logo">Hana Energy</a> <nav class="main-nav">
+        <a href="#home" class="logo">Hana Energy</a>
+        <nav class="main-nav">
             <input type="checkbox" id="nav-toggle" class="nav-toggle">
             <label for="nav-toggle" class="nav-toggle-label">☰</label>
             
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
-                <li><a href="#solutions">Solutions</a></li> <li><a href="#strengths">Strengths</a></li> <li><a href="#contact">Contact</a></li> <li class="language-switch"><a href="/en/index.html">English</a></li> 
+                <li><a href="#solutions">Solutions</a></li> 
+                <li><a href="#strengths">Strengths</a></li> 
+                <li><a href="#contact">Contact</a></li> <li class="language-switch"><a href="/en/index.html">English</a></li> 
             </ul>
         </nav>
     </div>
@@ -287,7 +322,8 @@
     <div class="container">
         <h1>Ihr Spezialist für E-Mobilität, Photovoltaik & Energiespeichersysteme in Österreich und Deutschland.</h1>
         <h2>Wir verbinden Hersteller weltweit mit vertrauenswürdigen Installateuren und EPC-Firmen in der DACH-Region, um Markteintritte effizient zu gestalten.</h2>
-        <a href="#contact" class="cta-button">Jetzt Partner werden: Expansion starten</a> </div>
+        <a href="#contact" class="cta-button">Jetzt Partner werden: Expansion starten</a>
+    </div>
 </section>
 
 <section class="services" id="solutions">
@@ -351,6 +387,72 @@
     </div>
 </section>
 
+<section class="contact-form-section">
+    <div class="container">
+        <h2>Kontakt aufnehmen</h2>
+        <p>Haben Sie Fragen zu einer Partnerschaft oder unseren Lösungen? Bitte füllen Sie das folgende Formular aus.</p>
+
+        <form 
+            action="https://formspree.io/f/xjklobyd" 
+            method="POST"
+            class="form-container"
+        >
+            <input type="hidden" name="_subject" value="[Hana Energy] Website Anfrage">
+            
+            <div class="form-group">
+                <label for="name">Name / Firma (Name / Company):</label>
+                <input 
+                    type="text" 
+                    id="name" 
+                    name="Name_Firma" 
+                    placeholder="Ihr Name oder Ihre Firma" 
+                    required 
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="email">E-Mail (Email):</label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="_replyto" 
+                    placeholder="Ihre E-Mail-Adresse" 
+                    required 
+                >
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">Telefonnummer (Phone Number): (Optional)</label>
+                <input 
+                    type="tel" 
+                    id="phone" 
+                    name="Telefonnummer" 
+                    placeholder="Ihre Telefonnummer (optional)" 
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="message">Ihre Nachricht (Your Message):</label>
+                <textarea 
+                    id="message" 
+                    name="Nachricht" 
+                    rows="5" 
+                    placeholder="Ihre Anfrage oder Nachricht..." 
+                    required 
+                ></textarea>
+            </div>
+
+            <button type="submit" class="cta-button">
+                Senden
+            </button>
+        </form>
+
+        <p style="text-align: center; max-width: 500px; margin: 30px auto 0; font-size: 0.9rem; color: #555;">
+            * Hinweis: Zur Bearbeitung des Formulars nutzen wir den externen Dienstleister <a href="https://formspree.io/legal/privacy" target="_blank" style="color: var(--primary-color); text-decoration: underline;">Formspree, Inc.</a> Es erfolgt eine Datenübermittlung in die USA. Weitere Informationen finden Sie in unserer <a href="/legal/datenschutz.html" style="color: var(--primary-color); text-decoration: underline;">Datenschutzerklärung</a>.
+        </p>
+
+    </div>
+</section>
 <footer class="footer" id="contact">
     <div class="container">
         <p>Hana Energy (e.U. in Gründung, Österreich)</p>
