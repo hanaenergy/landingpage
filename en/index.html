@@ -190,34 +190,28 @@
         }
         .service-item {
             flex-basis: calc(33% - 20px);
-            padding: 0; /* 이미지가 모서리를 채우도록 패딩을 0으로 설정 */
+            padding: 30px; /* 원래대로 30px 패딩 유지 */
             border: 1px solid #eee;
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
             text-align: left;
-            overflow: hidden; /* 이미지 모서리 처리를 위해 추가 */
         }
-        
-        /* 서비스 아이템 이미지 스타일 - 크기 확대된 부분 */
-        .service-item img {
-            width: 100%; /* 너비를 아이템 박스에 꽉 채움 */
-            height: 200px; /* 고정된 높이를 주어 깔끔하게 보이도록 */
-            object-fit: cover; /* 이미지가 찌그러지지 않고 영역을 채우도록 */
-            display: block;
-            border-top-left-radius: 8px; /* 박스 모서리 둥글게 처리 */
-            border-top-right-radius: 8px;
-        }
-
-        /* 텍스트 요소에만 패딩 재적용 */
-        .service-item h3 {
-            padding: 20px 30px 0 30px; /* 상단 패딩 추가 */
-            margin-top: 0;
-        }
-        
+        /* 아이콘 이미지 스타일 - 크기 조정 */
+        .icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80px; /* 아이콘 컨테이너 높이 증가 (적절한 여백) */
+            margin-bottom: 15px;
+        }
+        .icon img {
+            width: 60px; /* 이미지 크기 확대 (45px -> 60px) */
+            height: 60px;
+        }
         .description-list {
             list-style: none;
-            padding: 15px 30px 30px 30px; /* 좌우 및 하단에 30px 패딩 재적용 */
-            margin-top: 0;
+            padding: 0;
+            margin-top: 15px;
             font-size: 0.95rem;
         }
         .description-list li {
@@ -369,7 +363,7 @@
         <h2>Our Core Competencies and Solutions</h2>
         <div class="service-grid">
             <div class="service-item">
-                <img src="/images/ev_charging.jpg" alt="EV Charger Icon">
+                <div class="icon"><img src="/images/ev_charging.jpg" alt="EV Charger Icon"></div>
                 <h3>1. EV Charging Solutions</h3>
                 <ul class="description-list">
                     <li>AC and DC chargers, accessories, and charging cables.</li>
@@ -379,7 +373,7 @@
                 </ul>
             </div>
             <div class="service-item">
-                <img src="/images/photovoltaic.jpg" alt="Photovoltaic Icon">
+                <div class="icon"><img src="/images/photovoltaic.jpg" alt="Photovoltaic Icon"></div>
                 <h3>2. Photovoltaic Components (PV)</h3>
                 <ul class="description-list">
                     <li>Components for residential and commercial PV systems.</li>
@@ -389,7 +383,7 @@
                 </ul>
             </div>
             <div class="service-item">
-                <img src="/images/ess_storage.jpg" alt="Battery Storage Icon">
+                <div class="icon"><img src="/images/ess_storage.jpg" alt="Battery Storage Icon"></div>
                 <h3>3. Energy Storage Systems (ESS)</h3>
                 <ul class="description-list">
                     <li>Home batteries (5–15 kWh) and hybrid inverter solutions.</li>
@@ -486,7 +480,7 @@
         </form>
 
         <p style="text-align: center; max-width: 500px; margin: 30px auto 0; font-size: 0.9rem; color: #555;">
-            * Note: We use the external service provider <a href="https://formspree.io/legal/privacy" target="_blank" style="color: var(--primary-color); text-decoration: underline;">Formspree, Inc.</a> to process this form. Data transfer to the USA takes place. More information can be found in our <a href="/en/legal/privacy.html" style="color: var(--primary-color); text-decoration: underline;">Privacy Policy</a>.
+            * Note: We use the external service provider <a href="https://formspree.io/f/xjklobyd" target="_blank" style="color: var(--primary-color); text-decoration: underline;">Formspree, Inc.</a> to process this form. Data transfer to the USA takes place. More information can be found in our <a href="/en/legal/privacy.html" style="color: var(--primary-color); text-decoration: underline;">Privacy Policy</a>.
         </p>
 
     </div>
