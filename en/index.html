@@ -338,7 +338,7 @@
             margin-left: 5px;
         }
 
-        /* --- 버튼 그룹 스타일 (개선됨) --- */
+        /* --- 버튼 그룹 스타일 --- */
         .button-group {
             display: flex; 
             justify-content: space-between; 
@@ -640,6 +640,8 @@
         <p>LinkedIn: <a href="https://www.linkedin.com/in/nambodo" target="_blank">www.linkedin.com/in/nambodo</a></p>
         <div class="footer-links" style="margin-top: 10px;">
             <a href="/en/legal/privacy.html">Privacy Policy</a> | <a href="/en/legal/imprint.html">Imprint/Terms</a>
+            <span style="margin: 0 10px;">|</span>
+            <a href="#" onclick="showCookieSettings(); return false;" style="font-weight: bold;">Change Cookie Settings</a>
         </div>
         <p style="margin-top: 15px;">Founded: 2025. All Rights Reserved.</p>
     </div>
@@ -650,14 +652,13 @@
     // ⚠️ 중요: 이 값을 고객님의 실제 Google Analytics 측정 ID로 변경하십시오. 
     const GA_TRACKING_ID = 'G-XXXXXXXXXX'; 
     // ----------------------------------------------------------------------
-
+    
     /**
-     * Google Analytics 스크립트를 동적으로 로드하고 실행합니다.
-     * 이 함수는 사용자가 통계 쿠키에 동의했을 때만 호출되어야 합니다.
+     * Google Analytics 스크립트를 동적으로 로드합니다.
      */
     function loadGoogleAnalytics() {
         if (document.getElementById('ga-script')) {
-            console.warn("Google Analytics 스크립트가 이미 로드되었습니다.");
+            // 이미 로드되었으면 재실행하지 않음
             return;
         }
 
@@ -672,10 +673,16 @@
         // 2. Data Layer Setup 및 초기 config 실행
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
-        window.gtag = gtag; // 전역 스코프에 gtag 함수 등록
+        window.gtag = gtag; 
         gtag('js', new Date());
 
-        // GDPR 준수를 위해 IP 익명화 옵션을 포함하여 GA 초기화
+        // 동의 상태를 'granted'로 설정하고 GA 초기화
+        gtag('consent', 'update', {
+            'analytics_storage': 'granted',
+            'ad_storage': 'granted' 
+        });
+
+        // IP 익명화 옵션을 포함하여 GA 초기화
         gtag('config', GA_TRACKING_ID, {
             'anonymize_ip': true 
         });
@@ -684,19 +691,53 @@
     }
     
     /**
-     * 사용자의 동의 상태에 따라 비필수 스크립트(GA, 마케팅 도구 등)를 로드합니다.
+     * GA 관련 쿠키 및 저장된 데이터를 삭제합니다. (철회 기능 보완)
+     */
+    function deleteGAStorage() {
+        // gtag.js가 사용하는 모든 쿠키를 삭제합니다. (예: _ga, _gid 등)
+        const cookies = document.cookie.split(";");
+        for (let i = 0; i < cookies.length; i++) {
+            let cookie = cookies[i];
+            let eqPos = cookie.indexOf("=");
+            let name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+            name = name.trim();
+            if (name.startsWith('_ga') || name.startsWith('_gid')) {
+                 // 쿠키를 과거 날짜로 설정하여 삭제
+                document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+            }
+        }
+    }
+
+    /**
+     * 사용자의 동의 상태에 따라 비필수 스크립트(GA, 마케팅 도구 등)를 로드하거나 중지합니다.
      */
     function loadNonEssentialScripts() {
-        // 통계 쿠키 로드 
-        if (localStorage.getItem('cookieStats') === 'true') {
-            loadGoogleAnalytics();
+        const statsGranted = localStorage.getItem('cookieStats') === 'true';
+        const marketingGranted = localStorage.getItem('cookieMarketing') === 'true';
+
+        // 1. 통계 쿠키 처리
+        if (statsGranted) {
+            loadGoogleAnalytics(); // 동의 시 스크립트 로드
         } else {
-            // 통계를 거부했을 경우 GA 스크립트가 로드되지 않도록 보장 (선택적: 이미 로드된 경우 제거하는 로직 추가 가능)
+            // 거부 또는 철회 시: 추적 중단 명령 실행 및 쿠키 삭제
+            if (window.gtag) {
+                 // GA가 이미 로드된 경우, 동의 상태를 'denied'로 업데이트
+                gtag('consent', 'update', {
+                    'analytics_storage': 'denied',
+                    'ad_storage': 'denied' 
+                });
+            }
+            deleteGAStorage(); 
+            console.log("통계 쿠키가 거부되었습니다: GA 추적 중단 및 쿠키 삭제");
         }
 
-        // 마케팅 쿠키 로드 (여기에 Facebook Pixel 등 마케팅 스크립트 로직을 추가합니다.)
-        if (localStorage.getItem('cookieMarketing') === 'true') {
+        // 2. 마케팅 쿠키 처리
+        if (marketingGranted) {
             console.log("마케팅 쿠키 동의 확인: 여기에 마케팅 스크립트 동적 로딩 로직을 추가하십시오.");
+            // 여기에 마케팅 스크립트 로직을 추가할 때도, 거부 시 삭제/중단 로직을 구현해야 합니다.
+        } else {
+            console.log("마케팅 쿠키 거부됨.");
+            // 마케팅 쿠키 삭제 로직 추가 (예: Facebook Pixel 쿠키 삭제)
         }
     }
 
@@ -714,7 +755,7 @@
         localStorage.setItem('cookieConsent', 'granted_necessary');
         localStorage.setItem('cookieStats', 'false');
         localStorage.setItem('cookieMarketing', 'false');
-        // 필수만 허용이므로 비필수 스크립트는 로드하지 않음
+        loadNonEssentialScripts(); // 비필수 스크립트 중단/삭제 로직 실행
         document.getElementById('cookie-settings-modal').style.display = 'none';
     }
 
@@ -737,7 +778,7 @@
         
         localStorage.setItem('cookieConsent', 'granted_custom');
         
-        loadNonEssentialScripts(); // 저장된 설정에 따라 스크립트 로드
+        loadNonEssentialScripts(); // 저장된 설정에 따라 로드 또는 중단
         document.getElementById('cookie-settings-modal').style.display = 'none';
     }
 
@@ -745,13 +786,11 @@
     function checkCookieConsent() {
         const consent = localStorage.getItem('cookieConsent');
         
-        // 동의 기록이 없으면 모달/팝업을 강제로 띄웁니다.
         if (!consent || !consent.startsWith('granted')) {
             showCookieSettings();
         } 
-        // 동의 기록이 있으면 조건부 스크립트 로드
         else {
-            loadNonEssentialScripts(); 
+            loadNonEssentialScripts(); // 동의 기록이 있으면 로드/업데이트
             document.getElementById('cookie-settings-modal').style.display = 'none';
         }
     }
