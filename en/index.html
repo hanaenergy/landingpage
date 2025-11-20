@@ -13,7 +13,7 @@
             --text-color: #333;
             --light-text: #555;
             --font-family: 'Helvetica Neue', Arial, sans-serif; 
-            --header-height: 70px; 
+            --header-height: 70px; /* 헤더 높이 정의 */
         }
         body {
             font-family: var(--font-family);
@@ -21,6 +21,7 @@
             padding: 0;
             color: var(--text-color);
             line-height: 1.6;
+            /* 스크롤 위치 보정: 헤더 높이만큼 Padding 추가 */
             scroll-padding-top: var(--header-height); 
         }
         .container {
@@ -350,12 +351,72 @@
 </header>
 
 <section class="hero" id="home">
+    <div class="container">
+        <h1>Your Partner for EV Charging, Photovoltaics & Energy Storage Systems in Austria and Germany.</h1>
+        <h2>We connect global manufacturers with trusted installers and EPC firms in the DACH region for seamless market entry.</h2>
+        <a href="#contact-form-section" class="cta-button">Partner Inquiry: Start Your Expansion</a>
+    </div>
 </section>
 
 <section class="services" id="solutions">
+    <div class="container">
+        <h2>Our Core Competencies and Solutions</h2>
+        <div class="service-grid">
+            <div class="service-item">
+                <div class="icon"><img src="/images/ev_charger.png" alt="EV Charger Icon"></div>
+                <h3>1. EV Charging Solutions</h3>
+                <ul class="description-list">
+                    <li>AC and DC chargers, accessories, and charging cables.</li>
+                    <li>Local demand analysis and sales channel development.</li>
+                    <li>Introduction to local installers and distributors.</li>
+                    <li>Consulting on certifications (CE, EN standards).</li>
+                </ul>
+            </div>
+            <div class="service-item">
+                <div class="icon"><img src="/images/pv_panel.png" alt="Photovoltaic Icon"></div>
+                <h3>2. Photovoltaic Components (PV)</h3>
+                <ul class="description-list">
+                    <li>Components for residential and commercial PV systems.</li>
+                    <li>Development of distributor and EPC partnerships.</li>
+                    <li>Competitive benchmarking for successful market launch.</li>
+                    <li>Support with local regulations (ÖNORM, VDE, etc.).</li>
+                </ul>
+            </div>
+            <div class="service-item">
+                <div class="icon"><img src="/images/ess_battery.png" alt="Battery Storage Icon"></div>
+                <h3>3. Energy Storage Systems (ESS)</h3>
+                <ul class="description-list">
+                    <li>Home batteries (5–15 kWh) and hybrid inverter solutions.</li>
+                    <li>Market feasibility assessment.</li>
+                    <li>Targeted identification of B2B sales partners.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </section>
 
 <section class="strengths" id="strengths">
+    <div class="container">
+        <h2>Your Advantages of Partnering with Hana Energy</h2>
+        <div class="service-grid">
+            <div class="strength-item">
+                <h4>Strong Local Network</h4>
+                <p>We cooperate closely with installers, energy consultants, and smaller EPC companies looking for competitive products.</p>
+            </div>
+            <div class="strength-item">
+                <h4>Comprehensive Market Knowledge</h4>
+                <p>Up-to-date knowledge on European technical standards, pricing, logistics, and competition in our focus markets.</p>
+            </div>
+            <div class="strength-item">
+                <h4>Performance-Based Commercial Agent Model (Handelsagent)</h4>
+                <p>As a Commercial Agent, we work on a performance-based model, allowing manufacturers to expand into Europe **without fixed cost risk or local employment obligations**.</p>
+            </div>
+            <div class="strength-item">
+                <h4>Flexible Logistics Consulting</h4>
+                <p>We support DAP and DDP solutions, and the setup of EU fulfillment centers, matching the manufacturers' long-term strategy.</p>
+            </div>
+        </div>
+    </div>
 </section>
 
 <section class="contact-form-section" id="contact-form-section">
@@ -368,7 +429,52 @@
             method="POST"
             class="form-container"
         >
-<button type="submit" class="cta-button">
+            <input type="hidden" name="_subject" value="[Hana Energy - EN] Website Inquiry">
+            
+            <div class="form-group">
+                <label for="name">Name / Company:</label>
+                <input 
+                    type="text" 
+                    id="name" 
+                    name="Name_Company" 
+                    placeholder="Your Name or Company" 
+                    required 
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="_replyto" 
+                    placeholder="Your Email Address" 
+                    required 
+                >
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">Phone Number (Optional):</label>
+                <input 
+                    type="tel" 
+                    id="phone" 
+                    name="Phone_Number" 
+                    placeholder="Your Phone Number (optional)" 
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="message">Your Message:</label>
+                <textarea 
+                    id="message" 
+                    name="Message" 
+                    rows="5" 
+                    placeholder="Your inquiry or message..." 
+                    required 
+                ></textarea>
+            </div>
+
+            <button type="submit" class="cta-button">
                 Send
             </button>
         </form>
@@ -380,7 +486,7 @@
     </div>
 </section>
 <footer class="footer" id="contact">
-<div class="container">
+    <div class="container">
         <p>Hana Energy (e.U. in Gründung, Austria)</p>
         <p>Email: <strong>contact@hanaenergy.at</strong></p>
         <p>LinkedIn: <a href="https://www.linkedin.com/in/nambodo" target="_blank">www.linkedin.com/in/nambodo</a></p>
@@ -392,7 +498,7 @@
 </footer>
 
 <script>
-    // 앵커 클릭 시 부드럽게 스크롤하는 JavaScript
+    // 앵커 클릭 시 부드럽게 스크롤하는 JavaScript (스크롤 위치는 헤더 높이만큼 보정)
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             // 모바일 메뉴가 열려 있다면 닫기
