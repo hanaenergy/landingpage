@@ -236,8 +236,8 @@
             text-align: center;
         }
         .form-container {
-              max-width: 500px; 
-              margin: 0 auto;
+             max-width: 500px; 
+             margin: 0 auto;
         }
         .form-group {
             margin-bottom: 20px;
@@ -590,14 +590,16 @@
                 ></textarea>
             </div>
 
+            <div class="form-group-consent" style="margin-top: 25px; margin-bottom: 20px; text-align: left; font-size: 0.9rem; line-height: 1.4;">
+                <label>
+                    <input type="checkbox" name="datenschutz_zustimmung" value="zugestimmt" required style="margin-right: 8px; vertical-align: top;">
+                    Ich stimme der Verarbeitung meiner übermittelten Daten gemäß der <a href="/legal/datenschutz.html" target="_blank" style="color: var(--primary-color); text-decoration: underline; font-weight: bold;">Datenschutzerklärung</a> zu. Ich habe die gesonderte Information zur **Datenübermittlung in die USA** (Drittlandtransfer via Formspree, Inc.) und die damit verbundenen **Risiken des Behördenzugriffs** (Abschnitt 5 der DS-Erklärung) zur Kenntnis genommen und **willige ausdrücklich in diese Übermittlung ein.**
+                </label>
+            </div>
             <button type="submit" class="cta-button">
                 Senden
             </button>
         </form>
-
-        <p style="text-align: center; max-width: 500px; margin: 30px auto 0; font-size: 0.9rem; color: #555;">
-            * Hinweis: Zur Bearbeitung des Formulars nutzen wir den externen Dienstleister <a href="https://formspree.io/f/xjklobyd" target="_blank" style="color: var(--primary-color); text-decoration: underline;">Formspree, Inc.</a> Es erfolgt eine Datenübermittlung in die USA. Detaillierte Informationen, insbesondere zu den Risiken der Datenübertragung in die USA und der Rechtsgrundlage, finden Sie in unserer <a href="/legal/datenschutz.html" style="color: var(--primary-color); text-decoration: underline;">Datenschutzerklärung</a>.
-        </p>
 
     </div>
 </section>
@@ -703,7 +705,7 @@
             // Google Analytics 관련 쿠키 이름을 식별하여 삭제
             if (name.startsWith('_ga') || name.startsWith('_gid')) {
                  // 쿠키를 과거 날짜로 설정하여 삭제
-                document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+                 document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
             }
         }
     }
