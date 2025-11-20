@@ -7,14 +7,14 @@
     
     <style>
 
-        /* 기본 변수 및 바디 스타일 */
+        /* 기본 변수 및 바디 스타일 (Same as previous version) */
         :root {
             --primary-color: #007bff;
             --secondary-color: #f8f9fa;
             --text-color: #333;
             --light-text: #555;
             --font-family: 'Helvetica Neue', Arial, sans-serif; 
-            --header-height: 70px; /* 헤더 높이 정의 */
+            --header-height: 70px; 
         }
         body {
             font-family: var(--font-family);
@@ -236,8 +236,8 @@
             text-align: center;
         }
         .form-container {
-              max-width: 500px; 
-              margin: 0 auto;
+             max-width: 500px; 
+             margin: 0 auto;
         }
         .form-group {
             margin-bottom: 20px;
@@ -590,14 +590,16 @@
                 ></textarea>
             </div>
 
+            <div class="form-group-consent" style="margin-top: 25px; margin-bottom: 20px; text-align: left; font-size: 0.9rem; line-height: 1.4;">
+                <label>
+                    <input type="checkbox" name="data_processing_consent" value="agreed" required style="margin-right: 8px; vertical-align: top;">
+                    I consent to the processing of my submitted data according to the <a href="/en/legal/privacy.html" target="_blank" style="color: var(--primary-color); text-decoration: underline; font-weight: bold;">Privacy Policy</a>. I have read the separate information regarding **data transfer to the USA** (Third Country Transfer via Formspree, Inc.) and the associated **risks of governmental access** (Section 5 of the Privacy Policy) and **explicitly consent to this transfer.**
+                </label>
+            </div>
             <button type="submit" class="cta-button">
                 Submit
             </button>
         </form>
-
-        <p style="text-align: center; max-width: 500px; margin: 30px auto 0; font-size: 0.9rem; color: #555;">
-            * Note: We use the external service provider <a href="https://formspree.io/f/xjklobyd" target="_blank" style="color: var(--primary-color); text-decoration: underline;">Formspree, Inc.</a> to process the form. Data will be transmitted to the USA. Detailed information, particularly concerning the risks of data transfer to the USA and the legal basis, can be found in our <a href="/en/legal/privacy.html" style="color: var(--primary-color); text-decoration: underline;">Privacy Policy</a>.
-        </p>
 
     </div>
 </section>
@@ -649,20 +651,19 @@
 
 <script>
     // ----------------------------------------------------------------------
-    // ⚠️ 중요: 이 값을 고객님의 실제 Google Analytics 측정 ID로 변경하십시오. 
+    // ⚠️ IMPORTANT: Please change this value to your actual Google Analytics tracking ID. 
     const GA_TRACKING_ID = 'G-XXXXXXXXXX'; 
     // ----------------------------------------------------------------------
     
     /**
-     * Google Analytics 스크립트를 동적으로 로드합니다.
+     * Dynamically loads the Google Analytics script.
      */
     function loadGoogleAnalytics() {
         if (document.getElementById('ga-script')) {
-            // 이미 로드되었으면 재실행하지 않음
             return;
         }
 
-        // 1. GA Configuration Script (gtag.js) 로드
+        // 1. Load GA Configuration Script (gtag.js) 
         const scriptUrl = `https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`;
         const script = document.createElement('script');
         script.async = true;
@@ -670,105 +671,107 @@
         script.id = 'ga-script'; 
         document.head.appendChild(script);
 
-        // 2. Data Layer Setup 및 초기 config 실행
+        // 2. Data Layer Setup and initial config execution
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         window.gtag = gtag; 
         gtag('js', new Date());
 
-        // 동의 상태를 'granted'로 설정하고 GA 초기화
+        // Update consent status to 'granted' and initialize GA
         gtag('consent', 'update', {
             'analytics_storage': 'granted',
             'ad_storage': 'granted' 
         });
 
-        // IP 익명화 옵션을 포함하여 GA 초기화
+        // Initialize GA including IP anonymization option
         gtag('config', GA_TRACKING_ID, {
             'anonymize_ip': true 
         });
 
-        console.log("Google Analytics (통계 쿠키) 스크립트가 로드되었습니다.");
+        console.log("Google Analytics (Statistical Cookies) script loaded.");
     }
     
     /**
-     * GA 관련 쿠키 및 저장된 데이터를 삭제합니다. (철회 기능 보완)
+     * Deletes GA-related cookies and stored data (Withdrawal functionality).
      */
     function deleteGAStorage() {
-        // gtag.js가 사용하는 모든 쿠키를 삭제합니다. (예: _ga, _gid 등)
+        // Delete all cookies used by gtag.js (e.g., _ga, _gid, etc.)
         const cookies = document.cookie.split(";");
         for (let i = 0; i < cookies.length; i++) {
             let cookie = cookies[i];
             let eqPos = cookie.indexOf("=");
             let name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
             name = name.trim();
+            // Identify and delete Google Analytics related cookies
             if (name.startsWith('_ga') || name.startsWith('_gid')) {
-                 // 쿠키를 과거 날짜로 설정하여 삭제
-                document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+                 // Set cookie to an old date to delete it
+                 document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
             }
         }
     }
 
     /**
-     * 사용자의 동의 상태에 따라 비필수 스크립트(GA, 마케팅 도구 등)를 로드하거나 중지합니다.
+     * Loads or stops non-essential scripts (GA, marketing tools, etc.) based on user consent.
      */
     function loadNonEssentialScripts() {
         const statsGranted = localStorage.getItem('cookieStats') === 'true';
         const marketingGranted = localStorage.getItem('cookieMarketing') === 'true';
 
-        // 1. 통계 쿠키 처리
+        // 1. Handle Statistical Cookies (GA)
         if (statsGranted) {
-            loadGoogleAnalytics(); // 동의 시 스크립트 로드
+            loadGoogleAnalytics(); // Load script upon consent
         } else {
-            // 거부 또는 철회 시: 추적 중단 명령 실행 및 쿠키 삭제
+            // Refusal or Withdrawal: Execute tracking stop command and delete cookies
             if (window.gtag) {
-                 // GA가 이미 로드된 경우, 동의 상태를 'denied'로 업데이트
+                 // If GA is already loaded, update consent status to 'denied'
                 gtag('consent', 'update', {
                     'analytics_storage': 'denied',
                     'ad_storage': 'denied' 
                 });
             }
             deleteGAStorage(); 
-            console.log("통계 쿠키가 거부되었습니다: GA 추적 중단 및 쿠키 삭제");
+            console.log("Statistical Cookies denied: GA tracking stopped and cookies deleted.");
         }
 
-        // 2. 마케팅 쿠키 처리
+        // 2. Handle Marketing Cookies (Facebook Pixel, etc.)
         if (marketingGranted) {
-            console.log("마케팅 쿠키 동의 확인: 여기에 마케팅 스크립트 동적 로딩 로직을 추가하십시오.");
-            // 여기에 마케팅 스크립트 로직을 추가할 때도, 거부 시 삭제/중단 로직을 구현해야 합니다.
+            console.log("Marketing Cookies consented: Add logic for dynamic loading of marketing scripts here.");
+            // Actual marketing script loading logic should be added here.
         } else {
-            console.log("마케팅 쿠키 거부됨.");
-            // 마케팅 쿠키 삭제 로직 추가 (예: Facebook Pixel 쿠키 삭제)
+            console.log("Marketing Cookies denied.");
+            // Add marketing cookie deletion logic here (e.g., deleting Facebook Pixel cookies)
         }
     }
 
-    // 1. 모든 쿠키 허용
+    // 1. Accept All Cookies
     function acceptAllCookies() {
         localStorage.setItem('cookieConsent', 'granted_all');
         localStorage.setItem('cookieStats', 'true');
         localStorage.setItem('cookieMarketing', 'true');
-        loadNonEssentialScripts(); // 동의 후 스크립트 로드
+        loadNonEssentialScripts(); // Load scripts after consent
         document.getElementById('cookie-settings-modal').style.display = 'none';
     }
 
-    // 2. 필수 쿠키만 허용
+    // 2. Accept Necessary Only
     function acceptNecessaryCookies() {
         localStorage.setItem('cookieConsent', 'granted_necessary');
         localStorage.setItem('cookieStats', 'false');
         localStorage.setItem('cookieMarketing', 'false');
-        loadNonEssentialScripts(); // 비필수 스크립트 중단/삭제 로직 실행
+        loadNonEssentialScripts(); // Execute non-essential script halt/deletion logic
         document.getElementById('cookie-settings-modal').style.display = 'none';
     }
 
-    // 3. 설정 창 표시 함수 (모달 표시)
+    // 3. Show Settings Window (Display Modal)
     function showCookieSettings() {
+        // Display modal
         document.getElementById('cookie-settings-modal').style.display = 'flex';
         
-        // 현재 저장된 설정 불러오기
+        // Load current saved settings
         document.getElementById('cookie-statistical').checked = (localStorage.getItem('cookieStats') === 'true');
         document.getElementById('cookie-marketing').checked = (localStorage.getItem('cookieMarketing') === 'true');
     }
 
-    // 설정 저장 함수 
+    // 4. Save Settings Function
     function saveCookieSettings() {
         const statsChecked = document.getElementById('cookie-statistical').checked;
         const marketingChecked = document.getElementById('cookie-marketing').checked;
@@ -778,24 +781,26 @@
         
         localStorage.setItem('cookieConsent', 'granted_custom');
         
-        loadNonEssentialScripts(); // 저장된 설정에 따라 로드 또는 중단
+        loadNonEssentialScripts(); // Load or halt based on saved settings
         document.getElementById('cookie-settings-modal').style.display = 'none';
     }
 
-    // 4. 페이지 로드 시 동의 상태 확인
+    // 5. Check Consent Status on Page Load
     function checkCookieConsent() {
         const consent = localStorage.getItem('cookieConsent');
         
         if (!consent || !consent.startsWith('granted')) {
+            // No consent record, show modal
             showCookieSettings();
         } 
         else {
-            loadNonEssentialScripts(); // 동의 기록이 있으면 로드/업데이트
+            // Consent record exists, run load/update script logic
+            loadNonEssentialScripts(); 
             document.getElementById('cookie-settings-modal').style.display = 'none';
         }
     }
 
-    // 페이지 로드 시 기존 동의 상태 확인 함수 호출
+    // Call function to check existing consent status on page load
     checkCookieConsent();
 
 
