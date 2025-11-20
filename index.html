@@ -55,10 +55,12 @@
             text-decoration: none;
             z-index: 1001; 
         }
+        /* NOTE: In a production environment, use a real logo image. Here we use a placeholder text/box. */
         .logo img {
             height: 70px; 
             width: 100px;
             display: block;
+            content: url("https://placehold.co/100x70/007bff/ffffff?text=Hana+Energy");
         }
         
         .main-nav { 
@@ -154,11 +156,11 @@
             display: flex;
             justify-content: center; 
             flex-wrap: wrap;
-            row-gap: 30px; 
-            gap: 0; 
+            gap: 30px; /* 아이템 간격 설정 */
         }
         .service-item {
-            flex-basis: 100%; 
+            flex-basis: calc(33.333% - 20px); /* 3개 항목, 갭 고려 */
+            min-width: 300px;
             text-align: center; 
             padding: 30px;
             border: 1px solid #eee;
@@ -177,14 +179,11 @@
             display: block; 
             overflow: hidden;
         }
-        .icon img {
-           position: absolute;
-           top: 0;
-           left: 0;
-           width: 100%; 
-           height: 100%;
-           object-fit: cover;
-        }
+        /* Placeholder Images for Services */
+        .icon.ev img { content: url("https://placehold.co/400x200/4CAF50/ffffff?text=E-Mobilität"); }
+        .icon.pv img { content: url("https://placehold.co/400x200/FF9800/ffffff?text=Photovoltaik"); }
+        .icon.ess img { content: url("https://placehold.co/400x200/2196F3/ffffff?text=Energiespeicher"); }
+        
         .description-list {
             list-style: none;
             padding: 0;
@@ -221,7 +220,8 @@
             margin-bottom: 40px;
         }
         .strength-item {
-            flex-basis: calc(50% - 20px);
+            flex-basis: calc(50% - 20px); /* 2개 항목, 갭 고려 */
+            min-width: 300px;
             padding: 20px;
             text-align: left;
         }
@@ -280,7 +280,6 @@
 
         /* --- 쿠키 설정 모달 스타일 (팝업) --- */
         #cookie-settings-modal {
-            display: none; 
             position: fixed;
             z-index: 2000; 
             left: 0;
@@ -362,10 +361,10 @@
         }
 
         /* Accept All 버튼 */
-        .cta-button {
+        .cta-button.modal-btn {
             background-color: var(--primary-color);
         }
-        .cta-button:hover {
+        .cta-button.modal-btn:hover {
             background-color: #0056b3;
         }
 
@@ -440,6 +439,9 @@
             .button-group button {
                 min-width: 100%;
             }
+            .service-grid {
+                gap: 20px;
+            }
         }
     </style>
 </head>
@@ -479,7 +481,7 @@
         <h2>Unsere Kernkompetenzen und Lösungen</h2>
         <div class="service-grid">
             <div class="service-item">
-                <div class="icon"><img src="/images/ev_charging.jpg" alt="Ladesäule Icon"></div>
+                <div class="icon ev"><img src="/images/ev_charging.jpg" alt="Ladesäule Icon"></div>
                 <h3>1. E-Ladelösungen (EV Charging)</h3>
                 <ul class="description-list">
                     <li>AC- und DC-Ladegeräte, Zubehör und Ladekabel.</li>
@@ -489,7 +491,7 @@
                 </ul>
             </div>
             <div class="service-item">
-                <div class="icon"><img src="/images/photovoltaic.jpg" alt="Photovoltaik Icon"></div>
+                <div class="icon pv"><img src="/images/photovoltaic.jpg" alt="Photovoltaik Icon"></div>
                 <h3>2. Photovoltaik-Komponenten (PV)</h3>
                 <ul class="description-list">
                     <li>Komponenten für private und gewerbliche PV-Anlagen.</li>
@@ -499,7 +501,7 @@
                 </ul>
             </div>
             <div class="service-item">
-                <div class="icon"><img src="/images/ess_storage.jpg" alt="Batteriespeicher Icon"></div>
+                <div class="icon ess"><img src="/images/ess_storage.jpg" alt="Batteriespeicher Icon"></div>
                 <h3>3. Energiespeichersysteme (ESS)</h3>
                 <ul class="description-list">
                     <li>Heimspeicher (5–15 kWh) und Hybrid-Wechselrichterlösungen.</li>
@@ -590,6 +592,7 @@
                 ></textarea>
             </div>
 
+            <!-- GDPR Risiko 3: Kontaktformular mit expliziter Zustimmung und Drittlandtransfer-Hinweis -->
             <div class="form-group-consent" style="margin-top: 25px; margin-bottom: 20px; text-align: left; font-size: 0.9rem; line-height: 1.4;">
                 <label>
                     <input type="checkbox" name="datenschutz_zustimmung" value="zugestimmt" required style="margin-right: 8px; vertical-align: top;">
@@ -604,6 +607,7 @@
     </div>
 </section>
 
+<!-- GDPR Risiko 1 & 2: Cookie Consent Management Platform (CMP) Simulation -->
 <div id="cookie-settings-modal" style="display: none;">
     <div class="modal-content">
         <h3>Datenschutzeinstellungen</h3>
@@ -612,23 +616,23 @@
         <div class="cookie-group">
             <input type="checkbox" id="cookie-necessary" checked disabled>
             <label for="cookie-necessary">Notwendige Cookies (Immer aktiv)</label>
-            <p class="description">Diese Cookies sind essenziell für die grundlegenden Funktionen der Website.</p>
+            <p class="description">Diese Cookies sind essenziell für die grundlegenden Funktionen der Website (z.B. diese Zustimmungseinstellung).</p>
         </div>
         
         <div class="cookie-group">
             <input type="checkbox" id="cookie-statistical">
             <label for="cookie-statistical">Statistik-Cookies</label>
-            <p class="description">Diese helfen uns zu verstehen, wie Besucher mit der Website interagieren (z.B. Google Analytics).</p>
+            <p class="description">Diese helfen uns zu verstehen, wie Besucher mit der Website interagieren (z.B. Google Analytics zur Reichweitenmessung).</p>
         </div>
         
         <div class="cookie-group">
             <input type="checkbox" id="cookie-marketing">
             <label for="cookie-marketing">Marketing-Cookies</label>
-            <p class="description">Diese werden verwendet, um relevante Werbung anzuzeigen.</p>
+            <p class="description">Diese werden verwendet, um relevante Werbung anzuzeigen (derzeit nicht verwendet, kann aber später hinzugefügt werden).</p>
         </div>
         
         <div class="button-group">
-            <button onclick="acceptAllCookies()" class="cta-button">Alle akzeptieren</button>
+            <button onclick="acceptAllCookies()" class="cta-button modal-btn">Alle akzeptieren</button>
             <button onclick="saveCookieSettings()" class="secondary-button">Einstellungen speichern</button>
             <button onclick="acceptNecessaryCookies()" class="accept-necessary-button">Nur Notwendige</button>
         </div>
@@ -651,19 +655,20 @@
 
 <script>
     // ----------------------------------------------------------------------
-    // ⚠️ 중요: 이 값을 고객님의 실제 Google Analytics 측정 ID로 변경하십시오. 
-    const GA_TRACKING_ID = 'G-XXXXXXXXXX'; // 현재는 임시 ID로 설정되어 있습니다.
+    // ⚠️ WICHTIG: Ersetzen Sie diesen Wert durch Ihre tatsächliche Google Analytics Mess-ID. 
+    const GA_TRACKING_ID = 'G-XXXXXXXXXX'; // Dies ist ein Platzhalter.
     // ----------------------------------------------------------------------
     
     /**
-     * Google Analytics 스크립트를 동적으로 로드합니다.
+     * Lädt das Google Analytics Skript dynamisch, falls zugestimmt wurde.
+     * Implementiert IP-Anonymisierung.
      */
     function loadGoogleAnalytics() {
         if (document.getElementById('ga-script')) {
-            return;
+            return; // Bereits geladen
         }
 
-        // 1. GA Configuration Script (gtag.js) 로드
+        // 1. GA Configuration Script (gtag.js) laden
         const scriptUrl = `https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`;
         const script = document.createElement('script');
         script.async = true;
@@ -671,107 +676,99 @@
         script.id = 'ga-script'; 
         document.head.appendChild(script);
 
-        // 2. Data Layer Setup 및 초기 config 실행
+        // 2. Data Layer Setup und Initialisierung
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         window.gtag = gtag; 
         gtag('js', new Date());
 
-        // 동의 상태를 'granted'로 설정하고 GA 초기화
+        // Consent Update: Wird sofort nach dem Laden des Skripts auf 'granted' gesetzt.
         gtag('consent', 'update', {
             'analytics_storage': 'granted',
             'ad_storage': 'granted' 
         });
 
-        // IP 익명화 옵션을 포함하여 GA 초기화
+        // GA Initialisierung mit IP-Anonymisierung (Pflicht in DE/AT)
         gtag('config', GA_TRACKING_ID, {
             'anonymize_ip': true 
         });
 
-        console.log("Google Analytics (Statistik-Cookies) Skript wurde geladen.");
+        console.log("Google Analytics (Statistik-Cookies) Skript wurde geladen (mit IP-Anonymisierung).");
     }
     
     /**
-     * GA 관련 쿠키 및 저장된 데이터를 삭제합니다. (철회 기능 보완)
+     * GA-bezogene Cookies und gespeicherte Daten löschen (für Widerruf).
      */
     function deleteGAStorage() {
-        // gtag.js가 사용하는 모든 쿠키를 삭제합니다. (예: _ga, _gid 등)
+        // 1. GA-Cookies löschen (_ga, _gid, etc.)
         const cookies = document.cookie.split(";");
         for (let i = 0; i < cookies.length; i++) {
             let cookie = cookies[i];
             let eqPos = cookie.indexOf("=");
             let name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
             name = name.trim();
-            // Google Analytics 관련 쿠키 이름을 식별하여 삭제
-            if (name.startsWith('_ga') || name.startsWith('_gid')) {
-                 // 쿠키를 과거 날짜로 설정하여 삭제
+            
+            // GA-relevante Cookie-Namen identifizieren und löschen
+            if (name.startsWith('_ga') || name.startsWith('_gid') || name.startsWith('_gcl')) {
+                 // Setzt das Cookie auf ein abgelaufenes Datum
                  document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
             }
         }
+        console.log("GA-Cookies wurden physikalisch gelöscht.");
     }
 
     /**
-     * 사용자의 동의 상태에 따라 비필수 스크립트(GA, 마케팅 도구 등)를 로드하거나 중지합니다.
+     * Lädt oder stoppt nicht-essentielle Dienste basierend auf dem Zustimmungsstatus.
      */
     function loadNonEssentialScripts() {
         const statsGranted = localStorage.getItem('cookieStats') === 'true';
         const marketingGranted = localStorage.getItem('cookieMarketing') === 'true';
 
-        // 1. 통계 쿠키 처리 (GA)
+        // 1. Statistik-Cookies (GA) behandeln
         if (statsGranted) {
-            loadGoogleAnalytics(); // 동의 시 스크립트 로드
+            loadGoogleAnalytics(); // Zustimmung: Skript laden
         } else {
-            // 거부 또는 철회 시: 추적 중단 명령 실행 및 쿠키 삭제
+            // Ablehnung/Widerruf: Tracking stoppen und Cookies löschen
             if (window.gtag) {
-                 // GA가 이미 로드된 경우, 동의 상태를 'denied'로 업데이트
-                gtag('consent', 'update', {
+                 // GA ist bereits geladen (Widerruf): Consent Status aktualisieren
+                 window.gtag('consent', 'update', {
                     'analytics_storage': 'denied',
                     'ad_storage': 'denied' 
-                });
+                 });
             }
             deleteGAStorage(); 
             console.log("Statistik-Cookies abgelehnt: GA-Tracking gestoppt und Cookies gelöscht.");
         }
 
-        // 2. 마케팅 쿠키 처리 (Facebook Pixel 등)
+        // 2. Marketing-Cookies behandeln
         if (marketingGranted) {
-            console.log("Marketing-Cookies zugestimmt: Hier muss die Logik zum dynamischen Laden der Marketing-Skripte hinzugefügt werden.");
-            // 여기에 실제 마케팅 스크립트 로직을 추가해야 합니다.
+            // Hier müssten Sie die Logik zum Laden von Marketing-Skripten (z.B. Facebook Pixel) hinzufügen.
+            console.log("Marketing-Cookies zugestimmt: Marketing-Skripte müssen hier geladen werden.");
         } else {
+            // Hier müssten Sie die Logik zum Löschen von Marketing-Cookies hinzufügen.
             console.log("Marketing-Cookies abgelehnt.");
-            // 마케팅 쿠키 삭제 로직 추가 (예: Facebook Pixel 쿠키 삭제)
         }
     }
 
-    // 1. 모든 쿠키 허용 (Alle akzeptieren)
+    // 1. Alle Cookies akzeptieren
     function acceptAllCookies() {
         localStorage.setItem('cookieConsent', 'granted_all');
         localStorage.setItem('cookieStats', 'true');
         localStorage.setItem('cookieMarketing', 'true');
-        loadNonEssentialScripts(); // 동의 후 스크립트 로드
+        loadNonEssentialScripts(); // Zustimmung: Skripte laden
         document.getElementById('cookie-settings-modal').style.display = 'none';
     }
 
-    // 2. 필수 쿠키만 허용 (Nur Notwendige)
+    // 2. Nur notwendige Cookies akzeptieren
     function acceptNecessaryCookies() {
         localStorage.setItem('cookieConsent', 'granted_necessary');
         localStorage.setItem('cookieStats', 'false');
         localStorage.setItem('cookieMarketing', 'false');
-        loadNonEssentialScripts(); // 비필수 스크립트 중단/삭제 로직 실행
+        loadNonEssentialScripts(); // Ablehnung: Skripte stoppen/löschen
         document.getElementById('cookie-settings-modal').style.display = 'none';
     }
 
-    // 3. 설정 창 표시 함수 (모달 표시)
-    function showCookieSettings() {
-        // 모달 표시
-        document.getElementById('cookie-settings-modal').style.display = 'flex';
-        
-        // 현재 저장된 설정 불러오기
-        document.getElementById('cookie-statistical').checked = (localStorage.getItem('cookieStats') === 'true');
-        document.getElementById('cookie-marketing').checked = (localStorage.getItem('cookieMarketing') === 'true');
-    }
-
-    // 4. 설정 저장 함수 (Einstellungen speichern)
+    // 3. Einstellung speichern
     function saveCookieSettings() {
         const statsChecked = document.getElementById('cookie-statistical').checked;
         const marketingChecked = document.getElementById('cookie-marketing').checked;
@@ -781,26 +778,36 @@
         
         localStorage.setItem('cookieConsent', 'granted_custom');
         
-        loadNonEssentialScripts(); // 저장된 설정에 따라 로드 또는 중단
+        loadNonEssentialScripts(); // Gespeicherte Einstellungen anwenden
         document.getElementById('cookie-settings-modal').style.display = 'none';
     }
 
-    // 5. 페이지 로드 시 동의 상태 확인
+    // 4. Einstellungsoberfläche anzeigen (für Erstbesuch oder Widerruf)
+    function showCookieSettings() {
+        // Modal anzeigen
+        document.getElementById('cookie-settings-modal').style.display = 'flex';
+        
+        // Aktuelle Einstellungen aus localStorage laden
+        document.getElementById('cookie-statistical').checked = (localStorage.getItem('cookieStats') === 'true');
+        document.getElementById('cookie-marketing').checked = (localStorage.getItem('cookieMarketing') === 'true');
+    }
+
+    // 5. Seite wird geladen: Zustimmungsstatus prüfen
     function checkCookieConsent() {
         const consent = localStorage.getItem('cookieConsent');
         
         if (!consent || !consent.startsWith('granted')) {
-            // 동의 기록이 없으면 모달 표시
+            // Keine Zustimmung gefunden: Modal anzeigen
             showCookieSettings();
         } 
         else {
-            // 동의 기록이 있으면 스크립트 로드/업데이트 로직 실행
+            // Zustimmung vorhanden: Skripte laden/aktualisieren
             loadNonEssentialScripts(); 
             document.getElementById('cookie-settings-modal').style.display = 'none';
         }
     }
 
-    // 페이지 로드 시 기존 동의 상태 확인 함수 호출
+    // Seite geladen: Zustand prüfen
     checkCookieConsent();
 
 
