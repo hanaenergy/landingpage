@@ -388,6 +388,7 @@
         }
 
         /* 쿠키 배너 - Flexbox 및 반응형 최종 수정 */
+/* 쿠키 배너 - Flexbox 및 반응형 최종 수정 (버튼 그룹화 반영) */
 #cookie-banner {
     position: fixed; 
     bottom: 0;
@@ -400,23 +401,19 @@
     z-index: 1000; 
     font-size: 0.9rem;
 
-    /* 기본 Flex 설정: 가로 정렬, 필요시 줄 바꿈 */
+    /* Flex 설정: p와 .button-group 두 항목만 인식 */
     display: flex; 
     flex-wrap: wrap; 
-    justify-content: center; /* 항목들을 가운데 정렬 */
+    justify-content: space-between; /* 텍스트와 버튼 그룹을 양 끝으로 배치 */
     align-items: center; 
 }
 
+/* 1. 텍스트 부분 (p) */
 #cookie-banner p {
-    /* 텍스트 내용 */
-    margin: 5px 10px; 
+    margin: 5px 10px 5px 0; /* 우측 여백만 조금 확보 */
     text-align: left;
-    order: 1; 
-    /* 텍스트가 최대한 많은 공간을 차지하도록 유연성 최대로 설정 */
-    flex-grow: 1;
-    /* 텍스트 내용이 너무 길어질 경우 자동으로 줄바꿈 허용 */
+    flex-grow: 1; /* 최대한 공간 확보 */
     white-space: normal; 
-    min-width: 50%; /* 최소한 50% 공간 확보 */
 }
         
 #cookie-banner a {
@@ -424,6 +421,15 @@
     text-decoration: underline;
 }
 
+/* 2. 버튼 그룹 (.button-group) */
+.button-group {
+    /* 버튼 그룹 자체가 축소/확대되지 않도록 설정 */
+    display: flex;
+    flex-shrink: 0; 
+    align-items: center;
+}
+
+/* 3. 개별 버튼 스타일 */
 #cookie-banner button {
     background-color: var(--primary-color);
     color: white;
@@ -431,35 +437,38 @@
     cursor: pointer;
     border-radius: 3px;
     display: inline-block;
-
     padding: 8px 10px; 
     font-size: 0.85rem; 
-    /* 버튼 텍스트는 줄바꿈되지 않도록 유지 */
-    white-space: nowrap; 
-    margin: 5px; 
-    order: 2; 
-    /* 버튼이 축소되지 않도록 설정 (길이 유지) */
+    white-space: nowrap; /* 버튼 텍스트는 잘리지 않도록 유지 */
+    margin: 5px 5px; 
     flex-shrink: 0;
 }
         
-/* 📱 모바일 뷰 (600px 이하) - 텍스트와 버튼을 강제로 세로 분리 */
+/* 4. 📱 모바일 뷰 (600px 이하) - 텍스트와 버튼을 세로 분리 강제 */
 @media (max-width: 600px) {
-    #cookie-banner p {
-        /* 모바일에서는 텍스트가 한 줄 전체(100%)를 차지하도록 강제 */
-        flex-basis: 100%; 
-        text-align: center;
-        margin: 5px 0 10px 0; 
-        order: 1;
+    #cookie-banner {
+        /* 세로로 쌓이도록 변경 */
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 10px 5px 10px; /* 좌우 패딩 감소 */
     }
     
-    /* 버튼이 그 다음 줄에 위치하며 가운데 정렬되도록 처리 */
-    #cookie-banner button {
-        /* 버튼들은 order: 2로 텍스트 밑에 위치 */
-        order: 2;
-        margin: 5px 5px; 
-        /* 버튼들이 좁은 공간에서 너무 뭉치지 않도록 flex-basis를 설정할 수 있으나, 
-           자동 줄바꿈(flex-wrap)에 맡기는 것이 더 안전합니다. */
+    #cookie-banner p {
+        /* 모바일에서 텍스트가 한 줄 전체(100%)를 차지하도록 강제 */
+        flex-basis: 100%; 
+        text-align: center;
+        margin: 5px 0 10px 0; /* 아래쪽 여백 확보 */
     }
+    
+    .button-group {
+        /* 버튼 그룹이 좁은 공간에서 줄바꿈되도록 허용 */
+        flex-wrap: wrap;
+        justify-content: center; /* 버튼들을 중앙 정렬 */
+        flex-basis: 100%;
+        margin-bottom: 5px;
+    }
+}
 }
 }
     .strength-item {
@@ -669,10 +678,12 @@
 </footer>
 
 <div id="cookie-banner">
-    This website uses cookies to ensure functionality. Further details can be found in our <a href="/en/legal/privacy.html">Privacy Policy</a>. 
-    <button onclick="acceptNecessaryCookies()">Accept Necessary</button>
-    <button onclick="showCookieSettings()">Settings</button>
-    <button onclick="acceptAllCookies()">Accept All</button>
+    <p style="margin: 0;">This website uses cookies to ensure functionality. Further details can be found in our <a href="/en/legal/privacy.html">Privacy Policy</a>.</p>
+    <div class="button-group">
+        <button onclick="acceptNecessaryCookies()">Accept Necessary</button>
+        <button onclick="showCookieSettings()">Settings</button>
+        <button onclick="acceptAllCookies()">Accept All</button>
+    </div>
 </div>
 
 <script>
