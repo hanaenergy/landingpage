@@ -519,7 +519,7 @@
         </form>
 
         <p style="text-align: center; max-width: 500px; margin: 30px auto 0; font-size: 0.9rem; color: #555;">
-            * Hinweis: Zur Bearbeitung des Formulars nutzen wir den externen Dienstleister <a href="https://formspree.io/legal/privacy" target="_blank" style="color: var(--primary-color); text-decoration: underline;">Formspree, Inc.</a> Es erfolgt eine Datenübermittlung in die USA. Weitere Informationen finden Sie in unserer <a href="/legal/datenschutz.html" style="color: var(--primary-color); text-decoration: underline;">Datenschutzerklärung</a>.
+            * Hinweis: Zur Bearbeitung des Formulars nutzen wir den externen Dienstleister <a href="https://formspree.io/legal/privacy" target="_blank" style="color: var(--primary-color); text-decoration: underline;">Formspree, Inc.</a> Es erfolgt eine Datenübermittlung in die USA. Detaillierte Informationen, insbesondere zu den Risiken der Datenübertragung in die USA und der Rechtsgrundlage, finden Sie in unserer <a href="/legal/datenschutz.html" style="color: var(--primary-color); text-decoration: underline;">Datenschutzerklärung</a>.
         </p>
 
     </div>
@@ -557,18 +557,62 @@
     });
 </script>
 <div id="cookie-banner">
-    Diese Website verwendet Cookies, um die Funktionalität zu gewährleisten. Weitere Informationen finden Sie in unserer <a href="/legal/datenschutz.html">Datenschutzerklärung</a>. 
-    <button onclick="acceptCookies()">OK</button>
+    Diese Website verwendet Cookies, um die Funktionalität zu gewährleisten. Weitere Informationen finden Sie in unserer <a href="/legal/datenschutz.html">Datenschutzerklärung</a>. 
+    <button onclick="acceptNecessaryCookies()">Nur Notwendige</button>
+    <button onclick="showCookieSettings()">Einstellungen</button>
+    <button onclick="acceptAllCookies()">Alle akzeptieren</button>
 </div>
 
 <script>
-    function acceptCookies() {
-        document.getElementById('cookie-banner').style.display = 'none';
-        localStorage.setItem('cookieConsent', 'granted');
-    }
-    if (localStorage.getItem('cookieConsent') === 'granted') {
-        document.getElementById('cookie-banner').style.display = 'none';
-    }
+    // 1. 모든 쿠키 허용
+function acceptAllCookies() {
+    // 모든 쿠키 사용 동의 상태를 저장
+    localStorage.setItem('cookieConsent', 'granted_all');
+    // 비필수 쿠키(통계, 마케팅) 사용 플래그를 true로 설정
+    localStorage.setItem('cookieStats', 'true');
+    localStorage.setItem('cookieMarketing', 'true');
+    document.getElementById('cookie-banner').style.display = 'none';
+    
+    // **TODO:** 이 시점에서 구글 애널리틱스, 마케팅 스크립트 등을 로드하는 함수 호출 필요
+    // loadNonEssentialScripts(); 
+}
+
+// 2. 필수 쿠키만 허용
+function acceptNecessaryCookies() {
+    // 필수 쿠키만 사용 동의 상태를 저장
+    localStorage.setItem('cookieConsent', 'granted_necessary');
+    // 비필수 쿠키는 사용 안 함 플래그 설정
+    localStorage.setItem('cookieStats', 'false');
+    localStorage.setItem('cookieMarketing', 'false');
+    document.getElementById('cookie-banner').style.display = 'none';
+    
+    // **TODO:** 비필수 스크립트가 로드되지 않도록 보장하는 로직 필요
+}
+
+// 3. 설정 창 표시 (실제 구현은 복잡하므로, 여기서는 임시 함수만 제공)
+function showCookieSettings() {
+    alert('Hier sollte ein Modal-Fenster zur Verwaltung der Cookie-Einstellungen implementiert werden, damit Nutzer kategorieweise wählen können.');
+    // 실제로는 모달을 표시하고, 모달 내의 "저장" 버튼이 최종 동의 상태를 저장하는 함수를 호출해야 합니다.
+}
+
+// 4. 페이지 로드 시 동의 상태 확인 (배너 표시/숨김 제어)
+function checkCookieConsent() {
+    const consent = localStorage.getItem('cookieConsent');
+    
+    // 'granted_all' 또는 'granted_necessary' 둘 중 하나라도 있으면 배너 숨김
+    if (consent && consent.startsWith('granted')) {
+        document.getElementById('cookie-banner').style.display = 'none';
+        
+        // **TODO:** consent 값에 따라 비필수 스크립트 로드 여부 결정 로직 추가
+        // if (consent === 'granted_all') { loadNonEssentialScripts(); }
+    } else {
+        document.getElementById('cookie-banner').style.display = 'block';
+    }
+}
+
+// 페이지 로드 시 기존 동의 상태 확인 함수 호출
+checkCookieConsent();
+</script>
 </script>
 </body>
 </html>
