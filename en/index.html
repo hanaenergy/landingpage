@@ -164,7 +164,7 @@
             border: 1px solid #eee;
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
-            box-sizing: border-box; /* 잘림 방지 CSS */
+            box-sizing: border-box; 
         }
         /* 아이콘 이미지 스타일 */
         .icon {
@@ -357,8 +357,8 @@
             transition: background-color 0.3s;
             text-align: center;
             border: none;
-            color: white; /* 텍스트 색상 통일 */
-            font-weight: bold; /* 폰트 굵기 통일 */
+            color: white; 
+            font-weight: bold; 
         }
 
         /* Accept All 버튼 */
@@ -371,7 +371,7 @@
 
         /* Save Settings 버튼 */
         .secondary-button {
-            background-color: #6c757d; /* 회색 톤 */
+            background-color: #6c757d; 
         }
         .secondary-button:hover {
             background-color: #5a6268;
@@ -379,7 +379,7 @@
 
         /* Accept Necessary Only 버튼 */
         .accept-necessary-button {
-            background-color: #28a745; /* 녹색 톤으로 변경하여 중요도 강조 */
+            background-color: #28a745; 
         }
         .accept-necessary-button:hover {
             background-color: #1e7e34;
@@ -434,7 +434,7 @@
         /* 버튼 그룹 모바일 최적화 */
         @media (max-width: 480px) {
             .button-group {
-                flex-direction: column; /* 세로로 정렬 */
+                flex-direction: column; 
                 gap: 8px; 
             }
             .button-group button {
@@ -646,72 +646,118 @@
 </footer>
 
 <script>
+    // ----------------------------------------------------------------------
+    // ⚠️ 중요: 이 값을 고객님의 실제 Google Analytics 측정 ID로 변경하십시오. 
+    const GA_TRACKING_ID = 'G-XXXXXXXXXX'; 
+    // ----------------------------------------------------------------------
+
+    /**
+     * Google Analytics 스크립트를 동적으로 로드하고 실행합니다.
+     * 이 함수는 사용자가 통계 쿠키에 동의했을 때만 호출되어야 합니다.
+     */
+    function loadGoogleAnalytics() {
+        if (document.getElementById('ga-script')) {
+            console.warn("Google Analytics 스크립트가 이미 로드되었습니다.");
+            return;
+        }
+
+        // 1. GA Configuration Script (gtag.js) 로드
+        const scriptUrl = `https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`;
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = scriptUrl;
+        script.id = 'ga-script'; 
+        document.head.appendChild(script);
+
+        // 2. Data Layer Setup 및 초기 config 실행
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        window.gtag = gtag; // 전역 스코프에 gtag 함수 등록
+        gtag('js', new Date());
+
+        // GDPR 준수를 위해 IP 익명화 옵션을 포함하여 GA 초기화
+        gtag('config', GA_TRACKING_ID, {
+            'anonymize_ip': true 
+        });
+
+        console.log("Google Analytics (통계 쿠키) 스크립트가 로드되었습니다.");
+    }
+    
+    /**
+     * 사용자의 동의 상태에 따라 비필수 스크립트(GA, 마케팅 도구 등)를 로드합니다.
+     */
+    function loadNonEssentialScripts() {
+        // 통계 쿠키 로드 
+        if (localStorage.getItem('cookieStats') === 'true') {
+            loadGoogleAnalytics();
+        } else {
+            // 통계를 거부했을 경우 GA 스크립트가 로드되지 않도록 보장 (선택적: 이미 로드된 경우 제거하는 로직 추가 가능)
+        }
+
+        // 마케팅 쿠키 로드 (여기에 Facebook Pixel 등 마케팅 스크립트 로직을 추가합니다.)
+        if (localStorage.getItem('cookieMarketing') === 'true') {
+            console.log("마케팅 쿠키 동의 확인: 여기에 마케팅 스크립트 동적 로딩 로직을 추가하십시오.");
+        }
+    }
+
     // 1. 모든 쿠키 허용
-function acceptAllCookies() {
-    localStorage.setItem('cookieConsent', 'granted_all');
-    localStorage.setItem('cookieStats', 'true');
-    localStorage.setItem('cookieMarketing', 'true');
-    // 모달 숨김
-    document.getElementById('cookie-settings-modal').style.display = 'none';
-    // loadNonEssentialScripts(); 
-}
-
-// 2. 필수 쿠키만 허용
-function acceptNecessaryCookies() {
-    localStorage.setItem('cookieConsent', 'granted_necessary');
-    localStorage.setItem('cookieStats', 'false');
-    localStorage.setItem('cookieMarketing', 'false');
-    // 모달 숨김
-    document.getElementById('cookie-settings-modal').style.display = 'none';
-}
-
-// 3. 설정 창 표시 함수 (모달 표시)
-function showCookieSettings() {
-    // 모달 표시 시 flex로 변경
-    document.getElementById('cookie-settings-modal').style.display = 'flex';
-    
-    // 현재 저장된 설정 불러오기
-    document.getElementById('cookie-statistical').checked = (localStorage.getItem('cookieStats') === 'true');
-    document.getElementById('cookie-marketing').checked = (localStorage.getItem('cookieMarketing') === 'true');
-}
-
-// 모달 닫기 함수 (팝업 모드에서는 보통 사용하지 않지만, JS 함수는 남겨둡니다.)
-function closeCookieSettings() {
-    document.getElementById('cookie-settings-modal').style.display = 'none';
-}
-
-// 설정 저장 함수 
-function saveCookieSettings() {
-    const statsChecked = document.getElementById('cookie-statistical').checked;
-    const marketingChecked = document.getElementById('cookie-marketing').checked;
-
-    localStorage.setItem('cookieStats', statsChecked ? 'true' : 'false');
-    localStorage.setItem('cookieMarketing', marketingChecked ? 'true' : 'false');
-    
-    // 동의 상태 저장 (설정 저장했으므로 necessary + 선택된 항목으로 간주)
-    localStorage.setItem('cookieConsent', 'granted_custom');
-    
-    // 모달 숨김
-    document.getElementById('cookie-settings-modal').style.display = 'none';
-    // if (statsChecked || marketingChecked) { loadNonEssentialScripts(); }
-}
-
-// 4. 페이지 로드 시 동의 상태 확인
-function checkCookieConsent() {
-    const consent = localStorage.getItem('cookieConsent');
-    
-    // 동의 기록이 없으면 모달/팝업을 강제로 띄웁니다.
-    if (!consent || !consent.startsWith('granted')) {
-        showCookieSettings();
-    } 
-    // 동의 기록이 있으면 모달을 숨깁니다 (기본적으로는 숨겨져 있지만 혹시 모를 경우 대비)
-    else {
+    function acceptAllCookies() {
+        localStorage.setItem('cookieConsent', 'granted_all');
+        localStorage.setItem('cookieStats', 'true');
+        localStorage.setItem('cookieMarketing', 'true');
+        loadNonEssentialScripts(); // 동의 후 스크립트 로드
         document.getElementById('cookie-settings-modal').style.display = 'none';
     }
-}
 
-// 페이지 로드 시 기존 동의 상태 확인 함수 호출
-checkCookieConsent();
+    // 2. 필수 쿠키만 허용
+    function acceptNecessaryCookies() {
+        localStorage.setItem('cookieConsent', 'granted_necessary');
+        localStorage.setItem('cookieStats', 'false');
+        localStorage.setItem('cookieMarketing', 'false');
+        // 필수만 허용이므로 비필수 스크립트는 로드하지 않음
+        document.getElementById('cookie-settings-modal').style.display = 'none';
+    }
+
+    // 3. 설정 창 표시 함수 (모달 표시)
+    function showCookieSettings() {
+        document.getElementById('cookie-settings-modal').style.display = 'flex';
+        
+        // 현재 저장된 설정 불러오기
+        document.getElementById('cookie-statistical').checked = (localStorage.getItem('cookieStats') === 'true');
+        document.getElementById('cookie-marketing').checked = (localStorage.getItem('cookieMarketing') === 'true');
+    }
+
+    // 설정 저장 함수 
+    function saveCookieSettings() {
+        const statsChecked = document.getElementById('cookie-statistical').checked;
+        const marketingChecked = document.getElementById('cookie-marketing').checked;
+
+        localStorage.setItem('cookieStats', statsChecked ? 'true' : 'false');
+        localStorage.setItem('cookieMarketing', marketingChecked ? 'true' : 'false');
+        
+        localStorage.setItem('cookieConsent', 'granted_custom');
+        
+        loadNonEssentialScripts(); // 저장된 설정에 따라 스크립트 로드
+        document.getElementById('cookie-settings-modal').style.display = 'none';
+    }
+
+    // 4. 페이지 로드 시 동의 상태 확인
+    function checkCookieConsent() {
+        const consent = localStorage.getItem('cookieConsent');
+        
+        // 동의 기록이 없으면 모달/팝업을 강제로 띄웁니다.
+        if (!consent || !consent.startsWith('granted')) {
+            showCookieSettings();
+        } 
+        // 동의 기록이 있으면 조건부 스크립트 로드
+        else {
+            loadNonEssentialScripts(); 
+            document.getElementById('cookie-settings-modal').style.display = 'none';
+        }
+    }
+
+    // 페이지 로드 시 기존 동의 상태 확인 함수 호출
+    checkCookieConsent();
 
 
     // Anchor click smooth scrolling JavaScript (Scroll position corrected by header height)
@@ -728,7 +774,7 @@ checkCookieConsent();
                 const headerHeight = headerStyle.getPropertyValue('--header-height').trim().replace('px', '');
                 
                 window.scrollTo({
-                    top: target.offsetTop - (headerHeight ? parseInt(headerHeight) : 70), // Fallback to 70px
+                    top: target.offsetTop - (headerHeight ? parseInt(headerHeight) : 70), 
                     behavior: 'smooth'
                 });
             }
