@@ -43,7 +43,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0; 
+            padding: 0 20px; 
             height: 100%;
         }
         
@@ -58,6 +58,7 @@
         .logo img {
             height: 70px; 
             width: 100px;
+            display: block;
         }
         
         .main-nav { 
@@ -117,11 +118,11 @@
     }
     /* 이전에 strength-item도 100%로 설정했다면 함께 유지 */
     .strength-item {
-        flex-basis: 100%; 
+        flex-basis: 100% !important; /* 강제 100% 너비 적용 */
+        margin-bottom: 20px; /* 수직 간격 확보 */
     }
             
             .nav-content {
-                 padding: 15px 0;
             }
             .nav-links {
                 position: absolute;
