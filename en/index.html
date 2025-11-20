@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hana Energy | Market Entry & Sales Solutions for EV Charging, PV, and ESS in the DACH Region</title>
-    
+    
     <style>
         /* 기본 변수 및 바디 스타일 */
         :root {
@@ -12,7 +12,7 @@
             --secondary-color: #f8f9fa;
             --text-color: #333;
             --light-text: #555;
-            --font-family: 'Helvetica Neue', Arial, sans-serif; 
+            --font-family: 'Helvetica Neue', Arial, sans-serif; 
             --header-height: 70px; /* 헤더 높이 정의 */
         }
         body {
@@ -22,61 +22,61 @@
             color: var(--text-color);
             line-height: 1.6;
             /* 스크롤 위치 보정: 헤더 높이만큼 Padding 추가 */
-            scroll-padding-top: var(--header-height); 
+            scroll-padding-top: var(--header-height); 
         }
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
-        
+        
         /* Navigation */
         .header {
             background-color: #fff;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
             position: sticky;
             top: 0;
-            height: var(--header-height); 
+            height: var(--header-height); 
             z-index: 1000;
         }
         .nav-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0; 
+            padding: 0; 
             height: 100%;
         }
-        
+        
         /* 로고 스타일: 이미지 컨테이너 */
         .logo {
             display: flex;
             align-items: center;
             height: 100%;
             text-decoration: none;
-            z-index: 1001; 
+            z-index: 1001; 
         }
         .logo img {
-            height: 70px; 
+            height: 70px; 
             width: 100px;
         }
-        
-        .main-nav { 
-            display: flex; 
-            justify-content: flex-end; 
-            align-items: center; 
+        
+        .main-nav { 
+            display: flex; 
+            justify-content: flex-end; 
+            align-items: center; 
             height: 100%;
             padding: 0 0px;
         }
-        .nav-links { 
-            list-style: none; 
-            display: flex; 
-            margin: 0; 
-            padding: 0; 
+        .nav-links { 
+            list-style: none; 
+            display: flex; 
+            margin: 0; 
+            padding: 0; 
         }
-        .nav-links li a { 
-            display: block; 
-            padding: 8px 15px; 
-            text-decoration: none; 
+        .nav-links li a { 
+            display: block; 
+            padding: 8px 15px; 
+            text-decoration: none; 
             color: var(--text-color);
             font-weight: 500;
             transition: color 0.3s;
@@ -84,25 +84,25 @@
         .nav-links a:hover {
             color: var(--primary-color);
         }
-        
+        
         /* 언어 전환 버튼 스타일 */
         .language-switch a {
-            font-size: 0.9rem !important; 
-            color: #777 !important; 
-            font-weight: normal !important; 
+            font-size: 0.9rem !important; 
+            color: #777 !important; 
+            font-weight: normal !important; 
             padding-left: 5px;
         }
-        
+        
         /* 햄버거 토글 기본 숨김 */
-        .nav-toggle-label { 
-            display: none; 
-            cursor: pointer; 
-            font-size: 30px; 
-            order: 1; 
-            z-index: 1002; 
+        .nav-toggle-label { 
+            display: none; 
+            cursor: pointer; 
+            font-size: 30px; 
+            order: 1; 
+            z-index: 1002; 
         }
-        .nav-toggle { 
-            display: none; 
+        .nav-toggle { 
+            display: none; 
         }
 
         /* --- 모바일 화면 스타일 (768px 이하) --- */
@@ -112,12 +112,12 @@
             }
             .nav-links {
                 position: absolute;
-                top: var(--header-height); 
+                top: var(--header-height); 
                 right: 0;
                 width: 100%;
-                display: none; 
+                display: none; 
                 flex-direction: column;
-                background: #fff; 
+                background: #fff; 
                 z-index: 999;
                 box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
             }
@@ -130,15 +130,15 @@
                 padding: 15px;
             }
             .nav-toggle-label {
-                display: block; 
+                display: block; 
             }
             .nav-toggle:checked ~ .nav-links {
-                display: flex; 
+                display: flex; 
             }
             .hero h1 { font-size: 2rem; }
             .service-item, .strength-item { flex-basis: 100%; }
         }
-        
+        
         /* Hero Section */
         .hero {
             background-color: var(--secondary-color);
@@ -166,7 +166,7 @@
             font-weight: bold;
             font-size: 1.1rem;
             transition: background-color 0.3s;
-            border: none; 
+            border: none; 
             cursor: pointer;
         }
         .cta-button:hover {
@@ -190,23 +190,23 @@
         }
         .service-item {
             flex-basis: calc(33% - 20px);
-            padding: 30px; /* 원래대로 30px 패딩 유지 */
+            padding: 30px;
             border: 1px solid #eee;
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
             text-align: left;
         }
-        /* 아이콘 이미지 스타일 - 크기 조정 */
+        /* 아이콘 이미지 스타일 */
         .icon {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 80px; /* 아이콘 컨테이너 높이 증가 (적절한 여백) */
+            height: 160px; /* <--- 이미지 크기에 맞게 높이 조정 */
             margin-bottom: 15px;
         }
         .icon img {
-            width: 60px; /* 이미지 크기 확대 (45px -> 60px) */
-            height: 60px;
+            width: 150px; /* <--- 150x150으로 수정 */
+            height: 150px; /* <--- 150x150으로 수정 */
         }
         .description-list {
             list-style: none;
@@ -229,7 +229,7 @@
             position: absolute;
             left: 0;
         }
-        
+        
         /* Strengths Section */
         .strengths {
             padding: 60px 0;
@@ -255,7 +255,7 @@
             text-align: center;
         }
         .form-container {
-             max-width: 500px; 
+             max-width: 500px; 
              margin: 0 auto;
         }
         .form-group {
@@ -266,7 +266,7 @@
             display: block;
             margin-bottom: 5px;
             font-weight: bold;
-            margin-top: 15px; 
+            margin-top: 15px; 
         }
         .form-group input[type="text"],
         .form-group input[type="email"],
@@ -276,14 +276,14 @@
             padding: 12px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            box-sizing: border-box; 
+            box-sizing: border-box; 
             font-family: var(--font-family);
             font-size: 1rem;
         }
         .form-group textarea {
             resize: vertical;
         }
-        
+        
         /* Footer */
         .footer {
             background-color: #333;
@@ -299,20 +299,20 @@
 
         /* 쿠키 배너 스타일 */
         #cookie-banner {
-            position: fixed; 
+            position: fixed; 
             bottom: 0;
             left: 0;
             width: 100%;
-            background-color: rgba(0, 0, 0, 0.85); 
+            background-color: rgba(0, 0, 0, 0.85); 
             color: white;
             padding: 10px 20px;
             text-align: center;
             box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
-            z-index: 1000; 
+            z-index: 1000; 
             font-size: 0.9rem;
         }
         #cookie-banner a {
-            color: #87CEEB; 
+            color: #87CEEB; 
             text-decoration: underline;
         }
         #cookie-banner button {
@@ -337,14 +337,14 @@
         <nav class="main-nav">
             <input type="checkbox" id="nav-toggle" class="nav-toggle">
             <label for="nav-toggle" class="nav-toggle-label">☰</label>
-            
+            
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
-                <li><a href="#solutions">Solutions</a></li> 
-                <li><a href="#strengths">Strengths</a></li> 
-                <li><a href="#contact-form-section">Contact</a></li> 
-                
-                <li class="language-switch"><a href="/index.html">Deutsch</a></li> 
+                <li><a href="#solutions">Solutions</a></li> 
+                <li><a href="#strengths">Strengths</a></li> 
+                <li><a href="#contact-form-section">Contact</a></li> 
+                
+                <li class="language-switch"><a href="/index.html">Deutsch</a></li> 
             </ul>
         </nav>
     </div>
@@ -424,53 +424,53 @@
         <h2>Get in Touch</h2>
         <p>Do you have questions about a potential partnership or our solutions? Please fill out the form below, and we will get back to you promptly.</p>
 
-        <form 
-            action="https://formspree.io/f/xjklobyd" 
+        <form 
+            action="https://formspree.io/f/xjklobyd" 
             method="POST"
             class="form-container"
         >
             <input type="hidden" name="_subject" value="[Hana Energy - EN] Website Inquiry">
-            
+            
             <div class="form-group">
                 <label for="name">Name / Company:</label>
-                <input 
-                    type="text" 
-                    id="name" 
-                    name="Name_Company" 
-                    placeholder="Your Name or Company" 
-                    required 
+                <input 
+                    type="text" 
+                    id="name" 
+                    name="Name_Company" 
+                    placeholder="Your Name or Company" 
+                    required 
                 >
             </div>
 
             <div class="form-group">
                 <label for="email">Email:</label>
-                <input 
-                    type="email" 
-                    id="email" 
-                    name="_replyto" 
-                    placeholder="Your Email Address" 
-                    required 
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="_replyto" 
+                    placeholder="Your Email Address" 
+                    required 
                 >
             </div>
-            
+            
             <div class="form-group">
                 <label for="phone">Phone Number (Optional):</label>
-                <input 
-                    type="tel" 
-                    id="phone" 
-                    name="Phone_Number" 
-                    placeholder="Your Phone Number (optional)" 
+                <input 
+                    type="tel" 
+                    id="phone" 
+                    name="Phone_Number" 
+                    placeholder="Your Phone Number (optional)" 
                 >
             </div>
 
             <div class="form-group">
                 <label for="message">Your Message:</label>
-                <textarea 
-                    id="message" 
-                    name="Message" 
-                    rows="5" 
-                    placeholder="Your inquiry or message..." 
-                    required 
+                <textarea 
+                    id="message" 
+                    name="Message" 
+                    rows="5" 
+                    placeholder="Your inquiry or message..." 
+                    required 
                 ></textarea>
             </div>
 
@@ -480,7 +480,7 @@
         </form>
 
         <p style="text-align: center; max-width: 500px; margin: 30px auto 0; font-size: 0.9rem; color: #555;">
-            * Note: We use the external service provider <a href="https://formspree.io/f/xjklobyd" target="_blank" style="color: var(--primary-color); text-decoration: underline;">Formspree, Inc.</a> to process this form. Data transfer to the USA takes place. More information can be found in our <a href="/en/legal/privacy.html" style="color: var(--primary-color); text-decoration: underline;">Privacy Policy</a>.
+            * Note: We use the external service provider <a href="https://formspree.io/legal/privacy" target="_blank" style="color: var(--primary-color); text-decoration: underline;">Formspree, Inc.</a> to process this form. Data transfer to the USA takes place. More information can be found in our <a href="/en/legal/privacy.html" style="color: var(--primary-color); text-decoration: underline;">Privacy Policy</a>.
         </p>
 
     </div>
@@ -502,11 +502,12 @@
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             // 모바일 메뉴가 열려 있다면 닫기
-            document.getElementById('nav-toggle').checked = false; 
-            
+            document.getElementById('nav-toggle').checked = false; 
+            
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
+                // target.scrollIntoView({ behavior: 'smooth' }); // CSS scroll-padding-top이 적용되므로 이 함수 사용
                 // 헤더 높이를 계산하여 정확한 위치로 스크롤
                 const headerHeight = document.documentElement.style.getPropertyValue('--header-height').replace('px', '');
                 window.scrollTo({
@@ -518,7 +519,7 @@
     });
 </script>
 <div id="cookie-banner">
-    This website uses cookies to ensure functionality. You can find more information in our <a href="/en/legal/privacy.html">Privacy Policy</a>. 
+    This website uses cookies to ensure functionality. You can find more information in our <a href="/en/legal/privacy.html">Privacy Policy</a>. 
     <button onclick="acceptCookies()">OK</button>
 </div>
 
