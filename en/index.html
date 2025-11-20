@@ -157,19 +157,18 @@
 
         /* --- 모바일 화면 스타일 (768px 이하) --- */
         @media (max-width: 768px) {
-            /* ... (기존 모바일 내비게이션 스타일) ... */
-    
-    /* 서비스 항목을 모바일에서 한 줄에 하나씩 (100% 너비) 표시하도록 강제 설정 */
-    .service-item { 
-        flex-basis: 100% !important; 
-        /* !important는 다른 스타일과의 충돌을 방지하기 위한 안전장치입니다. */
-        margin-bottom: 30px; /* 수직 간격 유지 */
-    }
-    /* 이전에 strength-item도 100%로 설정했다면 함께 유지 */
-    .strength-item {
-        flex-basis: 100% !important; /* 강제 100% 너비 적용 */
-        margin-bottom: 20px; /* 수직 간격 확보 */
-    }
+            
+        /* 서비스 항목을 모바일에서 한 줄에 하나씩 (100% 너비) 표시하도록 강제 설정 */
+        .service-item { 
+            flex-basis: 100% !important; 
+            /* !important는 다른 스타일과의 충돌을 방지하기 위한 안전장치입니다. */
+            margin-bottom: 30px; /* 수직 간격 유지 */
+        }
+        /* 이전에 strength-item도 100%로 설정했다면 함께 유지 */
+        .strength-item {
+            flex-basis: 100% !important; /* 강제 100% 너비 적용 */
+            margin-bottom: 20px; /* 수직 간격 확보 */
+        }
             
             .nav-content {
             }
@@ -288,11 +287,11 @@
         }
         .icon img {
            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%; 
-            height: 100%;
-            object-fit: cover;
+           top: 0;
+           left: 0;
+           width: 100%; 
+           height: 100%;
+           object-fit: cover;
         }
         .description-list {
             list-style: none;
@@ -388,20 +387,21 @@
             text-decoration: underline;
         }
 
-        /* 1. 컨테이너(#cookie-banner) 수정 */
+        /* 쿠키 배너 - Flexbox 및 반응형 적용 */
+/* 1. 컨테이너(#cookie-banner) 수정 */
 #cookie-banner {
-    position: fixed; 
+    position: fixed; 
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.85); 
+    background-color: rgba(0, 0, 0, 0.85); 
     color: white;
     padding: 10px 20px;
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
-    z-index: 1000; 
+    z-index: 1000; 
     font-size: 0.9rem;
 
-    /* ✅ 추가/수정: Flexbox를 사용하여 버튼과 텍스트를 유연하게 배치 */
+    /* ✅ 수정: Flexbox를 사용하여 버튼과 텍스트를 유연하게 배치 */
     display: flex; /* Flex 컨테이너로 설정 */
     flex-wrap: wrap; /* 내용이 넘칠 경우 줄바꿈 허용 */
     justify-content: center; /* 내용을 중앙 정렬 */
@@ -418,13 +418,20 @@
 }
 
         
-        #cookie-banner a {
-            color: #87CEEB; 
-            text-decoration: underline;
-        }
+#cookie-banner a {
+    color: #87CEEB; 
+    text-decoration: underline;
+}
         /* 쿠키 배너 버튼 스타일 */
 /* 3. 버튼 그룹에 추가적인 Flex 속성 적용 */
 #cookie-banner button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+    display: inline-block;
+
     /* 기존 스타일 유지 (패딩, 폰트 크기 등) */
     padding: 8px 10px; 
     font-size: 0.85rem; 
@@ -448,6 +455,11 @@
         margin: 5px 5px; /* 버튼 간격 유지 */
         flex-basis: auto; /* 버튼 크기는 내용에 맞게 */
     }
+    .strength-item {
+        /* 모바일에서 강점 항목이 너무 좁지 않도록 100%로 재정의 */
+        flex-basis: 100% !important;
+    }
+}
     </style>
 </head>
 <body>
@@ -609,32 +621,32 @@
     </div>
 
     <div id="cookie-settings-modal" style="display: none;">
-    <div class="modal-content">
-        <h3>Cookie-Einstellungen verwalten</h3>
-        <p>Wir verwenden Cookies, um unsere Website zu optimieren. Sie können Ihre Auswahl jederzeit ändern.</p>
-        
-        <div class="cookie-group">
-            <input type="checkbox" id="cookie-necessary" checked disabled>
-            <label for="cookie-necessary">Notwendige Cookies (Immer aktiv)</label>
-            <p class="description">Diese Cookies sind für die Grundfunktionen der Website unerlässlich.</p>
+        <div class="modal-content">
+            <h3>Cookie Settings Management</h3>
+            <p>We use cookies to optimize our website. You can change your selection at any time.</p>
+            
+            <div class="cookie-group">
+                <input type="checkbox" id="cookie-necessary" checked disabled>
+                <label for="cookie-necessary">Necessary Cookies (Always Active)</label>
+                <p class="description">These cookies are essential for the basic functions of the website.</p>
+            </div>
+            
+            <div class="cookie-group">
+                <input type="checkbox" id="cookie-statistical">
+                <label for="cookie-statistical">Statistical Cookies</label>
+                <p class="description">These help us understand how visitors interact with the website (e.g., Google Analytics).</p>
+            </div>
+            
+            <div class="cookie-group">
+                <input type="checkbox" id="cookie-marketing">
+                <label for="cookie-marketing">Marketing Cookies</label>
+                <p class="description">These are used to display relevant advertisements.</p>
+            </div>
+            
+            <button onclick="saveCookieSettings()" class="cta-button" style="margin-top: 20px;">Save Settings</button>
+            <button onclick="closeCookieSettings()" class="secondary-button">Cancel</button>
         </div>
-        
-        <div class="cookie-group">
-            <input type="checkbox" id="cookie-statistical">
-            <label for="cookie-statistical">Statistische Cookies</label>
-            <p class="description">Diese helfen uns zu verstehen, wie Besucher mit der Website interagieren (z.B. Google Analytics).</p>
-        </div>
-        
-        <div class="cookie-group">
-            <input type="checkbox" id="cookie-marketing">
-            <label for="cookie-marketing">Marketing-Cookies</label>
-            <p class="description">Diese werden verwendet, um relevante Werbung anzuzeigen.</p>
-        </div>
-        
-        <button onclick="saveCookieSettings()" class="cta-button" style="margin-top: 20px;">Einstellungen speichern</button>
-        <button onclick="closeCookieSettings()" class="secondary-button">Abbrechen</button>
     </div>
-</div>
     
 </section>
 <footer class="footer" id="contact">
@@ -649,9 +661,32 @@
     </div>
 </footer>
 
-<script>
+<div id="cookie-banner">
+    This website uses cookies to ensure functionality. Further details can be found in our <a href="/en/legal/privacy.html">Privacy Policy</a>. 
+    <button onclick="acceptNecessaryCookies()">Accept Necessary</button>
+    <button onclick="showCookieSettings()">Settings</button>
+    <button onclick="acceptAllCookies()">Accept All</button>
+</div>
 
-    // 3. 설정 창 표시 함수 (수정)
+<script>
+    // 1. 모든 쿠키 허용
+function acceptAllCookies() {
+    localStorage.setItem('cookieConsent', 'granted_all');
+    localStorage.setItem('cookieStats', 'true');
+    localStorage.setItem('cookieMarketing', 'true');
+    document.getElementById('cookie-banner').style.display = 'none';
+    // loadNonEssentialScripts(); 
+}
+
+// 2. 필수 쿠키만 허용
+function acceptNecessaryCookies() {
+    localStorage.setItem('cookieConsent', 'granted_necessary');
+    localStorage.setItem('cookieStats', 'false');
+    localStorage.setItem('cookieMarketing', 'false');
+    document.getElementById('cookie-banner').style.display = 'none';
+}
+
+// 3. 설정 창 표시 함수 (모달 표시)
 function showCookieSettings() {
     document.getElementById('cookie-settings-modal').style.display = 'block';
     
@@ -660,12 +695,12 @@ function showCookieSettings() {
     document.getElementById('cookie-marketing').checked = (localStorage.getItem('cookieMarketing') === 'true');
 }
 
-// 모달 닫기 함수 (추가)
+// 모달 닫기 함수 
 function closeCookieSettings() {
     document.getElementById('cookie-settings-modal').style.display = 'none';
 }
 
-// 설정 저장 함수 (추가)
+// 설정 저장 함수 
 function saveCookieSettings() {
     const statsChecked = document.getElementById('cookie-statistical').checked;
     const marketingChecked = document.getElementById('cookie-marketing').checked;
@@ -679,10 +714,25 @@ function saveCookieSettings() {
     closeCookieSettings();
     document.getElementById('cookie-banner').style.display = 'none';
 
-    // **TODO:** 이 시점에서 필요한 스크립트 로드 함수 호출 필요
     // if (statsChecked || marketingChecked) { loadNonEssentialScripts(); }
 }
+
+// 4. 페이지 로드 시 동의 상태 확인
+function checkCookieConsent() {
+    const consent = localStorage.getItem('cookieConsent');
     
+    // 'granted_all' 또는 'granted_necessary' 또는 'granted_custom' 중 하나라도 있으면 배너 숨김
+    if (consent && consent.startsWith('granted')) {
+        document.getElementById('cookie-banner').style.display = 'none';
+    } else {
+        document.getElementById('cookie-banner').style.display = 'block';
+    }
+}
+
+// 페이지 로드 시 기존 동의 상태 확인 함수 호출
+checkCookieConsent();
+
+
     // Anchor click smooth scrolling JavaScript (Scroll position corrected by header height)
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -693,7 +743,9 @@ function saveCookieSettings() {
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
                 // Calculate header height for correct scrolling position
-                const headerHeight = document.documentElement.style.getPropertyValue('--header-height').replace('px', '');
+                const headerStyle = getComputedStyle(document.documentElement);
+                const headerHeight = headerStyle.getPropertyValue('--header-height').trim().replace('px', '');
+                
                 window.scrollTo({
                     top: target.offsetTop - (headerHeight ? parseInt(headerHeight) : 70), // Fallback to 70px
                     behavior: 'smooth'
@@ -701,63 +753,6 @@ function saveCookieSettings() {
             }
         });
     });
-</script>
-<div id="cookie-banner">
-    This website uses cookies to ensure functionality. Further details can be found in our <a href="/en/legal/privacy.html">Privacy Policy</a>. 
-    <button onclick="acceptNecessaryCookies()">Accept Necessary</button>
-    <button onclick="showCookieSettings()">Settings</button>
-    <button onclick="acceptAllCookies()">Accept All</button>
-</div>
-
-<script>
-    // 1. 모든 쿠키 허용
-function acceptAllCookies() {
-    // 모든 쿠키 사용 동의 상태를 저장 (예: all, necessary, statistical, marketing)
-    localStorage.setItem('cookieConsent', 'granted_all');
-    // 비필수 쿠키(통계, 마케팅) 사용 플래그를 true로 설정 (실제 분석 스크립트 로딩에 사용)
-    localStorage.setItem('cookieStats', 'true');
-    localStorage.setItem('cookieMarketing', 'true');
-    document.getElementById('cookie-banner').style.display = 'none';
-    
-    // **TODO:** 이 시점에서 구글 애널리틱스, 마케팅 스크립트 등을 로드하는 함수 호출 필요
-    // loadNonEssentialScripts(); 
-}
-
-// 2. 필수 쿠키만 허용
-function acceptNecessaryCookies() {
-    // 필수 쿠키만 사용 동의 상태를 저장
-    localStorage.setItem('cookieConsent', 'granted_necessary');
-    // 비필수 쿠키는 사용 안 함 플래그 설정
-    localStorage.setItem('cookieStats', 'false');
-    localStorage.setItem('cookieMarketing', 'false');
-    document.getElementById('cookie-banner').style.display = 'none';
-    
-    // **TODO:** 비필수 스크립트가 로드되지 않도록 보장하는 로직 필요
-}
-
-// 3. 설정 창 표시 (실제 구현은 복잡하므로, 여기서는 임시 함수만 제공)
-function showCookieSettings() {
-    alert('여기에 쿠키 설정 관리 모달(Modal) 창을 구현하여 사용자가 카테고리별로 선택할 수 있게 해야 합니다.');
-    // 실제로는 모달을 표시하고, 모달 내의 "저장" 버튼이 최종 동의 상태를 저장하는 함수를 호출해야 합니다.
-}
-
-// 4. 페이지 로드 시 동의 상태 확인 (기존 로직 보강)
-function checkCookieConsent() {
-    const consent = localStorage.getItem('cookieConsent');
-    
-    // 'granted_all' 또는 'granted_necessary' 둘 중 하나라도 있으면 배너 숨김
-    if (consent && consent.startsWith('granted')) {
-        document.getElementById('cookie-banner').style.display = 'none';
-        
-        // **TODO:** consent 값에 따라 비필수 스크립트 로드 여부 결정 로직 추가
-        // if (consent === 'granted_all') { loadNonEssentialScripts(); }
-    } else {
-        document.getElementById('cookie-banner').style.display = 'block';
-    }
-}
-
-// 페이지 로드 시 기존 동의 상태 확인 함수 호출
-checkCookieConsent();
 </script>
 </body>
 </html>
