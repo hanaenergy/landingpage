@@ -7,33 +7,47 @@
     
     <style>
 
-        /* 쿠키 설정 모달 스타일 */
+        /* 쿠키 설정 모달 스타일 (기존 배너를 대체하는 팝업) */
 #cookie-settings-modal {
-    display: none; /* 기본 숨김 */
+    /* **수정:** 기본 숨김 스타일은 JS에서 처리 */
+    display: none; 
     position: fixed;
-    z-index: 2000; /* 배너보다 위로 */
+    z-index: 2000; 
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0, 0, 0, 0.6); /* 반투명 배경 */
+    background-color: rgba(0, 0, 0, 0.8); /* 어두운 배경으로 변경 */
+    /* **추가:** 중앙 정렬을 위한 Flexbox */
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
 }
 
 .modal-content {
     background-color: #fefefe;
-    margin: 10% auto; /* 상하 10%, 좌우 자동 (중앙) */
+    margin: auto; /* Flexbox로 인해 margin: 0 auto;와 동일한 효과 */
     padding: 30px;
     border: 1px solid #888;
     width: 90%; 
     max-width: 500px; /* 최대 너비 제한 */
     border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5); /* 그림자 강화 */
     text-align: left;
+    /* **추가:** 모달이 화면 중앙에서 위로 뜨는 애니메이션 */
+    animation: fadeIn 0.3s ease-out; 
 }
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 .modal-content h3 {
     text-align: center;
     color: var(--primary-color);
+    margin-top: 0;
+    margin-bottom: 20px;
 }
 .modal-content .description {
     font-size: 0.85rem;
@@ -42,6 +56,27 @@
     margin-bottom: 15px;
     padding-left: 25px;
 }
+
+/* 쿠키 그룹 레이아웃 */
+.cookie-group {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #eee;
+    border-radius: 4px;
+}
+.cookie-group label {
+    font-weight: bold;
+    display: inline-block;
+    margin-left: 5px;
+}
+
+/* 버튼 스타일: Accept All, Save Settings, Accept Necessary 등을 대체 */
+.modal-content .cta-button {
+    margin-top: 20px;
+    /* 버튼 정렬 */
+    display: inline-block;
+}
+
 .modal-content .secondary-button {
     background-color: #6c757d;
     color: white;
@@ -54,6 +89,7 @@
     cursor: pointer;
     transition: background-color 0.3s;
     margin-left: 10px;
+    /* **수정:** 팝업에서는 취소 버튼 대신 필수만 허용으로 사용 */
 }
         /* 기본 변수 및 바디 스타일 */
         :root {
@@ -70,7 +106,6 @@
             padding: 0;
             color: var(--text-color);
             line-height: 1.6;
-            /* 스크롤 위치 보정: 헤더 높이만큼 Padding 추가 */
             scroll-padding-top: var(--header-height); 
         }
         .container {
@@ -200,36 +235,29 @@
         }
         .service-grid {
             display: flex;
-            /* 항목들을 중앙에 배치 (100% 너비이므로 중앙 정렬 효과는 미미) */
             justify-content: center; 
             flex-wrap: wrap;
-            /* **수정: gap을 row-gap으로 변경하여 항목 간 수직 간격만 설정** */
             row-gap: 30px; 
-            gap: 0; /* 기존 gap: 0 유지하며 row-gap 추가 */
+            gap: 0; 
         }
         .service-item {
-            /* 웹에서도 한 줄에 하나씩만 나오도록 100% 설정 */
             flex-basis: 100%; 
-            /* 항목 내부 텍스트, 제목 및 내용을 중앙 정렬 */
             text-align: center; 
-            /* margin-bottom: 30px; -> row-gap으로 대체 */
             padding: 30px;
             border: 1px solid #eee;
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+            /* 모바일에서 잘림 방지를 위해 컨테이너의 좌우 패딩을 보정 */
+            box-sizing: border-box; 
         }
         /* 아이콘 이미지 스타일 */
         .icon {
-            /* 1. 수정: 이미지 컨테이너의 최대 너비를 400px로 제한 */
             max-width: 400px; 
-            /* 2. 수정: 이미지 블록을 중앙에 배치 */
             margin: 0 auto 15px auto; 
-            
-            /* (기존 비례 높이 설정 유지) */
             position: relative;
-            width: 100%; /* max-width: 400px을 넘지 않는 선에서 100% 사용 */
+            width: 100%; 
             height: 0; 
-            padding-bottom: 50%; /* 2:1 비율 유지: 너비의 50%를 높이로 설정 */
+            padding-bottom: 50%; 
             display: block; 
             overflow: hidden;
         }
@@ -246,11 +274,10 @@
             padding: 0;
             margin-top: 15px;
             font-size: 0.95rem;
-            /* 목록 블록 자체를 중앙에 배치하고 너비 제한 */
             max-width: 500px; 
-            margin-left: auto; /* 중앙 정렬 */
-            margin-right: auto; /* 중앙 정렬 */
-            text-align: left; /* 목록 항목 텍스트는 좌측 정렬 유지 */
+            margin-left: auto; 
+            margin-right: auto; 
+            text-align: left; 
         }
         .description-list li {
             margin-bottom: 8px;
@@ -278,7 +305,6 @@
             margin-bottom: 40px;
         }
         .strength-item {
-            /* 웹에서는 50%를 유지하며 flex-basis를 설정했었음 (2열) */
             flex-basis: calc(50% - 20px);
             padding: 20px;
             text-align: left;
@@ -336,82 +362,20 @@
             text-decoration: underline;
         }
 
-        /* 쿠키 배너 - Flexbox 및 반응형 최종 수정 (버튼 그룹화 반영) */
-#cookie-banner {
-    position: fixed; 
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.85); 
-    color: white;
-    padding: 10px 20px;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
-    z-index: 1000; 
-    font-size: 0.9rem;
-
-    /* Flex 설정: p와 .button-group 두 항목만 인식 */
-    display: flex; 
-    flex-wrap: wrap; 
-    justify-content: space-between; /* 텍스트와 버튼 그룹을 양 끝으로 배치 */
-    align-items: center; 
-}
-
-/* 1. 텍스트 부분 (p) */
-#cookie-banner p {
-    margin: 5px 10px 5px 0;
-    text-align: left;
-    flex-grow: 1; 
-    /* 텍스트가 컨테이너 너비에 맞게 줄바꿈되도록 보장 */
-    white-space: normal; 
-    /* 최소 너비 제한을 없애 최대한 공간을 활용하도록 합니다. */
-    min-width: 0; 
-}
-        
-#cookie-banner a {
-    color: #87CEEB; 
-    text-decoration: underline;
-}
-
-/* 2. 버튼 그룹 (.button-group) */
-.button-group {
-    /* 버튼 그룹 자체가 축소/확대되지 않도록 설정 */
-    display: flex;
-    flex-shrink: 0; 
-    align-items: center;
-}
-
-/* 3. 개별 버튼 스타일 */
-#cookie-banner button {
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 3px;
-    display: inline-block;
-    padding: 8px 10px; 
-    font-size: 0.85rem; 
-    white-space: nowrap; /* 버튼 텍스트는 잘리지 않도록 유지 */
-    margin: 5px 5px; 
-    flex-shrink: 0;
-}
-        
         /* --- 모바일 화면 스타일 (768px 이하) --- */
         @media (max-width: 768px) {
             
-            /* 1. 서비스/강점 항목 너비 강제 100% 설정 (잘림 방지) */
+            /* 서비스/강점 항목 너비 강제 100% 설정 (잘림 방지) */
             .service-item { 
                 flex-basis: 100% !important; 
-                margin-bottom: 0; /* row-gap 사용으로 마진 제거 */
+                margin-bottom: 0; 
             }
             .strength-item {
-                flex-basis: 100% !important; /* 강제 100% 너비 적용 */
-                margin-bottom: 20px; /* 수직 간격 확보 */
+                flex-basis: 100% !important; 
+                margin-bottom: 20px; 
             }
             
-            /* 2. 네비게이션 토글 활성화 */
-            .nav-content {
-                /* 필요 시 정렬 조정 */
-            }
+            /* 네비게이션 토글 활성화 */
             .nav-links {
                 position: absolute;
                 top: var(--header-height); 
@@ -438,44 +402,11 @@
                 display: flex; 
             }
 
-            /* 3. Hero 텍스트 크기 조정 */
+            /* Hero 텍스트 크기 조정 */
             .hero h1 { font-size: 1.5rem; }
             .hero h2 { 
                 font-size: 1rem; 
                 line-height: 1.4; 
-            }
-            .hero p {
-                font-size: 1rem; 
-                line-height: 1.4; 
-            }
-            /* .service-item, .strength-item { flex-basis: 100%; } -> 위에서 !important로 처리 완료 */
-        }
-        
-        /* 4. 📱 쿠키 배너 모바일 뷰 (600px 이하) - 텍스트와 버튼을 세로 분리 강제 */
-        @media (max-width: 600px) {
-            #cookie-banner {
-                /* 세로로 쌓이도록 변경 */
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                padding: 10px 10px 5px 10px;
-            }
-            
-            #cookie-banner p {
-                /* 텍스트가 한 줄 전체(100%)를 차지하도록 강제 및 줄바꿈 보장 */
-                flex-basis: 100%;
-                width: 100%; 
-                text-align: center;
-                margin: 5px 0 10px 0;
-            }
-            
-            .button-group {
-                flex-wrap: wrap;
-                justify-content: center;
-                flex-basis: 100%;
-                width: 100%; /* 버튼 그룹도 너비 100%로 설정 */
-                /* 수정: 버튼 그룹 하단 마진 조정 */
-                margin-bottom: 5px;
             }
         }
     </style>
@@ -633,40 +564,41 @@
         </form>
 
         <p style="text-align: center; max-width: 500px; margin: 30px auto 0; font-size: 0.9rem; color: #555;">
-            * Note: We use the external service provider <a href="https://formspree.io/legal/privacy" target="_blank" style="color: var(--primary-color); text-decoration: underline;">Formspree, Inc.</a> to process the form. Data will be transmitted to the USA. Detailed information, particularly concerning the risks of data transfer to the USA and the legal basis, can be found in our <a href="/en/legal/privacy.html" style="color: var(--primary-color); text-decoration: underline;">Privacy Policy</a>.
+            * Note: We use the external service provider <a href="https://formspree.io/f/xjklobyd" target="_blank" style="color: var(--primary-color); text-decoration: underline;">Formspree, Inc.</a> to process the form. Data will be transmitted to the USA. Detailed information, particularly concerning the risks of data transfer to the USA and the legal basis, can be found in our <a href="/en/legal/privacy.html" style="color: var(--primary-color); text-decoration: underline;">Privacy Policy</a>.
         </p>
 
     </div>
-
-    <div id="cookie-settings-modal" style="display: none;">
-        <div class="modal-content">
-            <h3>Cookie Settings Management</h3>
-            <p>We use cookies to optimize our website. You can change your selection at any time.</p>
-            
-            <div class="cookie-group">
-                <input type="checkbox" id="cookie-necessary" checked disabled>
-                <label for="cookie-necessary">Necessary Cookies (Always Active)</label>
-                <p class="description">These cookies are essential for the basic functions of the website.</p>
-            </div>
-            
-            <div class="cookie-group">
-                <input type="checkbox" id="cookie-statistical">
-                <label for="cookie-statistical">Statistical Cookies</label>
-                <p class="description">These help us understand how visitors interact with the website (e.g., Google Analytics).</p>
-            </div>
-            
-            <div class="cookie-group">
-                <input type="checkbox" id="cookie-marketing">
-                <label for="cookie-marketing">Marketing Cookies</label>
-                <p class="description">These are used to display relevant advertisements.</p>
-            </div>
-            
-            <button onclick="saveCookieSettings()" class="cta-button" style="margin-top: 20px;">Save Settings</button>
-            <button onclick="closeCookieSettings()" class="secondary-button">Cancel</button>
-        </div>
-    </div>
-    
 </section>
+
+<div id="cookie-settings-modal" style="display: none;">
+    <div class="modal-content">
+        <h3>Privacy Settings</h3>
+        <p>This website uses cookies to ensure functionality and analyze traffic. Please select your preferences. Detailed information can be found in our <a href="/en/legal/privacy.html" style="color: var(--primary-color); text-decoration: underline;">Privacy Policy</a>.</p>
+        
+        <div class="cookie-group">
+            <input type="checkbox" id="cookie-necessary" checked disabled>
+            <label for="cookie-necessary">Necessary Cookies (Always Active)</label>
+            <p class="description">These cookies are essential for the basic functions of the website.</p>
+        </div>
+        
+        <div class="cookie-group">
+            <input type="checkbox" id="cookie-statistical">
+            <label for="cookie-statistical">Statistical Cookies</label>
+            <p class="description">These help us understand how visitors interact with the website (e.g., Google Analytics).</p>
+        </div>
+        
+        <div class="cookie-group">
+            <input type="checkbox" id="cookie-marketing">
+            <label for="cookie-marketing">Marketing Cookies</label>
+            <p class="description">These are used to display relevant advertisements.</p>
+        </div>
+        
+        <button onclick="acceptAllCookies()" class="cta-button">Accept All</button>
+        <button onclick="saveCookieSettings()" class="secondary-button">Save Settings</button>
+        <button onclick="acceptNecessaryCookies()" class="secondary-button" style="background-color: #007bff; margin-left: 5px;">Accept Necessary Only</button>
+    </div>
+</div>
+
 <footer class="footer" id="contact">
     <div class="container">
         <p>Hana Energy (Sole Proprietorship in formation, Austria)</p>
@@ -679,22 +611,14 @@
     </div>
 </footer>
 
-<div id="cookie-banner">
-    <p style="margin: 0;">This website uses cookies to ensure functionality. Further details can be found in our <a href="/en/legal/privacy.html">Privacy Policy</a>.</p>
-    <div class="button-group">
-        <button onclick="acceptNecessaryCookies()">Accept Necessary</button>
-        <button onclick="showCookieSettings()">Settings</button>
-        <button onclick="acceptAllCookies()">Accept All</button>
-    </div>
-</div>
-
 <script>
     // 1. 모든 쿠키 허용
 function acceptAllCookies() {
     localStorage.setItem('cookieConsent', 'granted_all');
     localStorage.setItem('cookieStats', 'true');
     localStorage.setItem('cookieMarketing', 'true');
-    document.getElementById('cookie-banner').style.display = 'none';
+    // 모달 숨김
+    document.getElementById('cookie-settings-modal').style.display = 'none';
     // loadNonEssentialScripts(); 
 }
 
@@ -703,19 +627,21 @@ function acceptNecessaryCookies() {
     localStorage.setItem('cookieConsent', 'granted_necessary');
     localStorage.setItem('cookieStats', 'false');
     localStorage.setItem('cookieMarketing', 'false');
-    document.getElementById('cookie-banner').style.display = 'none';
+    // 모달 숨김
+    document.getElementById('cookie-settings-modal').style.display = 'none';
 }
 
 // 3. 설정 창 표시 함수 (모달 표시)
 function showCookieSettings() {
-    document.getElementById('cookie-settings-modal').style.display = 'block';
+    // 모달 표시 시 flex로 변경
+    document.getElementById('cookie-settings-modal').style.display = 'flex';
     
     // 현재 저장된 설정 불러오기
     document.getElementById('cookie-statistical').checked = (localStorage.getItem('cookieStats') === 'true');
     document.getElementById('cookie-marketing').checked = (localStorage.getItem('cookieMarketing') === 'true');
 }
 
-// 모달 닫기 함수 
+// 모달 닫기 함수 (팝업 모드에서는 보통 사용하지 않지만, JS 함수는 남겨둡니다.)
 function closeCookieSettings() {
     document.getElementById('cookie-settings-modal').style.display = 'none';
 }
@@ -731,9 +657,8 @@ function saveCookieSettings() {
     // 동의 상태 저장 (설정 저장했으므로 necessary + 선택된 항목으로 간주)
     localStorage.setItem('cookieConsent', 'granted_custom');
     
-    closeCookieSettings();
-    document.getElementById('cookie-banner').style.display = 'none';
-
+    // 모달 숨김
+    document.getElementById('cookie-settings-modal').style.display = 'none';
     // if (statsChecked || marketingChecked) { loadNonEssentialScripts(); }
 }
 
@@ -741,11 +666,13 @@ function saveCookieSettings() {
 function checkCookieConsent() {
     const consent = localStorage.getItem('cookieConsent');
     
-    // 'granted_all' 또는 'granted_necessary' 또는 'granted_custom' 중 하나라도 있으면 배너 숨김
-    if (consent && consent.startsWith('granted')) {
-        document.getElementById('cookie-banner').style.display = 'none';
-    } else {
-        document.getElementById('cookie-banner').style.display = 'block';
+    // 동의 기록이 없으면 모달/팝업을 강제로 띄웁니다.
+    if (!consent || !consent.startsWith('granted')) {
+        showCookieSettings();
+    } 
+    // 동의 기록이 있으면 모달을 숨깁니다 (기본적으로는 숨겨져 있지만 혹시 모를 경우 대비)
+    else {
+        document.getElementById('cookie-settings-modal').style.display = 'none';
     }
 }
 
