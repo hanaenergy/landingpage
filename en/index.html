@@ -8,12 +8,12 @@
     <style>
         /* 기본 변수 및 바디 스타일 */
         :root {
-            --primary-color: #007bff; 
+            --primary-color: #007bff; /* 파란색 */
             --secondary-color: #f8f9fa; 
             --text-color: #333;
             --light-text: #555;
             --font-family: 'Helvetica Neue', Arial, sans-serif; 
-            --header-height: 70px; /* 헤더 높이 설정 */
+            --header-height: 70px; 
         }
         body {
             font-family: var(--font-family);
@@ -21,7 +21,6 @@
             padding: 0;
             color: var(--text-color);
             line-height: 1.6;
-            /* 스크롤 위치 보정: 헤더 높이만큼 Padding 추가 */
             scroll-padding-top: var(--header-height); 
         }
         .container {
@@ -30,120 +29,78 @@
             padding: 0 20px;
         }
         
-        /* Navigation & Header */
-        .header {
-            background-color: #fff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            position: sticky;
-            top: 0;
-            height: var(--header-height); 
-            z-index: 1000;
+        /* Navigation & Header (생략) */
+        /* ... */
+        
+        /* Hero Section */
+        .hero {
+            background-color: var(--secondary-color);
+            padding: 100px 0;
+            text-align: center;
         }
-        .nav-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0; 
-            height: 100%;
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            color: #222;
         }
-        .logo {
-            display: flex;
-            align-items: center;
-            height: 100%;
+        .hero h2 {
+            font-size: 1.25rem;
+            margin-bottom: 40px;
+            color: #555;
+            margin-top: 0;
+        }
+        
+        /* **[복구]** CTA Button 스타일 */
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary-color); /* 파란색 배경 */
+            color: white;
+            padding: 15px 30px;
             text-decoration: none;
-            z-index: 1001; 
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: background-color 0.3s;
+            border: none; 
+            cursor: pointer;
         }
-        .logo img {
-            height: 40px; 
-            width: auto;
-        }
-        .main-nav { 
-            display: flex; 
-            justify-content: flex-end; 
-            align-items: center; 
-            height: 100%;
-        }
-        .nav-links { 
-            list-style: none; 
-            display: flex; 
-            margin: 0; 
-            padding: 0; 
-        }
-        .nav-links li a { 
-            display: block; 
-            padding: 8px 15px; 
-            text-decoration: none; 
-            color: var(--text-color);
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        .nav-links a:hover {
-            color: var(--primary-color);
-        }
-        
-        /* 언어 전환 버튼 스타일 */
-        .language-switch a {
-            font-size: 0.9rem !important; 
-            color: #777 !important; 
-            font-weight: normal !important; 
-            padding-left: 5px;
+        .cta-button:hover {
+            background-color: #0056b3; /* 호버 색상 */
         }
 
-        /* 햄버거 토글 기본 숨김 */
-        .nav-toggle-label { 
-            display: none; 
-            cursor: pointer; 
-            font-size: 30px; 
-            order: 1; 
-            z-index: 1002; 
-        }
-        .nav-toggle { 
-            display: none; 
-        }
+        /* Service Section (Solutions) (생략) */
+        /* ... */
 
-        /* --- 모바일 화면 스타일 (768px 이하) --- */
-        @media (max-width: 768px) {
-            .nav-links {
-                position: absolute;
-                top: var(--header-height); 
-                right: 0;
-                width: 100%;
-                display: none; 
-                flex-direction: column;
-                background: #fff; 
-                z-index: 999;
-                box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
-            }
-            .nav-links li {
-                text-align: center;
-                width: 100%;
-                border-bottom: 1px solid #eee;
-            }
-            .nav-links li a {
-                padding: 15px;
-            }
-            .nav-toggle-label {
-                display: block; 
-            }
-            .nav-toggle:checked ~ .nav-links {
-                display: flex; 
-            }
+        /* **[복구]** 쿠키 배너 스타일 */
+        #cookie-banner {
+            position: fixed; 
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.85); 
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000; 
+            font-size: 0.9rem;
+        }
+        #cookie-banner a {
+            color: #87CEEB; 
+            text-decoration: underline;
+        }
+        #cookie-banner button {
+            background-color: var(--primary-color); /* 파란색 버튼 */
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            margin-left: 15px;
+            cursor: pointer;
+            border-radius: 3px;
         }
         
-        /* Service Section (Solutions) */
-        .service-item .icon {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 60px; 
-            margin-bottom: 15px;
-        }
-        .service-item .icon img {
-            width: 45px; 
-            height: 45px;
-        }
-        
-        /* ... 나머지 스타일은 동일 ... */
+        /* Contact Form Section (생략) */
+        /* Footer (생략) */
 
     </style>
 </head>
@@ -178,133 +135,6 @@
     </div>
 </section>
 
-<section class="services" id="solutions">
-    <div class="container">
-        <h2>Our Core Competencies and Solutions</h2>
-        <div class="service-grid">
-            <div class="service-item">
-                <div class="icon"><img src="/images/ev_charger.png" alt="EV Charger Icon"></div>
-                <h3>1. EV Charging Solutions</h3>
-                <ul class="description-list">
-                    <li>AC and DC chargers, accessories, and charging cables.</li>
-                    <li>Local demand analysis and sales channel development.</li>
-                    <li>Introduction to local installers and distributors.</li>
-                    <li>Consulting on certifications (CE, EN standards).</li>
-                </ul>
-            </div>
-            <div class="service-item">
-                <div class="icon"><img src="/images/pv_panel.png" alt="Photovoltaic Icon"></div>
-                <h3>2. Photovoltaic Components (PV)</h3>
-                <ul class="description-list">
-                    <li>Components for residential and commercial PV systems.</li>
-                    <li>Development of distributor and EPC partnerships.</li>
-                    <li>Competitive benchmarking for successful market launch.</li>
-                    <li>Support with local regulations (ÖNORM, VDE, etc.).</li>
-                </ul>
-            </div>
-            <div class="service-item">
-                <div class="icon"><img src="/images/ess_battery.png" alt="Battery Storage Icon"></div>
-                <h3>3. Energy Storage Systems (ESS)</h3>
-                <ul class="description-list">
-                    <li>Home batteries (5–15 kWh) and hybrid inverter solutions.</li>
-                    <li>Market feasibility assessment.</li>
-                    <li>Targeted identification of B2B sales partners.</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="strengths" id="strengths">
-    <div class="container">
-        <h2>Your Advantages of Partnering with Hana Energy</h2>
-        <div class="service-grid">
-            <div class="strength-item">
-                <h4>Strong Local Network</h4>
-                <p>We cooperate closely with installers, energy consultants, and smaller EPC companies looking for competitive products.</p>
-            </div>
-            <div class="strength-item">
-                <h4>Comprehensive Market Knowledge</h4>
-                <p>Up-to-date knowledge on European technical standards, pricing, logistics, and competition in our focus markets.</p>
-            </div>
-            <div class="strength-item">
-                <h4>Performance-Based Commercial Agent Model (Handelsagent)</h4>
-                <p>As a Commercial Agent, we work on a performance-based model, allowing manufacturers to expand into Europe **without fixed cost risk or local employment obligations**.</p>
-            </div>
-            <div class="strength-item">
-                <h4>Flexible Logistics Consulting</h4>
-                <p>We support DAP and DDP solutions, and the setup of EU fulfillment centers, matching the manufacturers' long-term strategy.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="contact-form-section">
-    <div class="container">
-        <h2>Get in Touch</h2>
-        <p>Do you have questions about a potential partnership or our solutions? Please fill out the form below, and we will get back to you promptly.</p>
-
-        <form 
-            action="https://formspree.io/f/xjklobyd" 
-            method="POST"
-            class="form-container"
-        >
-            <input type="hidden" name="_subject" value="[Hana Energy - EN] Website Inquiry">
-            
-            <div class="form-group">
-                <label for="name">Name / Company:</label>
-                <input 
-                    type="text" 
-                    id="name" 
-                    name="Name_Company" 
-                    placeholder="Your Name or Company" 
-                    required 
-                >
-            </div>
-
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input 
-                    type="email" 
-                    id="email" 
-                    name="_replyto" 
-                    placeholder="Your Email Address" 
-                    required 
-                >
-            </div>
-            
-            <div class="form-group">
-                <label for="phone">Phone Number (Optional):</label>
-                <input 
-                    type="tel" 
-                    id="phone" 
-                    name="Phone_Number" 
-                    placeholder="Your Phone Number (optional)" 
-                >
-            </div>
-
-            <div class="form-group">
-                <label for="message">Your Message:</label>
-                <textarea 
-                    id="message" 
-                    name="Message" 
-                    rows="5" 
-                    placeholder="Your inquiry or message..." 
-                    required 
-                ></textarea>
-            </div>
-
-            <button type="submit" class="cta-button">
-                Send
-            </button>
-        </form>
-
-        <p style="text-align: center; max-width: 500px; margin: 30px auto 0; font-size: 0.9rem; color: #555;">
-            * Note: We use the external service provider <a href="https://formspree.io/legal/privacy" target="_blank" style="color: var(--primary-color); text-decoration: underline;">Formspree, Inc.</a> to process this form. Data transfer to the USA takes place. More information can be found in our <a href="/en/legal/privacy.html" style="color: var(--primary-color); text-decoration: underline;">Privacy Policy</a>.
-        </p>
-
-    </div>
-</section>
 <footer class="footer" id="contact">
     <div class="container">
         <p>Hana Energy (e.U. in Gründung, Austria)</p>
@@ -331,6 +161,7 @@
         });
     });
 </script>
+
 <div id="cookie-banner">
     This website uses cookies to ensure functionality. You can find more information in our <a href="/en/legal/privacy.html">Privacy Policy</a>. 
     <button onclick="acceptCookies()">OK</button>
@@ -339,14 +170,11 @@
 <script>
     function acceptCookies() {
         document.getElementById('cookie-banner').style.display = 'none';
-        // Stores consent status in local storage
         localStorage.setItem('cookieConsent', 'granted');
     }
-    // Hide the banner if consent was previously granted
     if (localStorage.getItem('cookieConsent') === 'granted') {
         document.getElementById('cookie-banner').style.display = 'none';
     }
 </script>
 </body>
 </html>
-```http://googleusercontent.com/image_generation_content/0
