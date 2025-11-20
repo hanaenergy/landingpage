@@ -6,6 +6,55 @@
     <title>Hana Energy | Your Partner for E-Mobility, PV & Energy Storage Systems in DACH</title>
     
     <style>
+
+        /* 쿠키 설정 모달 스타일 */
+#cookie-settings-modal {
+    display: none; /* 기본 숨김 */
+    position: fixed;
+    z-index: 2000; /* 배너보다 위로 */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6); /* 반투명 배경 */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto; /* 상하 10%, 좌우 자동 (중앙) */
+    padding: 30px;
+    border: 1px solid #888;
+    width: 90%; 
+    max-width: 500px; /* 최대 너비 제한 */
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    text-align: left;
+}
+.modal-content h3 {
+    text-align: center;
+    color: var(--primary-color);
+}
+.modal-content .description {
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    padding-left: 25px;
+}
+.modal-content .secondary-button {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-left: 10px;
+}
         /* 기본 변수 및 바디 스타일 */
         :root {
             --primary-color: #007bff;
@@ -339,43 +388,66 @@
             text-decoration: underline;
         }
 
-        /* 쿠키 배너 스타일 */
-        #cookie-banner {
-            position: fixed; 
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(0, 0, 0, 0.85); 
-            color: white;
-            padding: 10px 20px;
-            text-align: center;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
-            z-index: 1000; 
-            font-size: 0.9rem;
-        }
+        /* 1. 컨테이너(#cookie-banner) 수정 */
+#cookie-banner {
+    position: fixed; 
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.85); 
+    color: white;
+    padding: 10px 20px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000; 
+    font-size: 0.9rem;
+
+    /* ✅ 추가/수정: Flexbox를 사용하여 버튼과 텍스트를 유연하게 배치 */
+    display: flex; /* Flex 컨테이너로 설정 */
+    flex-wrap: wrap; /* 내용이 넘칠 경우 줄바꿈 허용 */
+    justify-content: center; /* 내용을 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+}
+
+        /* 2. 텍스트 부분과 버튼 부분 분리 */
+#cookie-banner p {
+    /* 텍스트가 줄바꿈이 일어나도 여백이 생기지 않도록 마진 제거 */
+    margin: 5px 10px; 
+    text-align: left;
+    /* 텍스트가 버튼보다 먼저 시작하도록 순서 설정 */
+    order: 1; 
+}
+
+        
         #cookie-banner a {
             color: #87CEEB; 
             text-decoration: underline;
         }
         /* 쿠키 배너 버튼 스타일 */
+/* 3. 버튼 그룹에 추가적인 Flex 속성 적용 */
 #cookie-banner button {
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    
-    /* 수정된 부분: 패딩, 폰트 크기, 줄 바꿈 방지 */
-    padding: 8px 10px; /* 세로 8px, 가로 10px로 패딩 증가 */
-    font-size: 0.85rem; /* 글꼴 크기 약간 축소 */
-    white-space: nowrap; /* 텍스트가 줄바꿈되지 않도록 설정 */
-    
-    /* 수정된 부분: 버튼 사이의 간격 조정 */
-    margin-left: 10px;
-    margin-right: 5px; 
-    
-    cursor: pointer;
-    border-radius: 3px;
-    display: inline-block;
+    /* 기존 스타일 유지 (패딩, 폰트 크기 등) */
+    padding: 8px 10px; 
+    font-size: 0.85rem; 
+    white-space: nowrap; 
+    margin: 5px; /* 버튼 간의 간격을 통일 */
+    
+    /* 버튼이 텍스트 다음에 나오도록 순서 설정 */
+    order: 2; 
 }
+        /* 4. 모바일 환경에서 텍스트가 너무 길어지면 버튼이 다음 줄로 내려가도록 강제 조정 */
+@media (max-width: 600px) {
+    #cookie-banner p {
+        flex-basis: 100%; /* 모바일에서 텍스트는 한 줄 전체 사용 */
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    #cookie-banner {
+        flex-direction: column; /* 세로로 쌓기 */
+    }
+    #cookie-banner button {
+        margin: 5px 5px; /* 버튼 간격 유지 */
+        flex-basis: auto; /* 버튼 크기는 내용에 맞게 */
+    }
     </style>
 </head>
 <body>
@@ -535,6 +607,35 @@
         </p>
 
     </div>
+
+    <div id="cookie-settings-modal" style="display: none;">
+    <div class="modal-content">
+        <h3>Cookie-Einstellungen verwalten</h3>
+        <p>Wir verwenden Cookies, um unsere Website zu optimieren. Sie können Ihre Auswahl jederzeit ändern.</p>
+        
+        <div class="cookie-group">
+            <input type="checkbox" id="cookie-necessary" checked disabled>
+            <label for="cookie-necessary">Notwendige Cookies (Immer aktiv)</label>
+            <p class="description">Diese Cookies sind für die Grundfunktionen der Website unerlässlich.</p>
+        </div>
+        
+        <div class="cookie-group">
+            <input type="checkbox" id="cookie-statistical">
+            <label for="cookie-statistical">Statistische Cookies</label>
+            <p class="description">Diese helfen uns zu verstehen, wie Besucher mit der Website interagieren (z.B. Google Analytics).</p>
+        </div>
+        
+        <div class="cookie-group">
+            <input type="checkbox" id="cookie-marketing">
+            <label for="cookie-marketing">Marketing-Cookies</label>
+            <p class="description">Diese werden verwendet, um relevante Werbung anzuzeigen.</p>
+        </div>
+        
+        <button onclick="saveCookieSettings()" class="cta-button" style="margin-top: 20px;">Einstellungen speichern</button>
+        <button onclick="closeCookieSettings()" class="secondary-button">Abbrechen</button>
+    </div>
+</div>
+    
 </section>
 <footer class="footer" id="contact">
     <div class="container">
@@ -549,6 +650,39 @@
 </footer>
 
 <script>
+
+    // 3. 설정 창 표시 함수 (수정)
+function showCookieSettings() {
+    document.getElementById('cookie-settings-modal').style.display = 'block';
+    
+    // 현재 저장된 설정 불러오기
+    document.getElementById('cookie-statistical').checked = (localStorage.getItem('cookieStats') === 'true');
+    document.getElementById('cookie-marketing').checked = (localStorage.getItem('cookieMarketing') === 'true');
+}
+
+// 모달 닫기 함수 (추가)
+function closeCookieSettings() {
+    document.getElementById('cookie-settings-modal').style.display = 'none';
+}
+
+// 설정 저장 함수 (추가)
+function saveCookieSettings() {
+    const statsChecked = document.getElementById('cookie-statistical').checked;
+    const marketingChecked = document.getElementById('cookie-marketing').checked;
+
+    localStorage.setItem('cookieStats', statsChecked ? 'true' : 'false');
+    localStorage.setItem('cookieMarketing', marketingChecked ? 'true' : 'false');
+    
+    // 동의 상태 저장 (설정 저장했으므로 necessary + 선택된 항목으로 간주)
+    localStorage.setItem('cookieConsent', 'granted_custom');
+    
+    closeCookieSettings();
+    document.getElementById('cookie-banner').style.display = 'none';
+
+    // **TODO:** 이 시점에서 필요한 스크립트 로드 함수 호출 필요
+    // if (statsChecked || marketingChecked) { loadNonEssentialScripts(); }
+}
+    
     // Anchor click smooth scrolling JavaScript (Scroll position corrected by header height)
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
