@@ -43,7 +43,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0; 
+            /* 수정 반영: 좌우 여백 20px 및 수직 중앙 정렬 */
+            padding: 0 20px; 
             height: 100%;
         }
         
@@ -58,6 +59,8 @@
         .logo img {
             height: 70px; 
             width: 100px;
+            /* 수정 반영: 로고가 헤더 내에서 수직 중앙 정렬되도록 display: block 추가 */
+            display: block;
         }
         
         .main-nav { 
@@ -107,9 +110,16 @@
 
         /* --- 모바일 화면 스타일 (768px 이하) --- */
         @media (max-width: 768px) {
-            .nav-content {
-                 padding: 15px 0;
-            }
+             /* Nav Content 패딩은 공통 스타일에서 0 20px로 처리되었으므로 불필요한 패딩 재정의 제거 */
+             .nav-content {
+                 /* padding: 15px 0; 이 코드는 제거 또는 주석 처리 */
+             }
+             /* 서비스 항목을 모바일에서 한 줄에 하나씩 (100% 너비) 표시하도록 강제 설정 */
+             .service-item, .strength-item { 
+                 flex-basis: 100% !important; 
+                 margin-bottom: 30px; /* 수직 간격 유지 */
+             }
+            
             .nav-links {
                 position: absolute;
                 top: var(--header-height); 
@@ -135,8 +145,14 @@
             .nav-toggle:checked ~ .nav-links {
                 display: flex; 
             }
-            .hero h1 { font-size: 2rem; }
-            .service-item, .strength-item { flex-basis: 100%; }
+            /* 수정 반영: Hero 섹션 텍스트 크기 조정 */
+            .hero h1 { 
+                font-size: 1.5rem; /* 모바일에서 1.5rem */
+            }
+            .hero h2 { 
+                font-size: 1rem; 
+                line-height: 1.4; 
+            }
         }
         
         /* Hero Section */
@@ -146,7 +162,8 @@
             text-align: center;
         }
         .hero h1 {
-            font-size: 2.8rem;
+            /* 수정 반영: 웹 화면에서 메인 제목 크기를 2.2rem으로 줄임 */
+            font-size: 2.2rem;
             margin-bottom: 20px;
             color: #222;
         }
@@ -184,36 +201,55 @@
         }
         .service-grid {
             display: flex;
-            justify-content: space-around;
+            /* 수정 반영: 항목들을 중앙에 배치 */
+            justify-content: center; 
             flex-wrap: wrap;
-            gap: 30px;
+            /* 항목 사이의 간격 조정 */
+            gap: 0; 
         }
         .service-item {
-            flex-basis: calc(33% - 20px);
+            /* 수정 반영: 웹에서도 한 줄에 하나씩만 나오도록 100% 설정 */
+            flex-basis: 100%; 
+            /* 수정 반영: 항목 내부 텍스트, 제목 및 내용을 중앙 정렬 */
+            text-align: center; 
+            margin-bottom: 30px; 
             padding: 30px;
             border: 1px solid #eee;
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
-            text-align: left;
         }
         /* 아이콘 이미지 스타일 */
         .icon {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: auto; 
-            margin-bottom: 15px;
+            /* 수정 반영: 이미지 컨테이너의 최대 너비를 400px로 제한 및 중앙 배치 */
+            max-width: 400px; 
+            margin: 0 auto 15px auto; 
+            
+            /* 비례 높이 설정 (Aspect Ratio Box) */
+            position: relative;
+            width: 100%; 
+            height: 0; 
+            padding-bottom: 50%; /* 2:1 비율 유지: 너비의 50%를 높이로 설정 */
+            display: block; 
+            overflow: hidden;
         }
         .icon img {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%; 
-            height: auto;
-            max-width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         .description-list {
             list-style: none;
             padding: 0;
             margin-top: 15px;
             font-size: 0.95rem;
+            /* 목록 블록 자체를 중앙에 배치하고 너비 제한 */
+            max-width: 500px; 
+            margin-left: auto; /* 중앙 정렬 */
+            margin-right: auto; /* 중앙 정렬 */
+            text-align: left; /* 목록 항목 텍스트는 좌측 정렬 유지 */
         }
         .description-list li {
             margin-bottom: 8px;
@@ -241,9 +277,11 @@
             margin-bottom: 40px;
         }
         .strength-item {
+            /* 웹에서 2개씩 표시 */
             flex-basis: calc(50% - 20px);
             padding: 20px;
-            text-align: left;
+            /* 텍스트 정렬은 이전 요청대로 왼쪽 정렬 유지 */
+            text-align: left; 
         }
         .strength-item h4 {
             color: var(--primary-color);
