@@ -7,90 +7,6 @@
     
     <style>
 
-        /* 쿠키 설정 모달 스타일 (기존 배너를 대체하는 팝업) */
-#cookie-settings-modal {
-    /* **수정:** 기본 숨김 스타일은 JS에서 처리 */
-    display: none; 
-    position: fixed;
-    z-index: 2000; 
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.8); /* 어두운 배경으로 변경 */
-    /* **추가:** 중앙 정렬을 위한 Flexbox */
-    display: flex; 
-    align-items: center; 
-    justify-content: center;
-}
-
-.modal-content {
-    background-color: #fefefe;
-    margin: auto; /* Flexbox로 인해 margin: 0 auto;와 동일한 효과 */
-    padding: 30px;
-    border: 1px solid #888;
-    width: 90%; 
-    max-width: 500px; /* 최대 너비 제한 */
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.5); /* 그림자 강화 */
-    text-align: left;
-    /* **추가:** 모달이 화면 중앙에서 위로 뜨는 애니메이션 */
-    animation: fadeIn 0.3s ease-out; 
-}
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.modal-content h3 {
-    text-align: center;
-    color: var(--primary-color);
-    margin-top: 0;
-    margin-bottom: 20px;
-}
-.modal-content .description {
-    font-size: 0.85rem;
-    color: #666;
-    margin-top: 5px;
-    margin-bottom: 15px;
-    padding-left: 25px;
-}
-
-/* 쿠키 그룹 레이아웃 */
-.cookie-group {
-    margin-bottom: 15px;
-    padding: 10px;
-    border: 1px solid #eee;
-    border-radius: 4px;
-}
-.cookie-group label {
-    font-weight: bold;
-    display: inline-block;
-    margin-left: 5px;
-}
-
-/* 버튼 스타일: Accept All, Save Settings, Accept Necessary 등을 대체 */
-.modal-content .cta-button {
-    margin-top: 20px;
-    /* 버튼 정렬 */
-    display: inline-block;
-}
-
-.modal-content .secondary-button {
-    background-color: #6c757d;
-    color: white;
-    border: none;
-    padding: 15px 30px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    margin-left: 10px;
-    /* **수정:** 팝업에서는 취소 버튼 대신 필수만 허용으로 사용 */
-}
         /* 기본 변수 및 바디 스타일 */
         :root {
             --primary-color: #007bff;
@@ -207,6 +123,7 @@
             color: #555;
             margin-top: 0;
         }
+        /* CTA 버튼 기본 스타일 (모달 버튼과 공통 사용) */
         .cta-button {
             display: inline-block;
             background-color: var(--primary-color);
@@ -247,8 +164,7 @@
             border: 1px solid #eee;
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
-            /* 모바일에서 잘림 방지를 위해 컨테이너의 좌우 패딩을 보정 */
-            box-sizing: border-box; 
+            box-sizing: border-box; /* 잘림 방지 CSS */
         }
         /* 아이콘 이미지 스타일 */
         .icon {
@@ -362,6 +278,112 @@
             text-decoration: underline;
         }
 
+        /* --- 쿠키 설정 모달 스타일 (팝업) --- */
+        #cookie-settings-modal {
+            display: none; 
+            position: fixed;
+            z-index: 2000; 
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto; 
+            padding: 30px;
+            border: 1px solid #888;
+            width: 90%; 
+            max-width: 500px; 
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5); 
+            text-align: left;
+            animation: fadeIn 0.3s ease-out; 
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-content h3 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        .modal-content .description {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            padding-left: 25px;
+        }
+
+        /* 쿠키 그룹 레이아웃 */
+        .cookie-group {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #eee;
+            border-radius: 4px;
+        }
+        .cookie-group label {
+            font-weight: bold;
+            display: inline-block;
+            margin-left: 5px;
+        }
+
+        /* --- 버튼 그룹 스타일 (개선됨) --- */
+        .button-group {
+            display: flex; 
+            justify-content: space-between; 
+            gap: 10px; 
+            margin-top: 25px; 
+            flex-wrap: wrap; 
+        }
+
+        .button-group button {
+            flex-grow: 1; 
+            min-width: 120px; 
+            padding: 12px 10px; 
+            font-size: 0.95rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-align: center;
+            border: none;
+            color: white; /* 텍스트 색상 통일 */
+            font-weight: bold; /* 폰트 굵기 통일 */
+        }
+
+        /* Accept All 버튼 */
+        .cta-button {
+            background-color: var(--primary-color);
+        }
+        .cta-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Save Settings 버튼 */
+        .secondary-button {
+            background-color: #6c757d; /* 회색 톤 */
+        }
+        .secondary-button:hover {
+            background-color: #5a6268;
+        }
+
+        /* Accept Necessary Only 버튼 */
+        .accept-necessary-button {
+            background-color: #28a745; /* 녹색 톤으로 변경하여 중요도 강조 */
+        }
+        .accept-necessary-button:hover {
+            background-color: #1e7e34;
+        }
         /* --- 모바일 화면 스타일 (768px 이하) --- */
         @media (max-width: 768px) {
             
@@ -407,6 +429,16 @@
             .hero h2 { 
                 font-size: 1rem; 
                 line-height: 1.4; 
+            }
+        }
+        /* 버튼 그룹 모바일 최적화 */
+        @media (max-width: 480px) {
+            .button-group {
+                flex-direction: column; /* 세로로 정렬 */
+                gap: 8px; 
+            }
+            .button-group button {
+                min-width: 100%;
             }
         }
     </style>
@@ -593,9 +625,11 @@
             <p class="description">These are used to display relevant advertisements.</p>
         </div>
         
-        <button onclick="acceptAllCookies()" class="cta-button">Accept All</button>
-        <button onclick="saveCookieSettings()" class="secondary-button">Save Settings</button>
-        <button onclick="acceptNecessaryCookies()" class="secondary-button" style="background-color: #007bff; margin-left: 5px;">Accept Necessary Only</button>
+        <div class="button-group">
+            <button onclick="acceptAllCookies()" class="cta-button">Accept All</button>
+            <button onclick="saveCookieSettings()" class="secondary-button">Save Settings</button>
+            <button onclick="acceptNecessaryCookies()" class="accept-necessary-button">Accept Necessary Only</button>
+        </div>
     </div>
 </div>
 
