@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hana Energy | Market Entry & Sales Solutions for EV Charging, PV, and ESS in the DACH Region</title>
+    <title>Hana Energy | Ihr Partner für E-Mobilität, Photovoltaik & Energiespeichersysteme in DACH</title>
     
     <style>
         /* 기본 변수 및 바디 스타일 */
@@ -21,7 +21,7 @@
             padding: 0;
             color: var(--text-color);
             line-height: 1.6;
-            /* **[핵심 수정]** 스크롤 위치 보정: 헤더 높이만큼 Padding 추가 */
+            /* 스크롤 위치 보정: 헤더 높이만큼 Padding 추가 */
             scroll-padding-top: var(--header-height); 
         }
         .container {
@@ -43,20 +43,20 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0; /* padding 조정 */
+            padding: 0; 
             height: 100%;
         }
         
-        /* **[수정]** 로고 스타일: 이미지 컨테이너로 변경 */
+        /* 로고 스타일: 이미지 컨테이너 */
         .logo {
             display: flex;
             align-items: center;
             height: 100%;
             text-decoration: none;
-            z-index: 1001; /* 로고가 메뉴 위에 오도록 z-index 높임 */
+            z-index: 1001; 
         }
         .logo img {
-            height: 40px; /* 로고 이미지 크기 설정 */
+            height: 40px; 
             width: auto;
         }
         
@@ -65,7 +65,7 @@
             justify-content: flex-end; 
             align-items: center; 
             height: 100%;
-            padding: 0 0px; /* nav-content에서 관리하므로 제거 */
+            padding: 0 0px;
         }
         .nav-links { 
             list-style: none; 
@@ -85,11 +85,11 @@
             color: var(--primary-color);
         }
         
-        /* **[수정]** 언어 전환 버튼 스타일 */
+        /* 언어 전환 버튼 스타일 */
         .language-switch a {
-            font-size: 0.9rem !important; /* 글자 크기 작게 */
-            color: #777 !important; /* 색상 연하게 */
-            font-weight: normal !important; /* 굵기 보통 */
+            font-size: 0.9rem !important; 
+            color: #777 !important; 
+            font-weight: normal !important; 
             padding-left: 5px;
         }
         
@@ -99,7 +99,7 @@
             cursor: pointer; 
             font-size: 30px; 
             order: 1; 
-            z-index: 1002; /* 토글 버튼이 가장 위에 오도록 */
+            z-index: 1002; 
         }
         .nav-toggle { 
             display: none; 
@@ -112,7 +112,7 @@
             }
             .nav-links {
                 position: absolute;
-                top: var(--header-height); /* **[수정]** 헤더 높이 바로 아래에서 시작 */
+                top: var(--header-height); 
                 right: 0;
                 width: 100%;
                 display: none; 
@@ -129,13 +129,9 @@
             .nav-links li a {
                 padding: 15px;
             }
-
-            /* 햄버거 아이콘만 보여주기 */
             .nav-toggle-label {
                 display: block; 
             }
-
-            /* 체크박스가 체크되면 메뉴 보여주기 (핵심 기능) */
             .nav-toggle:checked ~ .nav-links {
                 display: flex; 
             }
@@ -200,16 +196,16 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
             text-align: left;
         }
-        /* **[수정]** 아이콘 대신 이미지 스타일 */
+        /* 아이콘 이미지 스타일 */
         .icon {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 60px; /* 이미지 컨테이너 높이 */
+            height: 60px; 
             margin-bottom: 15px;
         }
         .icon img {
-            width: 45px; /* 이미지 크기 설정 */
+            width: 45px; 
             height: 45px;
         }
         .description-list {
@@ -348,7 +344,7 @@
                 <li><a href="#strengths">Strengths</a></li> 
                 <li><a href="#contact">Contact</a></li> 
                 
-                <li class="language-switch"><a href="/index.html">Deutsch</a></li> 
+                <li class="language-switch"><a href="/en/index.html">English</a></li> 
             </ul>
         </nav>
     </div>
@@ -356,43 +352,43 @@
 
 <section class="hero" id="home">
     <div class="container">
-        <h1>Your Partner for EV Charging, Photovoltaics & Energy Storage Systems in Austria and Germany.</h1>
-        <h2>We connect global manufacturers with trusted installers and EPC firms in the DACH region for seamless market entry.</h2>
-        <a href="#contact" class="cta-button">Partner Inquiry: Start Your Expansion</a>
+        <h1>Ihr Spezialist für E-Mobilität, Photovoltaik & Energiespeichersysteme in Österreich und Deutschland.</h1>
+        <h2>Wir verbinden Hersteller weltweit mit vertrauenswürdigen Installateuren und EPC-Firmen in der DACH-Region, um Markteintritte effizient zu gestalten.</h2>
+        <a href="#contact" class="cta-button">Jetzt Partner werden: Expansion starten</a>
     </div>
 </section>
 
 <section class="services" id="solutions">
     <div class="container">
-        <h2>Our Core Competencies and Solutions</h2>
+        <h2>Unsere Kernkompetenzen und Lösungen</h2>
         <div class="service-grid">
             <div class="service-item">
-                <div class="icon"><img src="/images/ev_charger.png" alt="EV Charger Icon"></div>
-                <h3>1. EV Charging Solutions</h3>
+                <div class="icon"><img src="/images/ev_charger.png" alt="Ladesäule Icon"></div>
+                <h3>1. E-Ladelösungen (EV Charging)</h3>
                 <ul class="description-list">
-                    <li>AC and DC chargers, accessories, and charging cables.</li>
-                    <li>Local demand analysis and sales channel development.</li>
-                    <li>Introduction to local installers and distributors.</li>
-                    <li>Consulting on certifications (CE, EN standards).</li>
+                    <li>AC- und DC-Ladegeräte, Zubehör und Ladekabel.</li>
+                    <li>Analyse des lokalen Bedarfs und Aufbau von Vertriebskanälen.</li>
+                    <li>Vermittlung an lokale Installateure und Distributoren.</li>
+                    <li>Beratung zu Zertifizierungen (CE, EN-Normen).</li>
                 </ul>
             </div>
             <div class="service-item">
-                <div class="icon"><img src="/images/pv_panel.png" alt="Photovoltaic Icon"></div>
-                <h3>2. Photovoltaic Components (PV)</h3>
+                <div class="icon"><img src="/images/pv_panel.png" alt="Photovoltaik Icon"></div>
+                <h3>2. Photovoltaik-Komponenten (PV)</h3>
                 <ul class="description-list">
-                    <li>Components for residential and commercial PV systems.</li>
-                    <li>Development of distributor and EPC partnerships.</li>
-                    <li>Competitive benchmarking for successful market launch.</li>
-                    <li>Support with local regulations (ÖNORM, VDE, etc.).</li>
+                    <li>Komponenten für private und gewerbliche PV-Anlagen.</li>
+                    <li>Aufbau von Distributoren- und EPC-Partnerschaften.</li>
+                    <li>Wettbewerbs-Benchmarking für eine erfolgreiche Markteinführung.</li>
+                    <li>Unterstützung bei lokalen Vorschriften (ÖNORM, VDE etc.).</li>
                 </ul>
             </div>
             <div class="service-item">
-                <div class="icon"><img src="/images/ess_battery.png" alt="Battery Storage Icon"></div>
-                <h3>3. Energy Storage Systems (ESS)</h3>
+                <div class="icon"><img src="/images/ess_battery.png" alt="Batteriespeicher Icon"></div>
+                <h3>3. Energiespeichersysteme (ESS)</h3>
                 <ul class="description-list">
-                    <li>Home batteries (5–15 kWh) and hybrid inverter solutions.</li>
-                    <li>Market feasibility assessment.</li>
-                    <li>Targeted identification of B2B sales partners.</li>
+                    <li>Heimspeicher (5–15 kWh) und Hybrid-Wechselrichterlösungen.</li>
+                    <li>Marktchancen-Bewertung (Machbarkeitsanalyse).</li> 
+                    <li>Gezielte Identifizierung von B2B-Vertriebspartnern.</li>
                 </ul>
             </div>
         </div>
@@ -401,23 +397,23 @@
 
 <section class="strengths" id="strengths">
     <div class="container">
-        <h2>Your Advantages of Partnering with Hana Energy</h2>
+        <h2>Ihre Vorteile einer Partnerschaft mit Hana Energy</h2>
         <div class="service-grid">
             <div class="strength-item">
-                <h4>Strong Local Network</h4>
-                <p>We cooperate closely with installers, energy consultants, and smaller EPC companies looking for competitive products.</p>
+                <h4>Starkes lokales Netzwerk</h4>
+                <p>Wir kooperieren eng mit Installateuren, Energieberatern und kleineren EPC-Unternehmen, die wettbewerbsfähige Produkte suchen.</p>
             </div>
             <div class="strength-item">
-                <h4>Comprehensive Market Knowledge</h4>
-                <p>Up-to-date knowledge on European technical standards, pricing, logistics, and competition in our focus markets.</p>
+                <h4>Umfassende Marktkenntnis</h4>
+                <p>Aktuelles Wissen über europäische technische Standards, Preisgestaltung, Logistik und Wettbewerb in den Fokusmärkten.</p>
             </div>
             <div class="strength-item">
-                <h4>Performance-Based Commercial Agent Model (Handelsagent)</h4>
-                <p>As a Commercial Agent, we work on a performance-based model, allowing manufacturers to expand into Europe **without fixed cost risk or local employment obligations**.</p>
+                <h4>Provisionsbasiertes Handelsagenten-Modell</h4>
+                <p>Als Handelsagent arbeiten wir leistungsorientiert, wodurch Hersteller in Europa **ohne Fixkostenrisiko oder lokale Einstellungspflichten** expandieren können.</p>
             </div>
             <div class="strength-item">
-                <h4>Flexible Logistics Consulting</h4>
-                <p>We support DAP and DDP solutions, and the setup of EU fulfillment centers, matching the manufacturers' long-term strategy.</p>
+                <h4>Flexible Logistikberatung</h4>
+                <p>Wir unterstützen DAP-, DDP-Lösungen und den Aufbau von EU-Fulfillment-Centern, passend zur langfristigen Strategie der Hersteller.</p>
             </div>
         </div>
     </div>
@@ -425,79 +421,79 @@
 
 <section class="contact-form-section">
     <div class="container">
-        <h2>Get in Touch</h2>
-        <p>Do you have questions about a potential partnership or our solutions? Please fill out the form below, and we will get back to you promptly.</p>
+        <h2>Kontakt aufnehmen</h2>
+        <p>Haben Sie Fragen zu einer Partnerschaft oder unseren Lösungen? Bitte füllen Sie das folgende Formular aus.</p>
 
         <form 
             action="https://formspree.io/f/xjklobyd" 
             method="POST"
             class="form-container"
         >
-            <input type="hidden" name="_subject" value="[Hana Energy - EN] Website Inquiry">
+            <input type="hidden" name="_subject" value="[Hana Energy] Website Anfrage">
             
             <div class="form-group">
-                <label for="name">Name / Company:</label>
+                <label for="name">Name / Firma:</label>
                 <input 
                     type="text" 
                     id="name" 
-                    name="Name_Company" 
-                    placeholder="Your Name or Company" 
+                    name="Name_Firma" 
+                    placeholder="Ihr Name oder Ihre Firma" 
                     required 
                 >
             </div>
 
             <div class="form-group">
-                <label for="email">Email:</label>
+                <label for="email">E-Mail:</label>
                 <input 
                     type="email" 
                     id="email" 
                     name="_replyto" 
-                    placeholder="Your Email Address" 
+                    placeholder="Ihre E-Mail-Adresse" 
                     required 
                 >
             </div>
             
             <div class="form-group">
-                <label for="phone">Phone Number (Optional):</label>
+                <label for="phone">Telefonnummer (Optional):</label>
                 <input 
                     type="tel" 
                     id="phone" 
-                    name="Phone_Number" 
-                    placeholder="Your Phone Number (optional)" 
+                    name="Telefonnummer" 
+                    placeholder="Ihre Telefonnummer (optional)" 
                 >
             </div>
 
             <div class="form-group">
-                <label for="message">Your Message:</label>
+                <label for="message">Ihre Nachricht:</label>
                 <textarea 
                     id="message" 
-                    name="Message" 
+                    name="Nachricht" 
                     rows="5" 
-                    placeholder="Your inquiry or message..." 
+                    placeholder="Ihre Anfrage oder Nachricht..." 
                     required 
                 ></textarea>
             </div>
 
             <button type="submit" class="cta-button">
-                Send
+                Senden
             </button>
         </form>
 
         <p style="text-align: center; max-width: 500px; margin: 30px auto 0; font-size: 0.9rem; color: #555;">
-            * Note: We use the external service provider <a href="https://formspree.io/legal/privacy" target="_blank" style="color: var(--primary-color); text-decoration: underline;">Formspree, Inc.</a> to process this form. Data transfer to the USA takes place. More information can be found in our <a href="/en/legal/privacy.html" style="color: var(--primary-color); text-decoration: underline;">Privacy Policy</a>.
+            * Hinweis: Zur Bearbeitung des Formulars nutzen wir den externen Dienstleister <a href="https://formspree.io/legal/privacy" target="_blank" style="color: var(--primary-color); text-decoration: underline;">Formspree, Inc.</a> Es erfolgt eine Datenübermittlung in die USA. Weitere Informationen finden Sie in unserer <a href="/legal/datenschutz.html" style="color: var(--primary-color); text-decoration: underline;">Datenschutzerklärung</a>.
         </p>
 
     </div>
 </section>
 <footer class="footer" id="contact">
     <div class="container">
-        <p>Hana Energy (e.U. in Gründung, Austria)</p>
-        <p>Email: <strong>contact@hanaenergy.at</strong></p>
+        <p>Hana Energy (e.U. in Gründung, Österreich)</p>
+        <p>E-Mail: <strong>contact@hanaenergy.at</strong></p>
         <p>LinkedIn: <a href="https://www.linkedin.com/in/nambodo" target="_blank">www.linkedin.com/in/nambodo</a></p>
         <div class="footer-links" style="margin-top: 10px;">
-            <a href="/en/legal/privacy.html">Privacy Policy</a> | <a href="/en/legal/terms.html">Terms of Use</a>
+            <a href="/legal/datenschutz.html">Datenschutzerklärung</a> | <a href="/legal/impressum.html">Nutzungsbedingungen</a>
         </div>
-        <p style="margin-top: 15px;">Founded: 2025. All Rights Reserved.</p>
+        <p style="margin-top: 15px;">Gegründet: 2025. Alle Rechte vorbehalten.</p>
     </div>
 </footer>
 
@@ -521,17 +517,17 @@
     });
 </script>
 <div id="cookie-banner">
-    This website uses cookies to ensure functionality. You can find more information in our <a href="/en/legal/privacy.html">Privacy Policy</a>. 
+    Diese Website verwendet Cookies, um die Funktionalität zu gewährleisten. Weitere Informationen finden Sie in unserer <a href="/legal/datenschutz.html">Datenschutzerklärung</a>. 
     <button onclick="acceptCookies()">OK</button>
 </div>
 
 <script>
     function acceptCookies() {
         document.getElementById('cookie-banner').style.display = 'none';
-        // Stores consent status in local storage
+        // 로컬 스토리지에 동의 상태 기록
         localStorage.setItem('cookieConsent', 'granted');
     }
-    // Hide the banner if consent was previously granted
+    // 이전에 동의했으면 배너를 표시하지 않음
     if (localStorage.getItem('cookieConsent') === 'granted') {
         document.getElementById('cookie-banner').style.display = 'none';
     }
