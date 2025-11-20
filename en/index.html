@@ -107,17 +107,18 @@
 
         /* --- 모바일 화면 스타일 (768px 이하) --- */
         @media (max-width: 768px) {
-            /* ... (기존 모바일 내비게이션 관련 스타일은 유지) ... */
+            /* ... (기존 모바일 내비게이션 스타일) ... */
     
-            /* 서비스 항목을 모바일에서 한 줄에 하나씩 (100% 너비) 표시하도록 설정 */
-            .service-item, .strength-item { 
-                flex-basis: 100%; 
-            }
-
-            /* 추가적으로, 아이콘의 중앙 정렬을 위해 필요하다면 이전에 삭제했던 중앙 마진을 복원할 수 있습니다. */
-            /* .icon {
-                margin: 0 auto 15px; 
-            } */
+    /* 서비스 항목을 모바일에서 한 줄에 하나씩 (100% 너비) 표시하도록 강제 설정 */
+    .service-item { 
+        flex-basis: 100% !important; 
+        /* !important는 다른 스타일과의 충돌을 방지하기 위한 안전장치입니다. */
+        margin-bottom: 30px; /* 수직 간격 유지 */
+    }
+    /* 이전에 strength-item도 100%로 설정했다면 함께 유지 */
+    .strength-item {
+        flex-basis: 100%; 
+    }
             
             .nav-content {
                  padding: 15px 0;
@@ -196,12 +197,17 @@
         }
         .service-grid {
             display: flex;
-            justify-content: space-around;
+            /* 항목이 양 끝으로 벌어지도록 space-around 대신 space-between 사용 */
+            justify-content: space-between; 
             flex-wrap: wrap;
-            gap: 30px;
+            /* gap 대신 margin을 사용하여 간격 계산을 단순화 */
+            gap: 0;
         }
         .service-item {
-            flex-basis: calc(30% - 20px);
+            /* 너비: 3개 항목이 들어갈 수 있도록 32%로 설정 */
+            flex-basis: 32%; 
+            /* 항목 간 간격을 위한 margin-bottom 추가 */
+            margin-bottom: 30px; 
             padding: 30px;
             border: 1px solid #eee;
             border-radius: 8px;
