@@ -215,17 +215,21 @@
         }
         /* 아이콘 이미지 스타일 */
         .icon {
-            /* 이미지는 100% 너비를 유지합니다. */
+            /* 1. 수정: 이미지 컨테이너의 최대 너비를 400px로 제한 */
+            max-width: 400px; 
+            /* 2. 수정: 이미지 블록을 중앙에 배치 */
+            margin: 0 auto 15px auto; 
+            
+            /* (기존 비례 높이 설정 유지) */
             position: relative;
-            width: 100%;
+            width: 100%; /* max-width: 400px을 넘지 않는 선에서 100% 사용 */
             height: 0; 
-            padding-bottom: 50%; /* 2:1 비율 유지 */
+            padding-bottom: 50%; /* 2:1 비율 유지: 너비의 50%를 높이로 설정 */
             display: block; 
-            margin: 0 0 15px 0; 
             overflow: hidden;
         }
         .icon img {
-            position: absolute;
+           position: absolute;
             top: 0;
             left: 0;
             width: 100%; 
