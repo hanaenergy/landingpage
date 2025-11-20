@@ -201,12 +201,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 160px; /* <--- 이미지 크기에 맞게 높이 조정 */
+            height: auto; 
             margin-bottom: 15px;
         }
         .icon img {
-            width: 150px; /* <--- 150x150으로 수정 */
-            height: 150px; /* <--- 150x150으로 수정 */
+            width: 100%; 
+            height: auto;
+            max-width: 100%;
         }
         .description-list {
             list-style: none;
@@ -534,3 +535,5 @@
 </script>
 </body>
 </html>
+
+여기서 서비스섹션에 jpg이미지들 크기 각각 150x150으로 만들어주세요.
