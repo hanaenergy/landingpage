@@ -155,60 +155,6 @@
             display: none; 
         }
 
-        /* --- 모바일 화면 스타일 (768px 이하) --- */
-        @media (max-width: 768px) {
-            
-        /* 서비스 항목을 모바일에서 한 줄에 하나씩 (100% 너비) 표시하도록 강제 설정 */
-        .service-item { 
-            flex-basis: 100% !important; 
-            /* !important는 다른 스타일과의 충돌을 방지하기 위한 안전장치입니다. */
-            margin-bottom: 30px; /* 수직 간격 유지 */
-        }
-        /* 이전에 strength-item도 100%로 설정했다면 함께 유지 */
-        .strength-item {
-            flex-basis: 100% !important; /* 강제 100% 너비 적용 */
-            margin-bottom: 20px; /* 수직 간격 확보 */
-        }
-            
-            .nav-content {
-            }
-            .nav-links {
-                position: absolute;
-                top: var(--header-height); 
-                right: 0;
-                width: 100%;
-                display: none; 
-                flex-direction: column;
-                background: #fff; 
-                z-index: 999;
-                box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
-            }
-            .nav-links li {
-                text-align: center;
-                width: 100%;
-                border-bottom: 1px solid #eee;
-            }
-            .nav-links li a {
-                padding: 15px;
-            }
-            .nav-toggle-label {
-                display: block; 
-            }
-            .nav-toggle:checked ~ .nav-links {
-                display: flex; 
-            }
-            .hero h1 { font-size: 1.5rem; }
-            .hero h2 { 
-                font-size: 1rem; 
-                line-height: 1.4; 
-            }
-            .hero p {
-                font-size: 1rem; /* 기본 크기인 1rem으로 설정하여 가독성 확보 */
-                line-height: 1.4; /* 줄 간격 설정 */
-            }
-            .service-item, .strength-item { flex-basis: 100%; }
-        }
-        
         /* Hero Section */
         .hero {
             background-color: var(--secondary-color);
@@ -257,14 +203,16 @@
             /* 항목들을 중앙에 배치 (100% 너비이므로 중앙 정렬 효과는 미미) */
             justify-content: center; 
             flex-wrap: wrap;
-            gap: 0;
+            /* **수정: gap을 row-gap으로 변경하여 항목 간 수직 간격만 설정** */
+            row-gap: 30px; 
+            gap: 0; /* 기존 gap: 0 유지하며 row-gap 추가 */
         }
         .service-item {
-            /* 1. 웹에서도 한 줄에 하나씩만 나오도록 100% 설정 */
+            /* 웹에서도 한 줄에 하나씩만 나오도록 100% 설정 */
             flex-basis: 100%; 
-            /* 2. 항목 내부 텍스트, 제목 및 내용을 중앙 정렬 */
+            /* 항목 내부 텍스트, 제목 및 내용을 중앙 정렬 */
             text-align: center; 
-            margin-bottom: 30px; 
+            /* margin-bottom: 30px; -> row-gap으로 대체 */
             padding: 30px;
             border: 1px solid #eee;
             border-radius: 8px;
@@ -330,6 +278,7 @@
             margin-bottom: 40px;
         }
         .strength-item {
+            /* 웹에서는 50%를 유지하며 flex-basis를 설정했었음 (2열) */
             flex-basis: calc(50% - 20px);
             padding: 20px;
             text-align: left;
@@ -345,8 +294,8 @@
             text-align: center;
         }
         .form-container {
-             max-width: 500px; 
-             margin: 0 auto;
+              max-width: 500px; 
+              margin: 0 auto;
         }
         .form-group {
             margin-bottom: 20px;
@@ -387,8 +336,7 @@
             text-decoration: underline;
         }
 
-        /* 쿠키 배너 - Flexbox 및 반응형 최종 수정 */
-/* 쿠키 배너 - Flexbox 및 반응형 최종 수정 (버튼 그룹화 반영) */
+        /* 쿠키 배너 - Flexbox 및 반응형 최종 수정 (버튼 그룹화 반영) */
 #cookie-banner {
     position: fixed; 
     bottom: 0;
@@ -447,39 +395,89 @@
     flex-shrink: 0;
 }
         
-/* 4. 📱 모바일 뷰 (600px 이하) - 텍스트와 버튼을 세로 분리 강제 */
-@media (max-width: 600px) {
-    #cookie-banner {
-        /* 세로로 쌓이도록 변경 */
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 10px 10px 5px 10px;
-    }
-    
-    #cookie-banner p {
-        /* 텍스트가 한 줄 전체(100%)를 차지하도록 강제 및 줄바꿈 보장 */
-        flex-basis: 100%;
-        width: 100%; /* 너비를 100%로 설정하여 확실히 부모를 채웁니다. */
-        text-align: center;
-        margin: 5px 0 10px 0;
-    }
-    
-    .button-group {
-        flex-wrap: wrap;
-        justify-content: center;
-        flex-basis: 100%;
-        width: 100%; /* 버튼 그룹도 너비 100%로 설정 */
-        margin-bottom: 5px;
-    }
-}
-}
-}
-    .strength-item {
-        /* 모바일에서 강점 항목이 너무 좁지 않도록 100%로 재정의 */
-        flex-basis: 100% !important;
-    }
-}
+        /* --- 모바일 화면 스타일 (768px 이하) --- */
+        @media (max-width: 768px) {
+            
+            /* 1. 서비스/강점 항목 너비 강제 100% 설정 (잘림 방지) */
+            .service-item { 
+                flex-basis: 100% !important; 
+                margin-bottom: 0; /* row-gap 사용으로 마진 제거 */
+            }
+            .strength-item {
+                flex-basis: 100% !important; /* 강제 100% 너비 적용 */
+                margin-bottom: 20px; /* 수직 간격 확보 */
+            }
+            
+            /* 2. 네비게이션 토글 활성화 */
+            .nav-content {
+                /* 필요 시 정렬 조정 */
+            }
+            .nav-links {
+                position: absolute;
+                top: var(--header-height); 
+                right: 0;
+                width: 100%;
+                display: none; 
+                flex-direction: column;
+                background: #fff; 
+                z-index: 999;
+                box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+            }
+            .nav-links li {
+                text-align: center;
+                width: 100%;
+                border-bottom: 1px solid #eee;
+            }
+            .nav-links li a {
+                padding: 15px;
+            }
+            .nav-toggle-label {
+                display: block; 
+            }
+            .nav-toggle:checked ~ .nav-links {
+                display: flex; 
+            }
+
+            /* 3. Hero 텍스트 크기 조정 */
+            .hero h1 { font-size: 1.5rem; }
+            .hero h2 { 
+                font-size: 1rem; 
+                line-height: 1.4; 
+            }
+            .hero p {
+                font-size: 1rem; 
+                line-height: 1.4; 
+            }
+            /* .service-item, .strength-item { flex-basis: 100%; } -> 위에서 !important로 처리 완료 */
+        }
+        
+        /* 4. 📱 쿠키 배너 모바일 뷰 (600px 이하) - 텍스트와 버튼을 세로 분리 강제 */
+        @media (max-width: 600px) {
+            #cookie-banner {
+                /* 세로로 쌓이도록 변경 */
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 10px 10px 5px 10px;
+            }
+            
+            #cookie-banner p {
+                /* 텍스트가 한 줄 전체(100%)를 차지하도록 강제 및 줄바꿈 보장 */
+                flex-basis: 100%;
+                width: 100%; 
+                text-align: center;
+                margin: 5px 0 10px 0;
+            }
+            
+            .button-group {
+                flex-wrap: wrap;
+                justify-content: center;
+                flex-basis: 100%;
+                width: 100%; /* 버튼 그룹도 너비 100%로 설정 */
+                /* 수정: 버튼 그룹 하단 마진 조정 */
+                margin-bottom: 5px;
+            }
+        }
     </style>
 </head>
 <body>
