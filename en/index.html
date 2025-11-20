@@ -357,16 +357,25 @@
             color: #87CEEB; 
             text-decoration: underline;
         }
-        #cookie-banner button {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 5px 15px;
-            margin-left: 15px;
-            cursor: pointer;
-            border-radius: 3px;
-        }
-
+        /* 쿠키 배너 버튼 스타일 */
+#cookie-banner button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    
+    /* 수정된 부분: 패딩, 폰트 크기, 줄 바꿈 방지 */
+    padding: 8px 10px; /* 세로 8px, 가로 10px로 패딩 증가 */
+    font-size: 0.85rem; /* 글꼴 크기 약간 축소 */
+    white-space: nowrap; /* 텍스트가 줄바꿈되지 않도록 설정 */
+    
+    /* 수정된 부분: 버튼 사이의 간격 조정 */
+    margin-left: 10px;
+    margin-right: 5px; 
+    
+    cursor: pointer;
+    border-radius: 3px;
+    display: inline-block;
+}
     </style>
 </head>
 <body>
