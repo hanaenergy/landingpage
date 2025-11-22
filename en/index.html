@@ -500,6 +500,7 @@
     document.addEventListener("DOMContentLoaded", function() {
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
+                document.getElementById('nav-toggle').checked = false; 
                 
                 const href = this.getAttribute('href');
                 if (href === '#' || href === '') return;
