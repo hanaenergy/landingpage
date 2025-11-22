@@ -621,47 +621,70 @@
 
 <script>
     // ============================================================
-    // 1. 설정 영역 (작성자님 정보를 이미 기입해 두었습니다)
+    // 1. 설정 영역 (작성자님 정보 기입 완료)
     // ============================================================
     const GA_TRACKING_ID = 'G-C080W3WZXT'; 
     const GOOGLE_FORM_ID = "1FAIpQLSf4quO3FbIzUXGioN7XbArct7qj39Ci7X_rOwnXgWyWj6iGXg";
     
     // 구글 폼 Entry IDs
-    const ENTRY_CONSENT  = "entry.1413813626"; // Consent Type
-    const ENTRY_TIME     = "entry.1235688242"; // Timestamp
-    const ENTRY_AGENT    = "entry.1765089682"; // User Agent
-    const ENTRY_LANG     = "entry.1915120239"; // Language
-    const ENTRY_URL      = "entry.2138235063"; // Page URL
+    const ENTRY_CONSENT  = "entry.1413813626"; 
+    const ENTRY_TIME     = "entry.1235688242"; 
+    const ENTRY_AGENT    = "entry.1765089682"; 
+    const ENTRY_LANG     = "entry.1915120239"; 
+    const ENTRY_URL      = "entry.2138235063"; 
 
     // ============================================================
-    // 2. 핵심 기능: 구글 폼으로 데이터 전송 (가장 안정적인 방식)
+    // 2. [핵심] 무적의 Iframe 전송 방식 (fetch 대체)
     // ============================================================
     function recordConsentLog(consentType) {
-        const formUrl = `https://docs.google.com/forms/d/e/${GOOGLE_FORM_ID}/formResponse`;
-        
-        // 🚨 변경점: FormData 대신 URLSearchParams 사용 (호환성 해결)
-        const params = new URLSearchParams();
-        params.append(ENTRY_CONSENT, consentType);
-        params.append(ENTRY_TIME, new Date().toISOString());
-        params.append(ENTRY_AGENT, navigator.userAgent);
-        params.append(ENTRY_LANG, navigator.language);
-        params.append(ENTRY_URL, window.location.href);
+        console.log("🚀 구글 폼 강제 전송 시도: " + consentType);
 
-        // 전송 시도
-        fetch(formUrl, {
-            method: "POST",
-            mode: "no-cors", // 중요: CORS 우회
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded" 
-            },
-            body: params
-        })
-        .then(() => console.log(`✅ 구글 시트 전송 성공: ${consentType}`))
-        .catch(err => console.error("❌ 전송 실패:", err));
+        // 1. 가상의 타겟 iframe 생성 (화면에 안 보임)
+        const iframeId = 'hidden_iframe_' + Date.now();
+        const iframe = document.createElement('iframe');
+        iframe.name = iframeId;
+        iframe.style.display = 'none';
+        document.body.appendChild(iframe);
+
+        // 2. 가상의 Form 생성
+        const form = document.createElement('form');
+        form.target = iframeId;
+        form.method = 'POST';
+        form.action = `https://docs.google.com/forms/d/e/${GOOGLE_FORM_ID}/formResponse`;
+        form.style.display = 'none';
+
+        // 3. 데이터 입력 (Input 태그 생성)
+        const data = {
+            [ENTRY_CONSENT]: consentType,
+            [ENTRY_TIME]: new Date().toISOString(),
+            [ENTRY_AGENT]: navigator.userAgent,
+            [ENTRY_LANG]: navigator.language,
+            [ENTRY_URL]: window.location.href
+        };
+
+        for (const key in data) {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = key;
+            input.value = data[key];
+            form.appendChild(input);
+        }
+
+        document.body.appendChild(form);
+
+        // 4. 전송 (Submit)
+        form.submit();
+        console.log("✅ 전송 명령 완료. (iframe으로 전송됨)");
+
+        // 5. 청소 (잠시 후 요소 삭제)
+        setTimeout(() => {
+            document.body.removeChild(form);
+            document.body.removeChild(iframe);
+        }, 2000);
     }
 
     // ============================================================
-    // 3. Google Analytics 로드 및 삭제 (기존 로직 유지)
+    // 3. Google Analytics 및 쿠키 관리 (기존 로직 유지)
     // ============================================================
     function loadGoogleAnalytics() {
         if (document.getElementById('ga-script')) return;
@@ -682,7 +705,6 @@
             'ad_storage': 'granted'
         });
         gtag('config', GA_TRACKING_ID, { 'anonymize_ip': true });
-        console.log("📈 GA 스크립트 로드됨");
     }
 
     function deleteGAStorage() {
@@ -698,12 +720,8 @@
             }
         }
         if (window.gtag) {
-            window.gtag('consent', 'update', {
-                'analytics_storage': 'denied',
-                'ad_storage': 'denied'
-            });
+            window.gtag('consent', 'update', { 'analytics_storage': 'denied', 'ad_storage': 'denied' });
         }
-        console.log("📉 GA 쿠키 삭제됨");
     }
 
     function loadNonEssentialScripts() {
@@ -713,61 +731,50 @@
     }
 
     // ============================================================
-    // 4. 버튼 동작 함수 (모달 닫기 기능 포함)
+    // 4. 버튼 동작 (모달 닫기 및 저장)
     // ============================================================
-    
-    // 공통: 모달 닫기
     function closeModal() {
         document.getElementById('cookie-settings-modal').style.display = 'none';
     }
 
-    // 1. 모두 동의
     function acceptAllCookies() {
         localStorage.setItem('cookieConsent', 'granted_all');
         localStorage.setItem('cookieStats', 'true');
         localStorage.setItem('cookieMarketing', 'true');
-        
-        recordConsentLog('granted_all'); 
+        recordConsentLog('granted_all');
         loadNonEssentialScripts();
         closeModal();
     }
 
-    // 2. 필수만 동의
     function acceptNecessaryCookies() {
         localStorage.setItem('cookieConsent', 'granted_necessary');
         localStorage.setItem('cookieStats', 'false');
         localStorage.setItem('cookieMarketing', 'false');
-        
-        recordConsentLog('granted_necessary'); 
+        recordConsentLog('granted_necessary');
         loadNonEssentialScripts();
         closeModal();
     }
 
-    // 3. 설정 저장
     function saveCookieSettings() {
         const statsChecked = document.getElementById('cookie-statistical').checked;
         const marketingChecked = document.getElementById('cookie-marketing').checked;
-
         localStorage.setItem('cookieStats', statsChecked ? 'true' : 'false');
         localStorage.setItem('cookieMarketing', marketingChecked ? 'true' : 'false');
         
-        // 하나라도 체크 안 되어 있으면 '필수 동의'로 간주할지, 커스텀으로 할지 결정
         let type = (!statsChecked && !marketingChecked) ? 'granted_necessary' : 'granted_custom';
-        
         localStorage.setItem('cookieConsent', type);
-        recordConsentLog(type); 
+        recordConsentLog(type);
         loadNonEssentialScripts();
         closeModal();
     }
 
-    // 설정창 열기
     function showCookieSettings() {
         document.getElementById('cookie-settings-modal').style.display = 'flex';
         document.getElementById('cookie-statistical').checked = (localStorage.getItem('cookieStats') === 'true');
         document.getElementById('cookie-marketing').checked = (localStorage.getItem('cookieMarketing') === 'true');
     }
 
-    // 초기 실행 체크
+    // 초기 실행
     document.addEventListener("DOMContentLoaded", function() {
         const consent = localStorage.getItem('cookieConsent');
         if (!consent || !consent.startsWith('granted')) {
@@ -776,22 +783,15 @@
             loadNonEssentialScripts();
         }
 
-        // 스무스 스크롤 (헤더 높이 고려)
+        // 스무스 스크롤
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                if(this.closest('.modal-content')) return; // 모달 내부 링크는 제외
-                
-                const navToggle = document.getElementById('nav-toggle');
-                if(navToggle) navToggle.checked = false; 
-                
+                if(this.closest('.modal-content')) return;
+                document.getElementById('nav-toggle').checked = false; 
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    const headerHeight = 70; 
-                    window.scrollTo({
-                        top: target.offsetTop - headerHeight, 
-                        behavior: 'smooth'
-                    });
+                    window.scrollTo({ top: target.offsetTop - 70, behavior: 'smooth' });
                 }
             });
         });
