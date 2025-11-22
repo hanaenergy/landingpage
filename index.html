@@ -505,15 +505,10 @@ document.addEventListener("DOMContentLoaded", function() {
             e.preventDefault();
             const target = document.querySelector(href);
             
-            if (target) {
-                const headerStyle = getComputedStyle(document.documentElement);
-                const headerHeight = headerStyle.getPropertyValue('--header-height').trim().replace('px', '');
-                
-                window.scrollTo({
-                    top: target.offsetTop - (headerHeight ? parseInt(headerHeight) : 70), 
-                    behavior: 'smooth'
-                });
-            }
+                if (target) {
+                    // 헤더 높이(70px)를 고려하여 스크롤
+                    window.scrollTo({ top: target.offsetTop - 70, behavior: 'smooth' });
+                }
         });
     });
 });
