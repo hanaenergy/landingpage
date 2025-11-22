@@ -629,9 +629,45 @@
     // ----------------------------------------------------------------------
     // ⚠️ [설정 필요] 실제 GA 측정 ID로 변경해주세요.
     const GA_TRACKING_ID = 'G-C080W3WZXT'; 
-    // ⚠️ [설정 필요] 동의 기록용 Formspree ID (문의용 폼과 다른 ID 사용 권장)
-    const CONSENT_LOGGING_URL = 'https://formspree.io/f/mjkzobrp'; 
     // ----------------------------------------------------------------------
+
+     // index.html <script> 태그 안에 있는 기존 함수를 이 코드로 교체합니다.
+
+/**
+ * ✅ [GDPR Action] Log Consent to Google Sheets
+ * Uses a Google Forms endpoint to log consent status without hitting Formspree limits.
+ * @param {string} consentType - The type of consent given (e.g., 'granted_all', 'granted_necessary')
+ */
+function recordConsentLog(consentType) {
+    
+    // ⚠️ 1. [필수 교체] YOUR_FORM_ID를 실제 폼 ID로 교체하세요.
+    const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSf4quO3FbIzUXGioN7XbArct7qj39Ci7X_rOwnXgWyWj6iGXg/formResponse";
+
+    const formData = new FormData();
+    
+    // ⚠️ 2. [필수 교체] entry.xxx 번호를 Google Forms에서 추출한 실제 번호로 교체하세요.
+    formData.append("entry.1413813626", consentType);               // consentType
+    formData.append("entry.1235688242", new Date().toISOString());   // timestamp
+    formData.append("entry.1765089682", navigator.userAgent);        // userAgent
+    formData.append("entry.1915120239", navigator.language);         // language
+    formData.append("entry.2138235063", window.location.href);       // pageUrl
+
+    // IP 주소는 수집하지 않습니다. (GDPR 위험 감소)
+
+    fetch(formUrl, {
+        method: "POST",
+        mode: "no-cors",    // 구글 폼은 CORS 문제로 인해 'no-cors' 모드가 필요합니다.
+        body: formData
+    })
+    .then(() => {
+        console.log("Consent log successfully sent to Google Sheets.");
+    })
+    .catch(error => {
+        console.error("Error sending consent log:", error);
+    });
+}
+
+
     
     /**
      * Google Analytics 스크립트를 동적으로 로드합니다. (GDPR: 동의 시에만 실행)
