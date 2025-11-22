@@ -732,32 +732,6 @@ function recordConsentLog(consentType) {
     }
 
     /**
-     * ✅ [GDPR Action] 동의 기록을 Formspree로 전송 (DB 대체)
-     * 동의 버튼 클릭 시 백그라운드에서 실행되어 기록을 남깁니다.
-     */
-   
-
-        const consentData = {
-            timestamp: new Date().toISOString(),
-            consent_type: consentType,
-            ip_anonymized: true,
-            page_url: window.location.href,
-            note: "GDPR Consent Log (DE)"
-        };
-
-        // fetch keepalive를 사용하여 페이지 이동/종료 시에도 전송 보장
-        fetch(CONSENT_LOGGING_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify(consentData),
-            keepalive: true
-        }).catch(err => console.error("Consent logging failed", err));
-    }
-
-    /**
      * 사용자의 동의 상태에 따라 스크립트 로드/중단 제어
      */
     function loadNonEssentialScripts() {
