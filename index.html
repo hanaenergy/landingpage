@@ -735,11 +735,7 @@ function recordConsentLog(consentType) {
      * ✅ [GDPR Action] 동의 기록을 Formspree로 전송 (DB 대체)
      * 동의 버튼 클릭 시 백그라운드에서 실행되어 기록을 남깁니다.
      */
-    function recordConsentLog(type) {
-        if (CONSENT_LOGGING_URL.includes('[YOUR_LOGGING_FORM_ID]')) {
-            console.warn("Consent logging URL not set.");
-            return;
-        }
+   
 
         const consentData = {
             timestamp: new Date().toISOString(),
