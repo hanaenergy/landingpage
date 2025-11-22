@@ -494,7 +494,7 @@
 // JavaScript: 오직 스무스 스크롤 로직만 유지
 // 모든 쿠키/GA/GTM/동의 기록 관련 로직은 제거됨
 // ============================================================
-
+document.addEventListener("DOMContentLoaded", function() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             document.getElementById('nav-toggle').checked = false; 
@@ -516,6 +516,7 @@
             }
         });
     });
+});
 </script>
 </body>
 </html>
