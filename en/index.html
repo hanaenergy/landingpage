@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
+    <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-K9K7CFDQ');</script>
+<!-- End Google Tag Manager -->
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hana Energy | Your Partner for E-Mobility, PV & Energy Storage Systems in DACH</title>
@@ -409,6 +418,10 @@
     </style>
 </head>
 <body>
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K9K7CFDQ"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
 <header class="header">
     <div class="container nav-content">
@@ -621,46 +634,33 @@
 
 <script>
 // ============================================================
-// 1. 설정 영역 (새로운 Apps Script 설정)
+// 1. 설정 영역 (기존 Apps Script URL은 이제 필요 없음)
 // ============================================================
-const GA_TRACKING_ID = 'G-C080W3WZXT'; 
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwS-SI-USiM2sX9p-7cOc9gBFeAFXGOm_BRN-5m7E1Jma-p_uyAe7vRExq8TfvvsYFB/exec"; 
-// 기존 GOOGLE_FORM_ID와 Entry ID는 이제 필요 없습니다.
+const GA_TRACKING_ID = 'G-C080W3WZXT'; 
+// SCRIPT_URL은 삭제하거나 주석 처리해야 합니다.
 
 // ============================================================
-// 2. [핵심] Apps Script Fetch 전송 방식으로 교체
+// 2. [핵심] GTM DataLayer 이벤트 푸시 방식으로 교체
 // ============================================================
+// GTM을 사용하려면 dataLayer 배열이 필요합니다.
+window.dataLayer = window.dataLayer || [];
+
 function recordConsentLog(consentType) {
-    console.log("🚀 Apps Script를 통한 안정적인 전송 시도: " + consentType);
+    console.log("🚀 GTM DataLayer를 통한 공식 이벤트 로깅 시도: " + consentType);
 
-    // Apps Script가 이해할 수 있는 형태의 JSON 데이터 (Keys는 스크립트 코드와 일치해야 함)
-    const payload = {
-        consentType: consentType,
-        userAgent: navigator.userAgent,
-        currentUrl: window.location.href,
-        language: navigator.language
-    };
-
-    fetch(SCRIPT_URL, {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload)
-    })
-    .then(response => {
-        console.log('✅ Apps Script 전송 성공:', response.status);
-    })
-    .catch(error => {
-        console.error('❌ Apps Script 전송 실패:', error);
+    // GTM이 인식할 수 있도록 dataLayer에 객체를 푸시합니다.
+    dataLayer.push({
+        'event': 'consent_granted', // GTM에서 트리거로 사용할 이벤트 이름
+        'consent_type': consentType, // GA4로 보낼 동의 유형 값 (granted_all, granted_custom 등)
+        'timestamp': new Date().toISOString(),
+        'user_agent': navigator.userAgent,
+        'current_url': window.location.href
     });
+    
+    console.log("✅ DataLayer에 이벤트 전송 완료. (GTM 설정 필요)");
 }
-// ============================================================
-// 3. Google Analytics 및 쿠키 관리 (나머지 함수들은 건드리지 마세요)
-// ...
-// ============================================================
+
+    
 
     // ============================================================
     // 3. Google Analytics 및 쿠키 관리 (기존 로직 유지)
