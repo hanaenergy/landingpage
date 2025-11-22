@@ -6,8 +6,7 @@
     <title>Hana Energy | Your Partner for E-Mobility, PV & Energy Storage Systems in DACH</title>
     
     <style>
-
-        /* 기본 변수 및 바디 스타일 (Same as previous version) */
+        /* 기본 변수 및 바디 스타일 */
         :root {
             --primary-color: #007bff;
             --secondary-color: #f8f9fa;
@@ -47,7 +46,7 @@
             height: 100%;
         }
         
-        /* 로고 스타일: 이미지 컨테이너 */
+        /* 로고 스타일 */
         .logo {
             display: flex;
             align-items: center;
@@ -94,7 +93,7 @@
             padding-left: 5px;
         }
         
-        /* 햄버거 토글 기본 숨김 */
+        /* 햄버거 토글 */
         .nav-toggle-label { 
             display: none; 
             cursor: pointer; 
@@ -123,7 +122,6 @@
             color: #555;
             margin-top: 0;
         }
-        /* CTA 버튼 기본 스타일 (모달 버튼과 공통 사용) */
         .cta-button {
             display: inline-block;
             background-color: var(--primary-color);
@@ -141,7 +139,7 @@
             background-color: #0056b3;
         }
 
-        /* Service Section (Solutions) */
+        /* Service Section */
         .services {
             padding: 80px 0;
             text-align: center;
@@ -166,7 +164,6 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
             box-sizing: border-box; 
         }
-        /* 아이콘 이미지 스타일 */
         .icon {
             max-width: 400px; 
             margin: 0 auto 15px auto; 
@@ -236,8 +233,8 @@
             text-align: center;
         }
         .form-container {
-             max-width: 500px; 
-             margin: 0 auto;
+              max-width: 500px; 
+              margin: 0 auto;
         }
         .form-group {
             margin-bottom: 20px;
@@ -362,22 +359,30 @@
         }
 
         /* Accept All 버튼 */
-        .cta-button,
-        .secondary-button,
-        .accept-necessary-button {
+        .cta-button {
             background-color: var(--primary-color);
         }
-        .cta-button:hover,
-        .secondary-button:hover,
-        .accept-necessary-button:hover {
+        .cta-button:hover {
             background-color: #0056b3;
         }
 
-        
-        /* --- 모바일 화면 스타일 (768px 이하) --- */
+        /* Save Settings 버튼 */
+        .secondary-button {
+            background-color: #6c757d; 
+        }
+        .secondary-button:hover {
+            background-color: #5a6268;
+        }
+
+        /* Accept Necessary Only 버튼 */
+        .accept-necessary-button {
+            background-color: #28a745; 
+        }
+        .accept-necessary-button:hover {
+            background-color: #1e7e34;
+        }
+        /* --- 모바일 화면 스타일 --- */
         @media (max-width: 768px) {
-            
-            /* 서비스/강점 항목 너비 강제 100% 설정 (잘림 방지) */
             .service-item { 
                 flex-basis: 100% !important; 
                 margin-bottom: 0; 
@@ -386,8 +391,6 @@
                 flex-basis: 100% !important; 
                 margin-bottom: 20px; 
             }
-            
-            /* 네비게이션 토글 활성화 */
             .nav-links {
                 position: absolute;
                 top: var(--header-height); 
@@ -413,15 +416,9 @@
             .nav-toggle:checked ~ .nav-links {
                 display: flex; 
             }
-
-            /* Hero 텍스트 크기 조정 */
             .hero h1 { font-size: 1.5rem; }
-            .hero h2 { 
-                font-size: 1rem; 
-                line-height: 1.4; 
-            }
+            .hero h2 { font-size: 1rem; line-height: 1.4; }
         }
-        /* 버튼 그룹 모바일 최적화 */
         @media (max-width: 480px) {
             .button-group {
                 flex-direction: column; 
@@ -531,7 +528,7 @@
         <p>Do you have questions about a partnership or our solutions? Please fill out the form below.</p>
 
         <form 
-            action="https://formspree.io/f/xjklobyd" 
+            action="https://formspree.io/f/[YOUR_CONTACT_FORM_ID]" 
             method="POST"
             class="form-container"
         >
@@ -586,10 +583,15 @@
                     I consent to the processing of my submitted data according to the <a href="/en/legal/privacy.html" target="_blank" style="color: var(--primary-color); text-decoration: underline; font-weight: bold;">Privacy Policy</a>. I have read the separate information regarding **data transfer to the USA** (Third Country Transfer via Formspree, Inc.) and the associated **risks of governmental access** (Section 5 of the Privacy Policy) and **explicitly consent to this transfer.**
                 </label>
             </div>
+
             <button type="submit" class="cta-button">
                 Submit
             </button>
         </form>
+
+        <p style="text-align: center; max-width: 500px; margin: 30px auto 0; font-size: 0.9rem; color: #555;">
+            * Note: We use the external service provider <a href="https://formspree.io/f/xjklobyd" target="_blank" style="color: var(--primary-color); text-decoration: underline;">Formspree, Inc.</a> to process the form. Data will be transmitted to the USA. Detailed information, particularly concerning the risks of data transfer to the USA and the legal basis, can be found in our <a href="/en/legal/privacy.html" style="color: var(--primary-color); text-decoration: underline;">Privacy Policy</a>.
+        </p>
 
     </div>
 </section>
@@ -641,19 +643,27 @@
 
 <script>
     // ----------------------------------------------------------------------
-    // ⚠️ IMPORTANT: Please change this value to your actual Google Analytics tracking ID. 
-    const GA_TRACKING_ID = 'G-XXXXXXXXXX'; 
+    // ⚠️ [설정 필요] 실제 값으로 변경해주세요.
+    const GA_TRACKING_ID = 'G-XXXXXXXXXX'; // Google Analytics 측정 ID
+    
+    // ⚠️ [설정 필요] DB 대용 동의 기록 저장용 Formspree 주소 (문의용 폼과는 별개로 생성 권장)
+    const CONSENT_LOGGING_URL = 'https://formspree.io/f/[YOUR_LOGGING_FORM_ID]'; 
     // ----------------------------------------------------------------------
     
     /**
-     * Dynamically loads the Google Analytics script.
+     * Google Analytics 스크립트를 동적으로 로드합니다.
      */
     function loadGoogleAnalytics() {
         if (document.getElementById('ga-script')) {
+            if (window.gtag) {
+                window.gtag('consent', 'update', {
+                    'analytics_storage': 'granted',
+                    'ad_storage': 'granted' 
+                });
+            }
             return;
         }
 
-        // 1. Load GA Configuration Script (gtag.js) 
         const scriptUrl = `https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`;
         const script = document.createElement('script');
         script.async = true;
@@ -661,107 +671,131 @@
         script.id = 'ga-script'; 
         document.head.appendChild(script);
 
-        // 2. Data Layer Setup and initial config execution
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         window.gtag = gtag; 
         gtag('js', new Date());
 
-        // Update consent status to 'granted' and initialize GA
         gtag('consent', 'update', {
             'analytics_storage': 'granted',
             'ad_storage': 'granted' 
         });
 
-        // Initialize GA including IP anonymization option
         gtag('config', GA_TRACKING_ID, {
             'anonymize_ip': true 
         });
 
-        console.log("Google Analytics (Statistical Cookies) script loaded.");
+        console.log("Google Analytics loaded with consent.");
     }
     
     /**
-     * Deletes GA-related cookies and stored data (Withdrawal functionality).
+     * GA 관련 쿠키 및 저장된 데이터를 삭제합니다. (철회 기능의 핵심)
      */
     function deleteGAStorage() {
-        // Delete all cookies used by gtag.js (e.g., _ga, _gid, etc.)
         const cookies = document.cookie.split(";");
         for (let i = 0; i < cookies.length; i++) {
             let cookie = cookies[i];
             let eqPos = cookie.indexOf("=");
             let name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
             name = name.trim();
-            // Identify and delete Google Analytics related cookies
             if (name.startsWith('_ga') || name.startsWith('_gid')) {
-                 // Set cookie to an old date to delete it
-                 document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+                 // 쿠키 만료일을 과거로 설정하여 삭제
+                document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;domain=" + window.location.hostname;
+                document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/"; 
             }
         }
     }
 
     /**
-     * Loads or stops non-essential scripts (GA, marketing tools, etc.) based on user consent.
+     * ✅ [GDPR Action] 동의 기록을 Formspree로 전송 (DB 대체)
+     * 동의 버튼 클릭 시 백그라운드에서 실행되어 기록을 남깁니다.
+     */
+    function recordConsentLog(type) {
+        if (CONSENT_LOGGING_URL.includes('[YOUR_LOGGING_FORM_ID]')) {
+            console.warn("Consent logging URL not set.");
+            return;
+        }
+
+        const consentData = {
+            timestamp: new Date().toISOString(),
+            consent_type: type,
+            ip_anonymized: true,
+            page_url: window.location.href,
+            note: "GDPR Consent Log"
+        };
+
+        // fetch keepalive를 사용하여 페이지 이동/종료 시에도 전송 보장
+        fetch(CONSENT_LOGGING_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(consentData),
+            keepalive: true
+        }).catch(err => console.error("Consent logging failed", err));
+    }
+
+    /**
+     * 사용자의 동의 상태에 따라 스크립트 로드/중단 제어
      */
     function loadNonEssentialScripts() {
         const statsGranted = localStorage.getItem('cookieStats') === 'true';
         const marketingGranted = localStorage.getItem('cookieMarketing') === 'true';
 
-        // 1. Handle Statistical Cookies (GA)
+        // 1. 통계 쿠키 처리
         if (statsGranted) {
-            loadGoogleAnalytics(); // Load script upon consent
+            loadGoogleAnalytics(); 
         } else {
-            // Refusal or Withdrawal: Execute tracking stop command and delete cookies
+            // 거부/철회 시: 추적 중단 및 쿠키 삭제
             if (window.gtag) {
-                 // If GA is already loaded, update consent status to 'denied'
-                gtag('consent', 'update', {
+                window.gtag('consent', 'update', {
                     'analytics_storage': 'denied',
                     'ad_storage': 'denied' 
                 });
             }
             deleteGAStorage(); 
-            console.log("Statistical Cookies denied: GA tracking stopped and cookies deleted.");
+            console.log("Stats cookies denied/withdrawn. Tracking stopped.");
         }
 
-        // 2. Handle Marketing Cookies (Facebook Pixel, etc.)
+        // 2. 마케팅 쿠키 처리
         if (marketingGranted) {
-            console.log("Marketing Cookies consented: Add logic for dynamic loading of marketing scripts here.");
-            // Actual marketing script loading logic should be added here.
+            console.log("Marketing cookies consented.");
         } else {
-            console.log("Marketing Cookies denied.");
-            // Add marketing cookie deletion logic here (e.g., deleting Facebook Pixel cookies)
+            console.log("Marketing cookies denied.");
         }
     }
 
-    // 1. Accept All Cookies
+    // 1. 모든 쿠키 허용
     function acceptAllCookies() {
         localStorage.setItem('cookieConsent', 'granted_all');
         localStorage.setItem('cookieStats', 'true');
         localStorage.setItem('cookieMarketing', 'true');
-        loadNonEssentialScripts(); // Load scripts after consent
+        
+        recordConsentLog('granted_all'); // 동의 기록 전송
+        loadNonEssentialScripts(); 
         document.getElementById('cookie-settings-modal').style.display = 'none';
     }
 
-    // 2. Accept Necessary Only
+    // 2. 필수 쿠키만 허용
     function acceptNecessaryCookies() {
         localStorage.setItem('cookieConsent', 'granted_necessary');
         localStorage.setItem('cookieStats', 'false');
         localStorage.setItem('cookieMarketing', 'false');
-        loadNonEssentialScripts(); // Execute non-essential script halt/deletion logic
+        
+        recordConsentLog('granted_necessary'); // 거부 기록 전송
+        loadNonEssentialScripts(); 
         document.getElementById('cookie-settings-modal').style.display = 'none';
     }
 
-    // 3. Show Settings Window (Display Modal)
+    // 3. 설정 창 표시
     function showCookieSettings() {
-        // Display modal
         document.getElementById('cookie-settings-modal').style.display = 'flex';
-        
-        // Load current saved settings
         document.getElementById('cookie-statistical').checked = (localStorage.getItem('cookieStats') === 'true');
         document.getElementById('cookie-marketing').checked = (localStorage.getItem('cookieMarketing') === 'true');
     }
 
-    // 4. Save Settings Function
+    // 4. 설정 저장
     function saveCookieSettings() {
         const statsChecked = document.getElementById('cookie-statistical').checked;
         const marketingChecked = document.getElementById('cookie-marketing').checked;
@@ -769,41 +803,40 @@
         localStorage.setItem('cookieStats', statsChecked ? 'true' : 'false');
         localStorage.setItem('cookieMarketing', marketingChecked ? 'true' : 'false');
         
-        localStorage.setItem('cookieConsent', 'granted_custom');
-        
-        loadNonEssentialScripts(); // Load or halt based on saved settings
+        // 동의 유형 결정
+        let type = 'granted_custom';
+        if (!statsChecked && !marketingChecked) type = 'granted_necessary';
+
+        localStorage.setItem('cookieConsent', type);
+        recordConsentLog(type); // 설정 기록 전송
+        loadNonEssentialScripts();
         document.getElementById('cookie-settings-modal').style.display = 'none';
     }
 
-    // 5. Check Consent Status on Page Load
+    // 5. 페이지 로드 시 동의 상태 확인
     function checkCookieConsent() {
         const consent = localStorage.getItem('cookieConsent');
         
         if (!consent || !consent.startsWith('granted')) {
-            // No consent record, show modal
             showCookieSettings();
         } 
         else {
-            // Consent record exists, run load/update script logic
             loadNonEssentialScripts(); 
             document.getElementById('cookie-settings-modal').style.display = 'none';
         }
     }
 
-    // Call function to check existing consent status on page load
+    // 초기화 실행
     checkCookieConsent();
 
 
-    // Anchor click smooth scrolling JavaScript (Scroll position corrected by header height)
+    // Anchor click smooth scrolling
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
-            // Close mobile menu if open
             document.getElementById('nav-toggle').checked = false; 
-            
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
-                // Calculate header height for correct scrolling position
                 const headerStyle = getComputedStyle(document.documentElement);
                 const headerHeight = headerStyle.getPropertyValue('--header-height').trim().replace('px', '');
                 
