@@ -620,95 +620,71 @@
 </footer>
 
 <script>
-    // ----------------------------------------------------------------------
-    // ⚠️ [Action Required] Replace with your actual Google Analytics ID.
+    // ============================================================
+    // 1. 설정 영역 (작성자님 정보를 이미 기입해 두었습니다)
+    // ============================================================
     const GA_TRACKING_ID = 'G-C080W3WZXT'; 
-    // ----------------------------------------------------------------------
-
+    const GOOGLE_FORM_ID = "1FAIpQLSf4quO3FbIzUXGioN7XbArct7qj39Ci7X_rOwnXgWyWj6iGXg";
     
-    // index.html <script> 태그 안에 있는 기존 함수를 이 코드로 교체합니다.
+    // 구글 폼 Entry IDs
+    const ENTRY_CONSENT  = "entry.1413813626"; // Consent Type
+    const ENTRY_TIME     = "entry.1235688242"; // Timestamp
+    const ENTRY_AGENT    = "entry.1765089682"; // User Agent
+    const ENTRY_LANG     = "entry.1915120239"; // Language
+    const ENTRY_URL      = "entry.2138235063"; // Page URL
 
-/**
- * ✅ [GDPR Action] Log Consent to Google Sheets
- * Uses a Google Forms endpoint to log consent status without hitting Formspree limits.
- * @param {string} consentType - The type of consent given (e.g., 'granted_all', 'granted_necessary')
- */
-function recordConsentLog(consentType) {
-    
-    // ⚠️ 1. [필수 교체] YOUR_FORM_ID를 실제 폼 ID로 교체하세요.
-    const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSf4quO3FbIzUXGioN7XbArct7qj39Ci7X_rOwnXgWyWj6iGXg/formResponse";
+    // ============================================================
+    // 2. 핵심 기능: 구글 폼으로 데이터 전송 (가장 안정적인 방식)
+    // ============================================================
+    function recordConsentLog(consentType) {
+        const formUrl = `https://docs.google.com/forms/d/e/${GOOGLE_FORM_ID}/formResponse`;
+        
+        // 🚨 변경점: FormData 대신 URLSearchParams 사용 (호환성 해결)
+        const params = new URLSearchParams();
+        params.append(ENTRY_CONSENT, consentType);
+        params.append(ENTRY_TIME, new Date().toISOString());
+        params.append(ENTRY_AGENT, navigator.userAgent);
+        params.append(ENTRY_LANG, navigator.language);
+        params.append(ENTRY_URL, window.location.href);
 
-    const formData = new FormData();
-    
-    // ⚠️ 2. [필수 교체] entry.xxx 번호를 Google Forms에서 추출한 실제 번호로 교체하세요.
-    formData.append("entry.1413813626", consentType);               // consentType
-    formData.append("entry.1235688242", new Date().toISOString());   // timestamp
-    formData.append("entry.1765089682", navigator.userAgent);        // userAgent
-    formData.append("entry.1915120239", navigator.language);         // language
-    formData.append("entry.2138235063", window.location.href);       // pageUrl
+        // 전송 시도
+        fetch(formUrl, {
+            method: "POST",
+            mode: "no-cors", // 중요: CORS 우회
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded" 
+            },
+            body: params
+        })
+        .then(() => console.log(`✅ 구글 시트 전송 성공: ${consentType}`))
+        .catch(err => console.error("❌ 전송 실패:", err));
+    }
 
-    // IP 주소는 수집하지 않습니다. (GDPR 위험 감소)
-
-    fetch(formUrl, {
-        method: "POST",
-        mode: "no-cors",    // 구글 폼은 CORS 문제로 인해 'no-cors' 모드가 필요합니다.
-        body: formData
-    })
-    .then(() => {
-        console.log("Consent log successfully sent to Google Sheets.");
-    })
-    .catch(error => {
-        console.error("Error sending consent log:", error);
-    });
-}
-
-    
-    /**
-     * Dynamically loads the Google Analytics script (GDPR: Only after consent).
-     */
+    // ============================================================
+    // 3. Google Analytics 로드 및 삭제 (기존 로직 유지)
+    // ============================================================
     function loadGoogleAnalytics() {
-        if (document.getElementById('ga-script')) {
-            // If loaded, just update consent status
-            if (window.gtag) {
-                window.gtag('consent', 'update', {
-                    'analytics_storage': 'granted',
-                    'ad_storage': 'granted' 
-                });
-            }
-            return;
-        }
+        if (document.getElementById('ga-script')) return;
 
-        // 1. Load GA Configuration Script (gtag.js) 
-        const scriptUrl = `https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`;
         const script = document.createElement('script');
+        script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`;
         script.async = true;
-        script.src = scriptUrl;
-        script.id = 'ga-script'; 
+        script.id = 'ga-script';
         document.head.appendChild(script);
 
-        // 2. Data Layer Setup
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
-        window.gtag = gtag; 
+        window.gtag = gtag;
         gtag('js', new Date());
-
-        // Update consent status to 'granted'
+        
         gtag('consent', 'update', {
             'analytics_storage': 'granted',
-            'ad_storage': 'granted' 
+            'ad_storage': 'granted'
         });
-
-        // Initialize GA with IP anonymization
-        gtag('config', GA_TRACKING_ID, {
-            'anonymize_ip': true 
-        });
-
-        console.log("Google Analytics (Statistical Cookies) script loaded.");
+        gtag('config', GA_TRACKING_ID, { 'anonymize_ip': true });
+        console.log("📈 GA 스크립트 로드됨");
     }
-    
-    /**
-     * Deletes GA-related cookies and stored data (Withdrawal functionality).
-     */
+
     function deleteGAStorage() {
         const cookies = document.cookie.split(";");
         for (let i = 0; i < cookies.length; i++) {
@@ -716,75 +692,58 @@ function recordConsentLog(consentType) {
             let eqPos = cookie.indexOf("=");
             let name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
             name = name.trim();
-            // Identify and delete Google Analytics related cookies
             if (name.startsWith('_ga') || name.startsWith('_gid')) {
-                 // Set cookie to an old date to delete it
                  document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;domain=" + window.location.hostname;
                  document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/"; 
             }
         }
+        if (window.gtag) {
+            window.gtag('consent', 'update', {
+                'analytics_storage': 'denied',
+                'ad_storage': 'denied'
+            });
+        }
+        console.log("📉 GA 쿠키 삭제됨");
     }
 
-    /**
-     * Loads or stops non-essential scripts based on user consent.
-     */
     function loadNonEssentialScripts() {
         const statsGranted = localStorage.getItem('cookieStats') === 'true';
-        const marketingGranted = localStorage.getItem('cookieMarketing') === 'true';
-
-        // 1. Handle Statistical Cookies (GA)
-        if (statsGranted) {
-            loadGoogleAnalytics(); 
-        } else {
-            // Refusal or Withdrawal: Stop tracking & delete cookies
-            if (window.gtag) {
-                window.gtag('consent', 'update', {
-                    'analytics_storage': 'denied',
-                    'ad_storage': 'denied' 
-                });
-            }
-            deleteGAStorage(); 
-            console.log("Stats cookies denied/withdrawn. Tracking stopped.");
-        }
-
-        // 2. Handle Marketing Cookies
-        if (marketingGranted) {
-            console.log("Marketing cookies consented.");
-        } else {
-            console.log("Marketing cookies denied.");
-        }
+        if (statsGranted) loadGoogleAnalytics();
+        else deleteGAStorage();
     }
 
-    // 1. Accept All Cookies
+    // ============================================================
+    // 4. 버튼 동작 함수 (모달 닫기 기능 포함)
+    // ============================================================
+    
+    // 공통: 모달 닫기
+    function closeModal() {
+        document.getElementById('cookie-settings-modal').style.display = 'none';
+    }
+
+    // 1. 모두 동의
     function acceptAllCookies() {
         localStorage.setItem('cookieConsent', 'granted_all');
         localStorage.setItem('cookieStats', 'true');
         localStorage.setItem('cookieMarketing', 'true');
         
-        recordConsentLog('granted_all'); // Log consent
-        loadNonEssentialScripts(); 
-        document.getElementById('cookie-settings-modal').style.display = 'none';
+        recordConsentLog('granted_all'); 
+        loadNonEssentialScripts();
+        closeModal();
     }
 
-    // 2. Accept Necessary Only
+    // 2. 필수만 동의
     function acceptNecessaryCookies() {
         localStorage.setItem('cookieConsent', 'granted_necessary');
         localStorage.setItem('cookieStats', 'false');
         localStorage.setItem('cookieMarketing', 'false');
         
-        recordConsentLog('granted_necessary'); // Log refusal
-        loadNonEssentialScripts(); 
-        document.getElementById('cookie-settings-modal').style.display = 'none';
+        recordConsentLog('granted_necessary'); 
+        loadNonEssentialScripts();
+        closeModal();
     }
 
-    // 3. Show Settings Window
-    function showCookieSettings() {
-        document.getElementById('cookie-settings-modal').style.display = 'flex';
-        document.getElementById('cookie-statistical').checked = (localStorage.getItem('cookieStats') === 'true');
-        document.getElementById('cookie-marketing').checked = (localStorage.getItem('cookieMarketing') === 'true');
-    }
-
-    // 4. Save Settings Function
+    // 3. 설정 저장
     function saveCookieSettings() {
         const statsChecked = document.getElementById('cookie-statistical').checked;
         const marketingChecked = document.getElementById('cookie-marketing').checked;
@@ -792,50 +751,49 @@ function recordConsentLog(consentType) {
         localStorage.setItem('cookieStats', statsChecked ? 'true' : 'false');
         localStorage.setItem('cookieMarketing', marketingChecked ? 'true' : 'false');
         
-        // Determine consent type
-        let type = 'granted_custom';
-        if (!statsChecked && !marketingChecked) type = 'granted_necessary';
-
-        localStorage.setItem('cookieConsent', type);
-        recordConsentLog(type); // Log settings
-        loadNonEssentialScripts();
-        document.getElementById('cookie-settings-modal').style.display = 'none';
-    }
-
-    // 5. Check Consent Status on Page Load
-    function checkCookieConsent() {
-        const consent = localStorage.getItem('cookieConsent');
+        // 하나라도 체크 안 되어 있으면 '필수 동의'로 간주할지, 커스텀으로 할지 결정
+        let type = (!statsChecked && !marketingChecked) ? 'granted_necessary' : 'granted_custom';
         
-        if (!consent || !consent.startsWith('granted')) {
-            // No consent record, show modal
-            showCookieSettings();
-        } 
-        else {
-            // Consent record exists, run load/update script logic
-            loadNonEssentialScripts(); 
-            document.getElementById('cookie-settings-modal').style.display = 'none';
-        }
+        localStorage.setItem('cookieConsent', type);
+        recordConsentLog(type); 
+        loadNonEssentialScripts();
+        closeModal();
     }
 
-    // Initialize
-    checkCookieConsent();
+    // 설정창 열기
+    function showCookieSettings() {
+        document.getElementById('cookie-settings-modal').style.display = 'flex';
+        document.getElementById('cookie-statistical').checked = (localStorage.getItem('cookieStats') === 'true');
+        document.getElementById('cookie-marketing').checked = (localStorage.getItem('cookieMarketing') === 'true');
+    }
 
+    // 초기 실행 체크
+    document.addEventListener("DOMContentLoaded", function() {
+        const consent = localStorage.getItem('cookieConsent');
+        if (!consent || !consent.startsWith('granted')) {
+            showCookieSettings();
+        } else {
+            loadNonEssentialScripts();
+        }
 
-    // Anchor click smooth scrolling
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            document.getElementById('nav-toggle').checked = false; 
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                const headerStyle = getComputedStyle(document.documentElement);
-                const headerHeight = headerStyle.getPropertyValue('--header-height').trim().replace('px', '');
+        // 스무스 스크롤 (헤더 높이 고려)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if(this.closest('.modal-content')) return; // 모달 내부 링크는 제외
                 
-                window.scrollTo({
-                    top: target.offsetTop - (headerHeight ? parseInt(headerHeight) : 70), 
-                    behavior: 'smooth'
-                });
-            }
+                const navToggle = document.getElementById('nav-toggle');
+                if(navToggle) navToggle.checked = false; 
+                
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerHeight = 70; 
+                    window.scrollTo({
+                        top: target.offsetTop - headerHeight, 
+                        behavior: 'smooth'
+                    });
+                }
+            });
         });
     });
 </script>
