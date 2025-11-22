@@ -1,522 +1,849 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hana Energy | Ihr Partner für E-Mobilität, Photovoltaik & Energiespeichersysteme in DACH</title>
-    
-    <style>
-        /* 기본 변수 및 바디 스타일 (Original 그대로 유지) */
-        :root {
-            --primary-color: #007bff;
-            --secondary-color: #f8f9fa;
-            --text-color: #333;
-            --light-text: #555;
-            --font-family: 'Helvetica Neue', Arial, sans-serif; 
-            --header-height: 70px; 
-        }
-        body {
-            font-family: var(--font-family);
-            margin: 0;
-            padding: 0;
-            color: var(--text-color);
-            line-height: 1.6;
-            scroll-padding-top: var(--header-height); 
-            word-break: break-word; /* 긴 단어를 강제로 줄바꿈 */
-            overflow-wrap: break-word;
-                
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* Navigation */
-        .header {
-            background-color: #fff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            position: sticky;
-            top: 0;
-            height: var(--header-height); 
-            z-index: 1000;
-        }
-        .nav-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px; 
-            height: 100%;
-        }
-        .logo {
-            display: flex;
-            align-items: center;
-            height: 100%;
-            text-decoration: none;
-            z-index: 1001; 
-        }
-        .logo img {
-            height: 70px; 
-            width: 100px;
-            display: block;
-        }
-        
-        .main-nav { 
-            display: flex; 
-            justify-content: flex-end; 
-            align-items: center; 
-            height: 100%;
-            padding: 0 0px;
-        }
-        .nav-links { 
-            list-style: none; 
-            display: flex; 
-            margin: 0; 
-            padding: 0; 
-        }
-        .nav-links li a { 
-            display: block; 
-            padding: 8px 15px; 
-            text-decoration: none; 
-            color: var(--text-color);
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        .nav-links a:hover {
-            color: var(--primary-color);
-        }
-        .language-switch a {
-            font-size: 0.9rem !important; 
-            color: #777 !important; 
-            font-weight: normal !important; 
-            padding-left: 5px;
-        }
-        .nav-toggle-label { 
-            display: none; 
-            cursor: pointer; 
-            font-size: 30px; 
-            order: 1; 
-            z-index: 1002; 
-        }
-        .nav-toggle { 
-            display: none; 
-        }
-
-        /* Hero Section */
-        .hero {
-            background-color: var(--secondary-color);
-            padding: 100px 0;
-            text-align: center;
-        }
-        .hero h1 {
-            font-size: 2.2rem;
-            margin-bottom: 20px;
-            color: #222;
-        }
-        .hero h2 {
-            font-size: 1.25rem;
-            margin-bottom: 40px;
-            color: #555;
-            margin-top: 0;
-        }
-        .cta-button {
-            display: inline-block;
-            background-color: var(--primary-color);
-            color: white;
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: background-color 0.3s;
-            border: none; 
-            cursor: pointer;
-            white-space: normal; 
-            word-break: break-word;
-        }
-        .cta-button:hover {
-            background-color: #0056b3;
-        }
-
-        /* Service Section */
-        .services {
-            padding: 80px 0;
-            text-align: center;
-        }
-        .services h2 {
-            font-size: 2rem;
-            margin-bottom: 50px;
-        }
-        .service-grid {
-            display: flex;
-            justify-content: center; 
-            flex-wrap: wrap;
-            row-gap: 30px; 
-            gap: 0; 
-        }
-        .service-item {
-            flex-basis: 100%; 
-            text-align: center; 
-            padding: 30px;
-            border: 1px solid #eee;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
-            box-sizing: border-box; 
-        }
-        .icon {
-            max-width: 400px; 
-            margin: 0 auto 15px auto; 
-            position: relative;
-            width: 100%; 
-            height: 0; 
-            padding-bottom: 50%; 
-            display: block; 
-            overflow: hidden;
-        }
-        .icon img {
-           position: absolute;
-           top: 0;
-           left: 0;
-           width: 100%; 
-           height: 100%;
-           object-fit: cover;
-        }
-        .description-list {
-            list-style: none;
-            padding: 0;
-            margin-top: 15px;
-            font-size: 0.95rem;
-            max-width: 500px; 
-            margin-left: auto; 
-            margin-right: auto; 
-            text-align: left; 
-        }
-        .description-list li {
-            margin-bottom: 8px;
-            padding-left: 15px;
-            position: relative;
-        }
-        .description-list li::before {
-            content: '•';
-            color: var(--primary-color);
-            font-weight: bold;
-            display: inline-block;
-            width: 1em;
-            margin-left: -1em;
-            position: absolute;
-            left: 0;
-        }
-        
-        /* Strengths Section */
-        .strengths {
-            padding: 60px 0;
-            background-color: #f8f8f8;
-            text-align: center;
-        }
-        .strengths h2 {
-            margin-bottom: 40px;
-        }
-        .strength-item {
-            flex-basis: calc(50% - 20px);
-            padding: 20px;
-            text-align: left;
-        }
-        .strength-item h4 {
-            color: var(--primary-color);
-            margin-top: 0;
-        }
-
-        /* Contact Form Section */
-        .contact-form-section {
-            padding: 80px 0;
-            text-align: center;
-        }
-        .form-container {
-             max-width: 500px; 
-             margin: 0 auto;
-        }
-        .form-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            margin-top: 15px; 
-        }
-        .form-group input[type="text"],
-        .form-group input[type="email"],
-        .form-group input[type="tel"],
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box; 
-            font-family: var(--font-family);
-            font-size: 1rem;
-        }
-        .form-group textarea {
-            resize: vertical;
-        }
-        
-        /* Footer */
-        .footer {
-            background-color: #333;
-            color: white;
-            padding: 40px 0;
-            text-align: center;
-            font-size: 0.9rem;
-        }
-        .footer a {
-            color: white;
-            text-decoration: underline;
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hana Energy | Ihr Partner für E-Mobilität, Photovoltaik & Energiespeichersysteme in DACH</title>
+    
+    <style>
+        /* 기본 변수 및 바디 스타일 */
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #f8f9fa;
+            --text-color: #333;
+            --light-text: #555;
+            --font-family: 'Helvetica Neue', Arial, sans-serif; 
+            --header-height: 70px; 
+        }
+        body {
+            font-family: var(--font-family);
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            line-height: 1.6;
+            scroll-padding-top: var(--header-height); 
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
         
-        /* --- 모바일 화면 스타일 (Original 그대로 유지) --- */
-        @media (max-width: 768px) {
-            .service-item { 
-                flex-basis: 100% !important; 
-                margin-bottom: 0; 
-            }
-            .strength-item {
-                flex-basis: 100% !important; 
-                margin-bottom: 20px; 
-            }
-            .nav-links {
-                position: absolute;
-                top: var(--header-height); 
-                right: 0;
-                width: 100%;
-                display: none; 
-                flex-direction: column;
-                background: #fff; 
-                z-index: 999;
-                box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
-            }
-            .nav-links li {
-                text-align: center;
-                width: 100%;
-                border-bottom: 1px solid #eee;
-            }
-            .nav-links li a {
-                padding: 15px;
-            }
-            .nav-toggle-label {
-                display: block; 
-            }
-            .nav-toggle:checked ~ .nav-links {
-                display: flex; 
-            }
-            .hero h1 { font-size: 1.5rem; }
-            .hero h2 { font-size: 1rem; line-height: 1.4; }
-        }
-        @media (max-width: 480px) {
-        }
-    </style>
+        /* Navigation */
+        .header {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            height: var(--header-height); 
+            z-index: 1000;
+        }
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px; 
+            height: 100%;
+        }
+        
+        /* 로고 스타일 */
+        .logo {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            text-decoration: none;
+            z-index: 1001; 
+        }
+        .logo img {
+            height: 70px; 
+            width: 100px;
+            display: block;
+        }
+        
+        .main-nav { 
+            display: flex; 
+            justify-content: flex-end; 
+            align-items: center; 
+            height: 100%;
+            padding: 0 0px;
+        }
+        .nav-links { 
+            list-style: none; 
+            display: flex; 
+            margin: 0; 
+            padding: 0; 
+        }
+        .nav-links li a { 
+            display: block; 
+            padding: 8px 15px; 
+            text-decoration: none; 
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        /* 언어 전환 버튼 스타일 */
+        .language-switch a {
+            font-size: 0.9rem !important; 
+            color: #777 !important; 
+            font-weight: normal !important; 
+            padding-left: 5px;
+        }
+        
+        /* 햄버거 토글 */
+        .nav-toggle-label { 
+            display: none; 
+            cursor: pointer; 
+            font-size: 30px; 
+            order: 1; 
+            z-index: 1002; 
+        }
+        .nav-toggle { 
+            display: none; 
+        }
+
+        /* Hero Section */
+        .hero {
+            background-color: var(--secondary-color);
+            padding: 100px 0;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: #222;
+        }
+        .hero h2 {
+            font-size: 1.25rem;
+            margin-bottom: 40px;
+            color: #555;
+            margin-top: 0;
+        }
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: background-color 0.3s;
+            border: none; 
+            cursor: pointer;
+        }
+        .cta-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Service Section */
+        .services {
+            padding: 80px 0;
+            text-align: center;
+        }
+        .services h2 {
+            font-size: 2rem;
+            margin-bottom: 50px;
+        }
+        .service-grid {
+            display: flex;
+            justify-content: center; 
+            flex-wrap: wrap;
+            row-gap: 30px; 
+            gap: 0; 
+        }
+        .service-item {
+            flex-basis: 100%; 
+            text-align: center; 
+            padding: 30px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+            box-sizing: border-box; 
+        }
+        .icon {
+            max-width: 400px; 
+            margin: 0 auto 15px auto; 
+            position: relative;
+            width: 100%; 
+            height: 0; 
+            padding-bottom: 50%; 
+            display: block; 
+            overflow: hidden;
+        }
+        .icon img {
+           position: absolute;
+           top: 0;
+           left: 0;
+           width: 100%; 
+           height: 100%;
+           object-fit: cover;
+        }
+        .description-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 15px;
+            font-size: 0.95rem;
+            max-width: 500px; 
+            margin-left: auto; 
+            margin-right: auto; 
+            text-align: left; 
+        }
+        .description-list li {
+            margin-bottom: 8px;
+            padding-left: 15px;
+            position: relative;
+        }
+        .description-list li::before {
+            content: '•';
+            color: var(--primary-color);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+            position: absolute;
+            left: 0;
+        }
+        
+        /* Strengths Section */
+        .strengths {
+            padding: 60px 0;
+            background-color: #f8f8f8;
+            text-align: center;
+        }
+        .strengths h2 {
+            margin-bottom: 40px;
+        }
+        .strength-item {
+            flex-basis: calc(50% - 20px);
+            padding: 20px;
+            text-align: left;
+        }
+        .strength-item h4 {
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+
+        /* Contact Form Section */
+        .contact-form-section {
+            padding: 80px 0;
+            text-align: center;
+        }
+        .form-container {
+             max-width: 500px; 
+             margin: 0 auto;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            margin-top: 15px; 
+        }
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"],
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; 
+            font-family: var(--font-family);
+            font-size: 1rem;
+        }
+        .form-group textarea {
+            resize: vertical;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        .footer a {
+            color: white;
+            text-decoration: underline;
+        }
+
+        /* --- 쿠키 설정 모달 스타일 (팝업) --- */
+        #cookie-settings-modal {
+            display: none; 
+            position: fixed;
+            z-index: 2000; 
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto; 
+            padding: 30px;
+            border: 1px solid #888;
+            width: 90%; 
+            max-width: 500px; 
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5); 
+            text-align: left;
+            animation: fadeIn 0.3s ease-out; 
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-content h3 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        .modal-content .description {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            padding-left: 25px;
+        }
+
+        /* 쿠키 그룹 레이아웃 */
+        .cookie-group {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #eee;
+            border-radius: 4px;
+        }
+        .cookie-group label {
+            font-weight: bold;
+            display: inline-block;
+            margin-left: 5px;
+        }
+
+        /* --- 버튼 그룹 스타일 --- */
+        .button-group {
+            display: flex; 
+            justify-content: space-between; 
+            gap: 10px; 
+            margin-top: 25px; 
+            flex-wrap: wrap; 
+        }
+
+        .button-group button {
+            flex-grow: 1; 
+            min-width: 120px; 
+            padding: 12px 10px; 
+            font-size: 0.95rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-align: center;
+            border: none;
+            /* 요청하신 대로 모든 버튼을 파란색으로 통일 */
+            background-color: var(--primary-color);
+            color: white; 
+            font-weight: bold; 
+        }
+
+        /* 모든 버튼에 hover 효과 동일 적용 */
+        .button-group button:hover {
+            background-color: #0056b3;
+        }
+
+        /* --- 모바일 화면 스타일 --- */
+        @media (max-width: 768px) {
+            .service-item { 
+                flex-basis: 100% !important; 
+                margin-bottom: 0; 
+            }
+            .strength-item {
+                flex-basis: 100% !important; 
+                margin-bottom: 20px; 
+            }
+            .nav-links {
+                position: absolute;
+                top: var(--header-height); 
+                right: 0;
+                width: 100%;
+                display: none; 
+                flex-direction: column;
+                background: #fff; 
+                z-index: 999;
+                box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+            }
+            .nav-links li {
+                text-align: center;
+                width: 100%;
+                border-bottom: 1px solid #eee;
+            }
+            .nav-links li a {
+                padding: 15px;
+            }
+            .nav-toggle-label {
+                display: block; 
+            }
+            .nav-toggle:checked ~ .nav-links {
+                display: flex; 
+            }
+            .hero h1 { font-size: 1.5rem; }
+            .hero h2 { font-size: 1rem; line-height: 1.4; }
+        }
+        @media (max-width: 480px) {
+            .button-group {
+                flex-direction: column; 
+                gap: 8px; 
+            }
+            .button-group button {
+                min-width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
 
 <header class="header">
-    <div class="container nav-content">
-        <a href="#home" class="logo">
-            <img src="/images/logo.png" alt="Hana Energy Logo">
-        </a>
-        <nav class="main-nav">
-            <input type="checkbox" id="nav-toggle" class="nav-toggle">
-            <label for="nav-toggle" class="nav-toggle-label">☰</label>
-            
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#solutions">Lösungen</a></li> 
-                <li><a href="#strengths">Stärken</a></li> 
-                <li><a href="#contact-form-section">Kontakt</a></li> 
-                
-                <li class="language-switch"><a href="/en/index.html">English</a></li> 
-            </ul>
-        </nav>
-    </div>
+    <div class="container nav-content">
+        <a href="#home" class="logo">
+            <img src="/images/logo.png" alt="Hana Energy Logo">
+        </a>
+        <nav class="main-nav">
+            <input type="checkbox" id="nav-toggle" class="nav-toggle">
+            <label for="nav-toggle" class="nav-toggle-label">☰</label>
+            
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#solutions">Lösungen</a></li> 
+                <li><a href="#strengths">Stärken</a></li> 
+                <li><a href="#contact-form-section">Kontakt</a></li> 
+                
+                <li class="language-switch"><a href="/en/index.html">English</a></li> 
+            </ul>
+        </nav>
+    </div>
 </header>
 
 <section class="hero" id="home">
-    <div class="container">
-        <h1>Ihr Spezialist für E-Mobilität, Photovoltaik & Energiespeichersysteme in Österreich und Deutschland.</h1>
-        <h2>Wir verbinden Hersteller weltweit mit vertrauenswürdigen Installateuren und EPC-Firmen in der DACH-Region, um Markteintritte effizient zu gestalten.</h2>
-        <a href="#contact-form-section" class="cta-button">Jetzt Partner werden: Expansion starten</a>
-    </div>
+    <div class="container">
+        <h1>Ihr Spezialist für E-Mobilität, Photovoltaik & Energiespeichersysteme in Österreich und Deutschland.</h1>
+        <h2>Wir verbinden Hersteller weltweit mit vertrauenswürdigen Installateuren und EPC-Firmen in der DACH-Region, um Markteintritte effizient zu gestalten.</h2>
+        <a href="#contact-form-section" class="cta-button">Jetzt Partner werden: Expansion starten</a>
+    </div>
 </section>
 
 <section class="services" id="solutions">
-    <div class="container">
-        <h2>Unsere Kernkompetenzen und Lösungen</h2>
-        <div class="service-grid">
-            <div class="service-item">
-                <div class="icon"><img src="/images/ev_charging.jpg" alt="Ladesäule Icon"></div>
-                <h3>1. E-Ladelösungen (EV Charging)</h3>
-                <ul class="description-list">
-                    <li>AC- und DC-Ladegeräte, Zubehör und Ladekabel.</li>
-                    <li>Analyse des lokalen Bedarfs und Aufbau von Vertriebskanälen.</li>
-                    <li>Vermittlung an lokale Installateure und Distributoren.</li>
-                    <li>Vermittlung von Experten-Beratung zu Zertifizierungen (CE, EN-Normen).</li>
-                </ul>
-            </div>
-            <div class="service-item">
-                <div class="icon"><img src="/images/photovoltaic.jpg" alt="Photovoltaik Icon"></div>
-                <h3>2. Photovoltaik-Komponenten (PV)</h3>
-                <ul class="description-list">
-                    <li>Komponenten für private und gewerbliche PV-Anlagen.</li>
-                    <li>Aufbau von Distributoren- und EPC-Partnerschaften.</li>
-                    <li>Wettbewerbs-Benchmarking für eine erfolgreiche Markteinführung.</li>
-                    <li>Vermittlung von Spezialisten-Unterstützung bei lokalen Vorschriften (ÖNORM, VDE etc.).</li>
-                </ul>
-            </div>
-            <div class="service-item">
-                <div class="icon"><img src="/images/ess_storage.jpg" alt="Batteriespeicher Icon"></div>
-                <h3>3. Energiespeichersysteme (ESS)</h3>
-                <ul class="description-list">
-                    <li>Heimspeicher (5–15 kWh) und Hybrid-Wechselrichterlösungen.</li>
-                    <li>Marktchancen-Bewertung (Machbarkeitsanalyse).</li> 
-                    <li>Gezielte Identifizierung von B2B-Vertriebspartnern.</li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    <div class="container">
+        <h2>Unsere Kernkompetenzen und Lösungen</h2>
+        <div class="service-grid">
+            <div class="service-item">
+                <div class="icon"><img src="/images/ev_charging.jpg" alt="Ladesäule Icon"></div>
+                <h3>1. E-Ladelösungen (EV Charging)</h3>
+                <ul class="description-list">
+                    <li>AC- und DC-Ladegeräte, Zubehör und Ladekabel.</li>
+                    <li>Analyse des lokalen Bedarfs und Aufbau von Vertriebskanälen.</li>
+                    <li>Vermittlung an lokale Installateure und Distributoren.</li>
+                    <li>Beratung zu Zertifizierungen (CE, EN-Normen).</li>
+                </ul>
+            </div>
+            <div class="service-item">
+                <div class="icon"><img src="/images/photovoltaic.jpg" alt="Photovoltaik Icon"></div>
+                <h3>2. Photovoltaik-Komponenten (PV)</h3>
+                <ul class="description-list">
+                    <li>Komponenten für private und gewerbliche PV-Anlagen.</li>
+                    <li>Aufbau von Distributoren- und EPC-Partnerschaften.</li>
+                    <li>Wettbewerbs-Benchmarking für eine erfolgreiche Markteinführung.</li>
+                    <li>Unterstützung bei lokalen Vorschriften (ÖNORM, VDE etc.).</li>
+                </ul>
+            </div>
+            <div class="service-item">
+                <div class="icon"><img src="/images/ess_storage.jpg" alt="Batteriespeicher Icon"></div>
+                <h3>3. Energiespeichersysteme (ESS)</h3>
+                <ul class="description-list">
+                    <li>Heimspeicher (5–15 kWh) und Hybrid-Wechselrichterlösungen.</li>
+                    <li>Marktchancen-Bewertung (Machbarkeitsanalyse).</li> 
+                    <li>Gezielte Identifizierung von B2B-Vertriebspartnern.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </section>
 
 <section class="strengths" id="strengths">
-    <div class="container">
-        <h2>Ihre Vorteile einer Partnerschaft mit Hana Energy</h2>
-        <div class="service-grid">
-            <div class="strength-item">
-                <h4>Starkes lokales Netzwerk</h4>
-                <p>Wir kooperieren eng mit Installateuren, Energieberatern und kleineren EPC-Unternehmen, die wettbewerbsfähige Produkte suchen.</p>
-            </div>
-            <div class="strength-item">
-                <h4>Umfassende Marktkenntnis</h4>
-                <p>Aktuelles Wissen über europäische technische Standards, Preisgestaltung, Logistik und Wettbewerb in den Fokusmärkten.</p>
-            </div>
-            <div class="strength-item">
-                <h4>Provisionsbasiertes Handelsagenten-Modell</h4>
-                <p>Als Handelsagent arbeiten wir leistungsorientiert, wodurch Hersteller in Europa <strong>ohne Fixkostenrisiko oder lokale Einstellungspflichten</strong> expandieren können.</p>
-            </div>
-            <div class="strength-item">
-                <h4>Flexible Logistikberatung</h4>
-                <p>Wir unterstützen DAP-, DDP-Lösungen und den Aufbau von EU-Fulfillment-Centern, passend zur langfristigen Strategie der Hersteller.</p>
-            </div>
-        </div>
-    </div>
+    <div class="container">
+        <h2>Ihre Vorteile einer Partnerschaft mit Hana Energy</h2>
+        <div class="service-grid">
+            <div class="strength-item">
+                <h4>Starkes lokales Netzwerk</h4>
+                <p>Wir kooperieren eng mit Installateuren, Energieberatern und kleineren EPC-Unternehmen, die wettbewerbsfähige Produkte suchen.</p>
+            </div>
+            <div class="strength-item">
+                <h4>Umfassende Marktkenntnis</h4>
+                <p>Aktuelles Wissen über europäische technische Standards, Preisgestaltung, Logistik und Wettbewerb in den Fokusmärkten.</p>
+            </div>
+            <div class="strength-item">
+                <h4>Provisionsbasiertes Handelsagenten-Modell</h4>
+                <p>Als Handelsagent arbeiten wir leistungsorientiert, wodurch Hersteller in Europa <strong>ohne Fixkostenrisiko oder lokale Einstellungspflichten</strong> expandieren können.</p>
+            </div>
+            <div class="strength-item">
+                <h4>Flexible Logistikberatung</h4>
+                <p>Wir unterstützen DAP-, DDP-Lösungen und den Aufbau von EU-Fulfillment-Centern, passend zur langfristigen Strategie der Hersteller.</p>
+            </div>
+        </div>
+    </div>
 </section>
 
 <section class="contact-form-section" id="contact-form-section">
-    <div class="container">
-        <h2>Kontakt aufnehmen</h2>
-        <p>Haben Sie Fragen zu einer Partnerschaft oder unseren Lösungen? Bitte füllen Sie das folgende Formular aus.</p>
+    <div class="container">
+        <h2>Kontakt aufnehmen</h2>
+        <p>Haben Sie Fragen zu einer Partnerschaft oder unseren Lösungen? Bitte füllen Sie das folgende Formular aus.</p>
 
-        <form 
-            action="https://formspree.io/f/xjklobyd" 
-            method="POST"
-            class="form-container"
-        >
-            <input type="hidden" name="_subject" value="[Hana Energy] Website Anfrage">
-            
-            <div class="form-group">
-                <label for="name">Name / Firma:</label>
-                <input 
-                    type="text" 
-                    id="name" 
-                    name="Name_Firma" 
-                    placeholder="Ihr Name oder Ihre Firma" 
-                    required 
-                >
-            </div>
+        <form 
+            action="https://formspree.io/f/xjklobyd" 
+            method="POST"
+            class="form-container"
+        >
+            <input type="hidden" name="_subject" value="[Hana Energy] Website Anfrage">
+            
+            <div class="form-group">
+                <label for="name">Name / Firma:</label>
+                <input 
+                    type="text" 
+                    id="name" 
+                    name="Name_Firma" 
+                    placeholder="Ihr Name oder Ihre Firma" 
+                    required 
+                >
+            </div>
 
-            <div class="form-group">
-                <label for="email">E-Mail:</label>
-                <input 
-                    type="email" 
-                    id="email" 
-                    name="_replyto" 
-                    placeholder="Ihre E-Mail-Adresse" 
-                    required 
-                >
-            </div>
-            
-            <div class="form-group">
-                <label for="phone">Telefonnummer (Optional):</label>
-                <input 
-                    type="tel" 
-                    id="phone" 
-                    name="Telefonnummer" 
-                    placeholder="Ihre Telefonnummer (optional)" 
-                >
-            </div>
+            <div class="form-group">
+                <label for="email">E-Mail:</label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="_replyto" 
+                    placeholder="Ihre E-Mail-Adresse" 
+                    required 
+                >
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">Telefonnummer (Optional):</label>
+                <input 
+                    type="tel" 
+                    id="phone" 
+                    name="Telefonnummer" 
+                    placeholder="Ihre Telefonnummer (optional)" 
+                >
+            </div>
 
-            <div class="form-group">
-                <label for="message">Ihre Nachricht:</label>
-                <textarea 
-                    id="message" 
-                    name="Nachricht" 
-                    rows="5" 
-                    placeholder="Ihre Anfrage oder Nachricht..." 
-                    required 
-                ></textarea>
-            </div>
+            <div class="form-group">
+                <label for="message">Ihre Nachricht:</label>
+                <textarea 
+                    id="message" 
+                    name="Nachricht" 
+                    rows="5" 
+                    placeholder="Ihre Anfrage oder Nachricht..." 
+                    required 
+                ></textarea>
+            </div>
 
-            <div class="form-group-consent" style="margin-top: 25px; margin-bottom: 20px; text-align: left; font-size: 0.9rem; line-height: 1.4; word-break: break-word;">
-                <label>
-                    <input type="checkbox" name="datenschutz_zustimmung" value="zugestimmt" required style="margin-right: 8px; vertical-align: top;">
-                    Ich stimme der Verarbeitung meiner übermittelten Daten gemäß der <a href="/legal/datenschutz.html" target="_blank" style="color: var(--primary-color); text-decoration: underline; font-weight: bold;">Datenschutzerklärung</a> zu. Ich habe die gesonderte Information zur <strong>Datenübermittlung in die USA</strong> (Drittlandtransfer via Formspree, Inc.) und die damit verbundenen <strong>Risiken des Behördenzugriffs</strong> (Abschnitt 5 der DS-Erklärung) zur Kenntnis genommen und <strong>willige ausdrücklich in diese Übermittlung ein</strong>.
-                </label>
-            </div>
+            <div class="form-group-consent" style="margin-top: 25px; margin-bottom: 20px; text-align: left; font-size: 0.9rem; line-height: 1.4;">
+                <label>
+                    <input type="checkbox" name="datenschutz_zustimmung" value="zugestimmt" required style="margin-right: 8px; vertical-align: top;">
+                    Ich stimme der Verarbeitung meiner übermittelten Daten gemäß der <a href="/legal/datenschutz.html" target="_blank" style="color: var(--primary-color); text-decoration: underline; font-weight: bold;">Datenschutzerklärung</a> zu. Ich habe die gesonderte Information zur <strong>Datenübermittlung in die USA</strong> (Drittlandtransfer via Formspree, Inc.) und die damit verbundenen <strong>Risiken des Behördenzugriffs</strong> (Abschnitt 5 der DS-Erklärung) zur Kenntnis genommen und <strong>willige ausdrücklich in diese Übermittlung ein</strong>.
+                </label>
+            </div>
 
-            <button type="submit" class="cta-button">
-                Senden
-            </button>
-        </form>
+            <button type="submit" class="cta-button">
+                Senden
+            </button>
+        </form>
 
-        <p style="text-align: center; max-width: 500px; margin: 30px auto 0; font-size: 0.9rem; color: #555;">
-            * Hinweis: Zur Bearbeitung des Formulars nutzen wir den externen Dienstleister <a href="https://formspree.io/legal/privacy" target="_blank" style="color: var(--primary-color); text-decoration: underline;">Formspree, Inc.</a> Es erfolgt eine Datenübermittlung in die USA. Detaillierte Informationen, insbesondere zu den Risiken der Datenübertragung in die USA und der Rechtsgrundlage, finden Sie in unserer <a href="/legal/datenschutz.html" style="color: var(--primary-color); text-decoration: underline;">Datenschutzerklärung</a>.
-        </p>
+        <p style="text-align: center; max-width: 500px; margin: 30px auto 0; font-size: 0.9rem; color: #555;">
+            * Hinweis: Zur Bearbeitung des Formulars nutzen wir den externen Dienstleister <a href="https://formspree.io/legal/privacy" target="_blank" style="color: var(--primary-color); text-decoration: underline;">Formspree, Inc.</a> Es erfolgt eine Datenübermittlung in die USA. Detaillierte Informationen, insbesondere zu den Risiken der Datenübertragung in die USA und der Rechtsgrundlage, finden Sie in unserer <a href="/legal/datenschutz.html" style="color: var(--primary-color); text-decoration: underline;">Datenschutzerklärung</a>.
+        </p>
 
-    </div>
+    </div>
 </section>
 
+<div id="cookie-settings-modal" style="display: none;">
+    <div class="modal-content">
+        <h3>Datenschutzeinstellungen</h3>
+        <p>Diese Website verwendet Cookies, um die Funktionalität zu gewährleisten und den Traffic zu analysieren. Bitte wählen Sie Ihre Präferenzen. Detaillierte Informationen finden Sie in unserer <a href="/legal/datenschutz.html" style="color: var(--primary-color); text-decoration: underline;">Datenschutzerklärung</a>.</p>
+        
+        <div class="cookie-group">
+            <input type="checkbox" id="cookie-necessary" checked disabled>
+            <label for="cookie-necessary">Notwendige Cookies (Immer aktiv)</label>
+            <p class="description">Diese Cookies sind essenziell für die grundlegenden Funktionen der Website.</p>
+        </div>
+        
+        <div class="cookie-group">
+            <input type="checkbox" id="cookie-statistical">
+            <label for="cookie-statistical">Statistik-Cookies</label>
+            <p class="description">Diese helfen uns zu verstehen, wie Besucher mit der Website interagieren (z.B. Google Analytics).</p>
+        </div>
+        
+        <div class="cookie-group">
+            <input type="checkbox" id="cookie-marketing">
+            <label for="cookie-marketing">Marketing-Cookies</label>
+            <p class="description">Diese werden verwendet, um relevante Werbung anzuzeigen.</p>
+        </div>
+        
+        <div class="button-group">
+            <button type="button" onclick="acceptAllCookies()">Alle akzeptieren</button>
+            <button type="button" onclick="saveCookieSettings()">Einstellungen speichern</button>
+            <button type="button" onclick="acceptNecessaryCookies()">Nur Notwendige</button>
+        </div>
+    </div>
+</div>
+
 <footer class="footer" id="contact">
-    <div class="container">
-        <p>Hana Energy (e.U. in Gründung, Österreich)</p>
-        <p>E-Mail: <strong>contact@hanaenergy.at</strong></p>
-        <p>LinkedIn: <a href="https://www.linkedin.com/in/nambodo" target="_blank">www.linkedin.com/in/nambodo</a></p>
-        <div class="footer-links" style="margin-top: 10px;">
-            <a href="/legal/datenschutz.html">Datenschutzerklärung</a> | <a href="/legal/impressum.html">Impressum/Nutzungsbedingungen</a>
-                    </div>
-        <p style="margin-top: 15px;">Gegründet: 2025. Alle Rechte vorbehalten.</p>
-    </div>
+    <div class="container">
+        <p>Hana Energy (e.U. in Gründung, Österreich)</p>
+        <p>E-Mail: <strong>contact@hanaenergy.at</strong></p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/nambodo" target="_blank">www.linkedin.com/in/nambodo</a></p>
+        <div class="footer-links" style="margin-top: 10px;">
+            <a href="/legal/datenschutz.html">Datenschutzerklärung</a> | <a href="/legal/impressum.html">Impressum/Nutzungsbedingungen</a>
+            <span style="margin: 0 10px;">|</span>
+            <a href="#" onclick="showCookieSettings(); return false;" style="font-weight: bold;">Cookie-Einstellungen ändern</a>
+        </div>
+        <p style="margin-top: 15px;">Gegründet: 2025. Alle Rechte vorbehalten.</p>
+    </div>
 </footer>
 
 <script>
-// ============================================================
-// JavaScript: 오직 스무스 스크롤 로직만 유지
-// 모든 쿠키/GA/GTM/동의 기록 관련 로직은 제거됨
-// ============================================================
-document.addEventListener("DOMContentLoaded", function() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            document.getElementById('nav-toggle').checked = false; 
-            
-            const href = this.getAttribute('href');
-            if (href === '#' || href === '') return;
+    // ----------------------------------------------------------------------
+    // ⚠️ [설정 필요] 실제 GA 측정 ID로 변경해주세요.
+    const GA_TRACKING_ID = 'G-C080W3WZXT'; 
+    // ----------------------------------------------------------------------
 
-            e.preventDefault();
-            const target = document.querySelector(href);
-            
-                if (target) {
-                    // 헤더 높이(70px)를 고려하여 스크롤
-                    window.scrollTo({ top: target.offsetTop - 70, behavior: 'smooth' });
-                }
-        });
-    });
-});
+     // index.html <script> 태그 안에 있는 기존 함수를 이 코드로 교체합니다.
+
+/**
+ * ✅ [GDPR Action] Log Consent to Google Sheets
+ * Uses a Google Forms endpoint to log consent status without hitting Formspree limits.
+ * @param {string} consentType - The type of consent given (e.g., 'granted_all', 'granted_necessary')
+ */
+function recordConsentLog(consentType) {
+    
+    // ⚠️ 1. [필수 교체] YOUR_FORM_ID를 실제 폼 ID로 교체하세요.
+    const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSf4quO3FbIzUXGioN7XbArct7qj39Ci7X_rOwnXgWyWj6iGXg/formResponse";
+
+    const formData = new FormData();
+    
+    // ⚠️ 2. [필수 교체] entry.xxx 번호를 Google Forms에서 추출한 실제 번호로 교체하세요.
+    formData.append("entry.1413813626", consentType);               // consentType
+    formData.append("entry.1235688242", new Date().toISOString());   // timestamp
+    formData.append("entry.1765089682", navigator.userAgent);        // userAgent
+    formData.append("entry.1915120239", navigator.language);         // language
+    formData.append("entry.2138235063", window.location.href);       // pageUrl
+
+    // IP 주소는 수집하지 않습니다. (GDPR 위험 감소)
+
+    fetch(formUrl, {
+        method: "POST",
+        mode: "no-cors",    // 구글 폼은 CORS 문제로 인해 'no-cors' 모드가 필요합니다.
+        body: formData
+    })
+    .then(() => {
+        console.log("Consent log successfully sent to Google Sheets.");
+    })
+    .catch(error => {
+        console.error("Error sending consent log:", error);
+    });
+}
+
+
+    
+    /**
+     * Google Analytics 스크립트를 동적으로 로드합니다. (GDPR: 동의 시에만 실행)
+     */
+    function loadGoogleAnalytics() {
+        // 이미 로드되었는지 확인
+        if (document.getElementById('ga-script')) {
+            if (window.gtag) {
+                window.gtag('consent', 'update', {
+                    'analytics_storage': 'granted',
+                    'ad_storage': 'granted' 
+                });
+            }
+            return;
+        }
+
+        // 1. GA Configuration Script (gtag.js) 로드
+        const scriptUrl = `https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`;
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = scriptUrl;
+        script.id = 'ga-script'; 
+        document.head.appendChild(script);
+
+        // 2. Data Layer Setup 및 초기 config 실행
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        window.gtag = gtag; 
+        gtag('js', new Date());
+
+        // 동의 상태를 'granted'로 설정하고 GA 초기화
+        gtag('consent', 'update', {
+            'analytics_storage': 'granted',
+            'ad_storage': 'granted' 
+        });
+
+        // IP 익명화 옵션을 포함하여 GA 초기화
+        gtag('config', GA_TRACKING_ID, {
+            'anonymize_ip': true 
+        });
+
+        console.log("Google Analytics (Statistik-Cookies) Skript wurde geladen.");
+    }
+    
+    /**
+     * GA 관련 쿠키 및 저장된 데이터를 삭제합니다. (철회 기능의 핵심)
+     */
+    function deleteGAStorage() {
+        const cookies = document.cookie.split(";");
+        for (let i = 0; i < cookies.length; i++) {
+            let cookie = cookies[i];
+            let eqPos = cookie.indexOf("=");
+            let name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+            name = name.trim();
+            // Google Analytics 관련 쿠키 식별 및 삭제
+            if (name.startsWith('_ga') || name.startsWith('_gid')) {
+                 // 쿠키 만료일을 과거로 설정하여 삭제
+                document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;domain=" + window.location.hostname;
+                document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/"; 
+            }
+        }
+    }
+
+    /**
+     * 사용자의 동의 상태에 따라 스크립트 로드/중단 제어
+     */
+    function loadNonEssentialScripts() {
+        const statsGranted = localStorage.getItem('cookieStats') === 'true';
+        const marketingGranted = localStorage.getItem('cookieMarketing') === 'true';
+
+        // 1. 통계 쿠키 처리 (GA)
+        if (statsGranted) {
+            loadGoogleAnalytics(); 
+        } else {
+            // 거부/철회 시: 추적 중단 명령 실행 및 쿠키 삭제
+            if (window.gtag) {
+                window.gtag('consent', 'update', {
+                    'analytics_storage': 'denied',
+                    'ad_storage': 'denied' 
+                });
+            }
+            deleteGAStorage(); 
+            console.log("Statistik-Cookies abgelehnt: GA-Tracking gestoppt und Cookies gelöscht.");
+        }
+
+        // 2. 마케팅 쿠키 처리
+        if (marketingGranted) {
+            console.log("Marketing-Cookies zugestimmt.");
+        } else {
+            console.log("Marketing-Cookies abgelehnt.");
+        }
+    }
+
+    // 1. 모든 쿠키 허용
+    function acceptAllCookies() {
+        localStorage.setItem('cookieConsent', 'granted_all');
+        localStorage.setItem('cookieStats', 'true');
+        localStorage.setItem('cookieMarketing', 'true');
+        
+        recordConsentLog('granted_all'); // 기록 전송
+        loadNonEssentialScripts(); 
+        document.getElementById('cookie-settings-modal').style.display = 'none';
+    }
+
+    // 2. 필수 쿠키만 허용
+    function acceptNecessaryCookies() {
+        localStorage.setItem('cookieConsent', 'granted_necessary');
+        localStorage.setItem('cookieStats', 'false');
+        localStorage.setItem('cookieMarketing', 'false');
+        
+        recordConsentLog('granted_necessary'); // 거부 기록 전송
+        loadNonEssentialScripts(); 
+        document.getElementById('cookie-settings-modal').style.display = 'none';
+    }
+
+    // 3. 설정 창 표시
+    function showCookieSettings() {
+        document.getElementById('cookie-settings-modal').style.display = 'flex';
+        document.getElementById('cookie-statistical').checked = (localStorage.getItem('cookieStats') === 'true');
+        document.getElementById('cookie-marketing').checked = (localStorage.getItem('cookieMarketing') === 'true');
+    }
+
+    // 4. 설정 저장
+    function saveCookieSettings() {
+        const statsChecked = document.getElementById('cookie-statistical').checked;
+        const marketingChecked = document.getElementById('cookie-marketing').checked;
+
+        localStorage.setItem('cookieStats', statsChecked ? 'true' : 'false');
+        localStorage.setItem('cookieMarketing', marketingChecked ? 'true' : 'false');
+        
+        // 동의 유형 결정
+        let type = 'granted_custom';
+        if (!statsChecked && !marketingChecked) type = 'granted_necessary';
+
+        localStorage.setItem('cookieConsent', type);
+        recordConsentLog(type); // 설정 기록 전송
+        loadNonEssentialScripts();
+        document.getElementById('cookie-settings-modal').style.display = 'none';
+    }
+
+    // 5. 페이지 로드 시 동의 상태 확인
+    function checkCookieConsent() {
+        const consent = localStorage.getItem('cookieConsent');
+        
+        if (!consent || !consent.startsWith('granted')) {
+            // No consent record, show modal
+            showCookieSettings();
+        } 
+        else {
+            // Consent record exists, run load/update script logic
+            loadNonEssentialScripts(); 
+            document.getElementById('cookie-settings-modal').style.display = 'none';
+        }
+    }
+
+    // 초기화 실행
+    checkCookieConsent();
+
+
+    // Anchor click smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            document.getElementById('nav-toggle').checked = false; 
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                const headerStyle = getComputedStyle(document.documentElement);
+                const headerHeight = headerStyle.getPropertyValue('--header-height').trim().replace('px', '');
+                
+                window.scrollTo({
+                    top: target.offsetTop - (headerHeight ? parseInt(headerHeight) : 70), 
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
 </script>
 </body>
 </html>
