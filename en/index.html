@@ -732,7 +732,7 @@ function recordConsentLog(consentType) {
 
         const consentData = {
             timestamp: new Date().toISOString(),
-            consent_type: type,
+            consent_type: consentType,
             ip_anonymized: true,
             page_url: window.location.href,
             note: "GDPR Consent Log (EN)"
