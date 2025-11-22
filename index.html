@@ -6,7 +6,7 @@
     <title>Hana Energy | Ihr Partner für E-Mobilität, Photovoltaik & Energiespeichersysteme in DACH</title>
     
     <style>
-        /* --- 기본 스타일 (영문 버전과 동일하게 유지) --- */
+        /* 기본 변수 및 바디 스타일 */
         :root {
             --primary-color: #007bff;
             --secondary-color: #f8f9fa;
@@ -45,6 +45,8 @@
             padding: 0 20px; 
             height: 100%;
         }
+        
+        /* 로고 스타일 */
         .logo {
             display: flex;
             align-items: center;
@@ -57,6 +59,7 @@
             width: 100px;
             display: block;
         }
+        
         .main-nav { 
             display: flex; 
             justify-content: flex-end; 
@@ -81,12 +84,16 @@
         .nav-links a:hover {
             color: var(--primary-color);
         }
+        
+        /* 언어 전환 버튼 스타일 */
         .language-switch a {
             font-size: 0.9rem !important; 
             color: #777 !important; 
             font-weight: normal !important; 
             padding-left: 5px;
         }
+        
+        /* 햄버거 토글 */
         .nav-toggle-label { 
             display: none; 
             cursor: pointer; 
@@ -328,7 +335,7 @@
             margin-left: 5px;
         }
 
-        /* --- 버튼 그룹 스타일 (영문 버전과 동일) --- */
+        /* --- 버튼 그룹 스타일 --- */
         .button-group {
             display: flex; 
             justify-content: space-between; 
@@ -347,32 +354,15 @@
             transition: background-color 0.3s;
             text-align: center;
             border: none;
+            /* 요청하신 대로 모든 버튼을 파란색으로 통일 */
+            background-color: var(--primary-color);
             color: white; 
             font-weight: bold; 
         }
 
-        /* Accept All 버튼 (Blue) */
-        .cta-button-modal {
-            background-color: var(--primary-color);
-        }
-        .cta-button-modal:hover {
+        /* 모든 버튼에 hover 효과 동일 적용 */
+        .button-group button:hover {
             background-color: #0056b3;
-        }
-
-        /* Save Settings 버튼 (Grey) */
-        .secondary-button {
-            background-color: #6c757d; 
-        }
-        .secondary-button:hover {
-            background-color: #5a6268;
-        }
-
-        /* Accept Necessary Only 버튼 (Green) */
-        .accept-necessary-button {
-            background-color: #28a745; 
-        }
-        .accept-necessary-button:hover {
-            background-color: #1e7e34;
         }
 
         /* --- 모바일 화면 스타일 --- */
@@ -614,9 +604,9 @@
         </div>
         
         <div class="button-group">
-            <button onclick="acceptAllCookies()" class="cta-button-modal">Alle akzeptieren</button>
-            <button onclick="saveCookieSettings()" class="secondary-button">Einstellungen speichern</button>
-            <button onclick="acceptNecessaryCookies()" class="accept-necessary-button">Nur Notwendige</button>
+            <button onclick="acceptAllCookies()">Alle akzeptieren</button>
+            <button onclick="saveCookieSettings()">Einstellungen speichern</button>
+            <button onclick="acceptNecessaryCookies()">Nur Notwendige</button>
         </div>
     </div>
 </div>
@@ -644,11 +634,11 @@
     // ----------------------------------------------------------------------
     
     /**
-     * Google Analytics 스크립트를 동적으로 로드합니다.
+     * Google Analytics 스크립트를 동적으로 로드합니다. (GDPR: 동의 시에만 실행)
      */
     function loadGoogleAnalytics() {
+        // 이미 로드되었는지 확인
         if (document.getElementById('ga-script')) {
-            // 이미 로드되었으면 동의 상태만 업데이트
             if (window.gtag) {
                 window.gtag('consent', 'update', {
                     'analytics_storage': 'granted',
@@ -687,7 +677,7 @@
     }
     
     /**
-     * GA 관련 쿠키 및 저장된 데이터를 삭제합니다. (철회 기능)
+     * GA 관련 쿠키 및 저장된 데이터를 삭제합니다. (철회 기능의 핵심)
      */
     function deleteGAStorage() {
         const cookies = document.cookie.split(";");
@@ -698,14 +688,16 @@
             name = name.trim();
             // Google Analytics 관련 쿠키 식별 및 삭제
             if (name.startsWith('_ga') || name.startsWith('_gid')) {
-                 document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;domain=" + window.location.hostname;
-                 document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/"; 
+                 // 쿠키 만료일을 과거로 설정하여 삭제
+                document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;domain=" + window.location.hostname;
+                document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/"; 
             }
         }
     }
 
     /**
      * ✅ [GDPR Action] 동의 기록을 Formspree로 전송 (DB 대체)
+     * 동의 버튼 클릭 시 백그라운드에서 실행되어 기록을 남깁니다.
      */
     function recordConsentLog(type) {
         if (CONSENT_LOGGING_URL.includes('[YOUR_LOGGING_FORM_ID]')) {
@@ -721,6 +713,7 @@
             note: "GDPR Consent Log (DE)"
         };
 
+        // fetch keepalive를 사용하여 페이지 이동/종료 시에도 전송 보장
         fetch(CONSENT_LOGGING_URL, {
             method: 'POST',
             headers: {
@@ -733,7 +726,7 @@
     }
 
     /**
-     * 사용자의 동의 상태에 따라 비필수 스크립트를 로드하거나 중단합니다.
+     * 사용자의 동의 상태에 따라 스크립트 로드/중단 제어
      */
     function loadNonEssentialScripts() {
         const statsGranted = localStorage.getItem('cookieStats') === 'true';
@@ -743,7 +736,7 @@
         if (statsGranted) {
             loadGoogleAnalytics(); 
         } else {
-            // 거부 또는 철회 시: 추적 중단 명령 실행 및 쿠키 삭제
+            // 거부/철회 시: 추적 중단 명령 실행 및 쿠키 삭제
             if (window.gtag) {
                 window.gtag('consent', 'update', {
                     'analytics_storage': 'denied',
@@ -799,6 +792,7 @@
         localStorage.setItem('cookieStats', statsChecked ? 'true' : 'false');
         localStorage.setItem('cookieMarketing', marketingChecked ? 'true' : 'false');
         
+        // 동의 유형 결정
         let type = 'granted_custom';
         if (!statsChecked && !marketingChecked) type = 'granted_necessary';
 
@@ -813,15 +807,17 @@
         const consent = localStorage.getItem('cookieConsent');
         
         if (!consent || !consent.startsWith('granted')) {
+            // No consent record, show modal
             showCookieSettings();
         } 
         else {
+            // Consent record exists, run load/update script logic
             loadNonEssentialScripts(); 
             document.getElementById('cookie-settings-modal').style.display = 'none';
         }
     }
 
-    // 페이지 로드 시 기존 동의 상태 확인 함수 호출
+    // 초기화 실행
     checkCookieConsent();
 
 
