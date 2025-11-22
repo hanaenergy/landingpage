@@ -730,25 +730,6 @@ function recordConsentLog(consentType) {
      */
    
 
-        const consentData = {
-            timestamp: new Date().toISOString(),
-            consent_type: consentType,
-            ip_anonymized: true,
-            page_url: window.location.href,
-            note: "GDPR Consent Log (EN)"
-        };
-
-        fetch(CONSENT_LOGGING_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify(consentData),
-            keepalive: true
-        }).catch(err => console.error("Consent logging failed", err));
-    }
-
     /**
      * Loads or stops non-essential scripts based on user consent.
      */
