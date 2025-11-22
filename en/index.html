@@ -620,68 +620,47 @@
 </footer>
 
 <script>
-    // ============================================================
-    // 1. 설정 영역 (작성자님 정보 기입 완료)
-    // ============================================================
-    const GA_TRACKING_ID = 'G-C080W3WZXT'; 
-    const GOOGLE_FORM_ID = "1FAIpQLSf4quO3FbIzUXGioN7XbArct7qj39Ci7X_rOwnXgWyWj6iGXg";
-    
-    // 구글 폼 Entry IDs
-    const ENTRY_CONSENT  = "entry.1413813626"; 
-    const ENTRY_TIME     = "entry.1235688242"; 
-    const ENTRY_AGENT    = "entry.1765089682"; 
-    const ENTRY_LANG     = "entry.1915120239"; 
-    const ENTRY_URL      = "entry.2138235063"; 
+// ============================================================
+// 1. 설정 영역 (새로운 Apps Script 설정)
+// ============================================================
+const GA_TRACKING_ID = 'G-C080W3WZXT'; 
+const SCRIPT_URL = "여기에 1단계에서 얻은 Apps Script URL을 붙여넣으세요"; 
+// 기존 GOOGLE_FORM_ID와 Entry ID는 이제 필요 없습니다.
 
-    // ============================================================
-    // 2. [핵심] 무적의 Iframe 전송 방식 (fetch 대체)
-    // ============================================================
-    function recordConsentLog(consentType) {
-        console.log("🚀 구글 폼 강제 전송 시도: " + consentType);
+// ============================================================
+// 2. [핵심] Apps Script Fetch 전송 방식으로 교체
+// ============================================================
+function recordConsentLog(consentType) {
+    console.log("🚀 Apps Script를 통한 안정적인 전송 시도: " + consentType);
 
-        // 1. 가상의 타겟 iframe 생성 (화면에 안 보임)
-        const iframeId = 'hidden_iframe_' + Date.now();
-        const iframe = document.createElement('iframe');
-        iframe.name = iframeId;
-        iframe.style.display = 'none';
-        document.body.appendChild(iframe);
+    // Apps Script가 이해할 수 있는 형태의 JSON 데이터 (Keys는 스크립트 코드와 일치해야 함)
+    const payload = {
+        consentType: consentType,
+        userAgent: navigator.userAgent,
+        currentUrl: window.location.href,
+        language: navigator.language
+    };
 
-        // 2. 가상의 Form 생성
-        const form = document.createElement('form');
-        form.target = iframeId;
-        form.method = 'POST';
-        form.action = `https://docs.google.com/forms/d/e/${GOOGLE_FORM_ID}/formResponse`;
-        form.style.display = 'none';
-
-        // 3. 데이터 입력 (Input 태그 생성)
-        const data = {
-            [ENTRY_CONSENT]: consentType,
-            [ENTRY_TIME]: new Date().toLocaleString(),
-            [ENTRY_AGENT]: navigator.userAgent,
-            [ENTRY_LANG]: navigator.language,
-            [ENTRY_URL]: window.location.href
-        };
-
-        for (const key in data) {
-            const input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = key;
-            input.value = data[key];
-            form.appendChild(input);
-        }
-
-        document.body.appendChild(form);
-
-        // 4. 전송 (Submit)
-        form.submit();
-        console.log("✅ 전송 명령 완료. (iframe으로 전송됨)");
-
-        // 5. 청소 (잠시 후 요소 삭제)
-        setTimeout(() => {
-            document.body.removeChild(form);
-            document.body.removeChild(iframe);
-        }, 2000);
-    }
+    fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'cors',
+        cache: 'no-cache',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload)
+    })
+    .then(response => {
+        console.log('✅ Apps Script 전송 성공:', response.status);
+    })
+    .catch(error => {
+        console.error('❌ Apps Script 전송 실패:', error);
+    });
+}
+// ============================================================
+// 3. Google Analytics 및 쿠키 관리 (나머지 함수들은 건드리지 마세요)
+// ...
+// ============================================================
 
     // ============================================================
     // 3. Google Analytics 및 쿠키 관리 (기존 로직 유지)
